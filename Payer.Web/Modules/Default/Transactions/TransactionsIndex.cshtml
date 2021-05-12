@@ -1,0 +1,15 @@
+﻿@{
+    ViewData["Title"] = Serenity.LocalText.Get("Db.Default.Transactions.EntityPlural");
+}
+
+<div id="GridDiv"></div>
+
+<div id="GridDiv"></div>
+
+<script type="text/javascript">
+    jQuery(function () {
+        new Payer.Default.TransactionsGrid($('#GridDiv'), {}).init();
+
+        Q.initFullHeightGridPage($('#GridDiv'));
+    });
+</script>

@@ -1,0 +1,46 @@
+﻿
+@model Payer.Models.Transaction
+
+<h1>TAX INVOICE</h1>
+
+<table class="table table-bordered" style="text-align: left;">
+
+    <thead>
+
+        <tr>
+            <th scope="col">Checks</th>
+            <th scope="col">#</th>
+            <th scope="col">Particulars</th>
+            <th scope="col">Amount</th>
+        </tr>
+
+    </thead>
+    <tbody>
+       
+      
+        @for (int i = 0; i < @Model.TransactionItems.Count; i++)
+        {
+            var transactionItem = @Model.TransactionItems[i];
+          
+        <tr>
+            <td><input id="checkedItem" type="checkbox" ></td>
+            <td>@(1+i)</td>
+            <td>@transactionItem.Item.Name</td>
+            <td>@transactionItem.Item.Price</td>
+
+
+        </tr>
+        }
+    </tbody>
+</table>
+<div class="pays" style="display:flex">
+    <button type="submit" class="btn btn-primary btn-sm" id="payy" style="margin-left:20px" onclick="PayButton()">Pay</button>
+    <script>
+        function PayButton() {
+           
+        }
+    </script>
+
+<textarea id="amountArea" rows="1" style="width:80px" disabled></textarea>
+    <label style="margin-right:20px">:Total Amount</label>
+</div>
