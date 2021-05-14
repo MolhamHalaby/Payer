@@ -19,12 +19,13 @@ namespace Payer.Default.Pages
     using System.Threading.Tasks;
     using System.Data.Entity;
 
-    [RoutePrefix("Default/Transactions"), Route("{action=index}")]
+    [RoutePrefix("Default/Transactions"), Route("{action=Index}")]
     [PageAuthorize(typeof(Entities.TransactionsRow))]
     public class TransactionsController : Controller
     {
         public ActionResult Index()
         {
+            
             return View("~/Modules/Default/Transactions/TransactionsIndex.cshtml");
         }
 
@@ -43,9 +44,10 @@ namespace Payer.Default.Pages
         }
 
         [HttpPost]
-        public ActionResult PayButton()
+        public JsonResult PayButton()
         {
-            return View("~/Modules/Default/Transactions/TransactionsIndex.cshtml");
+            View(MVC.Views.Default.Transactions.TransactionsIndex);
+            return Json(true);
         }
 
 
