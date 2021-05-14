@@ -1,9 +1,9 @@
-﻿
-@model Payer.Models.Transaction
+﻿@model Payer.Models.Transaction
+ 
 
 <h1>TAX INVOICE</h1>
 
-<table class="table table-bordered" style="text-align: left;">
+<table class="table table-bordered" id="table" style="text-align: left;">
 
     <thead>
 
@@ -16,31 +16,68 @@
 
     </thead>
     <tbody>
-       
-      
+
+
         @for (int i = 0; i < @Model.TransactionItems.Count; i++)
         {
             var transactionItem = @Model.TransactionItems[i];
-          
-        <tr>
-            <td><input id="checkedItem" type="checkbox" ></td>
-            <td>@(1+i)</td>
-            <td>@transactionItem.Item.Name</td>
-            <td>@transactionItem.Item.Price</td>
+
+<tr>
+    <td><input id="checkedItem" type="checkbox" ></td>
+    <td id="index">@(1+i)</td>
+    <td>@transactionItem.Item.Name</td>
+    <td id="price">@transactionItem.Item.Price</td>
 
 
-        </tr>
-        }
+</tr>
+}
     </tbody>
 </table>
+     
+    <script type="text/javascript">
+        $('#checkedItem').change(function () {
+            // this will contain a reference to the checkbox   
+            if (this.checked) {
+                var amount = document.getElementById("amountArea").value;
+                var t = document.getElementById("table"), // This have to be the ID of your table, not the tag
+                var  d = t.getElementsByTagName("tr")[0],
+                var  r = d.getElementsByTagName("td")[0];
+                var price = document.getElementById("price").value;
+                alert(parseInt(r,10));
+                document.getElementById("amountArea").value = (parseInt(amount) + parseInt(r)).toString();
+              
+            } else {
+                // the checkbox is now no longer checked
+            }
+        });
 
-<form method="post" action="TransactionsController\PayButton" style="display:flex">
-    @Html.AntiForgeryToken()
-    <textarea id="amountArea" rows="1" name="amountAre" style="width:80px" disabled>15</textarea>
-    <button type="submit" class="btn btn-primary btn-sm" id="payy" style="margin-left:20px">Pay</button>
+
+        function heyy() {
+            var urlToHandler = '<%=ResolveUrl("~/Transactions/PayButton")%>';
+            $.ajax({
+                url: "/Default/Transactions/PayButton" ,
+                type: 'post',
+                dataType: 'Json',
+                contentType: "application/json; charset=utf-8",
+                data: '{}',
+                success: function (response) {
+                    if (response == true)
+                        alert("done!");
+                },
+                error: function (response) {
+                    alert("Error");
+                },
+
+            });
 
 
+        }
 
-    <label style="margin-right:20px">:Total Amount</label>
-    
-</form>
+    </script>
+    <form method="post">
+        <input type="text" id="amountArea" rows="1" name="amountAre" style="width:80px" disabled value="0" />
+        <input type="button" class="btn btn-primary btn-sm" id="payy" value="pay" style="margin-left:20px" onclick="heyy()" />
+        <label style="margin-right:20px">:Total Amount</label>
+    </form>
+
+

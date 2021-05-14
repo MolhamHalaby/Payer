@@ -19,12 +19,13 @@ namespace Payer.Default.Pages
     using System.Threading.Tasks;
     using System.Data.Entity;
 
-    [RoutePrefix("Default/Transactions"), Route("{action=index}")]
+    [RoutePrefix("Default/Transactions"), Route("{action=Index}")]
     [PageAuthorize(typeof(Entities.TransactionsRow))]
     public class TransactionsController : Controller
     {
         public ActionResult Index()
         {
+            
             return View("~/Modules/Default/Transactions/TransactionsIndex.cshtml");
         }
 
@@ -42,12 +43,11 @@ namespace Payer.Default.Pages
             return View(MVC.Views.Default.Transactions.Pay, transaction);//here we pass the model to the view
         }
 
-        [HttpGet]
-        public ActionResult PayButton(FormCollection data)
+        [HttpPost]
+        public JsonResult PayButton()
         {
-            // String s = data["amountAre"];
-            //  Response.Write(s);
-            return View("~/Modules/Default/Transactions/TransactionsIndex.cshtml");
+            View(MVC.Views.Default.Transactions.TransactionsIndex);
+            return Json(true);
         }
 
 
