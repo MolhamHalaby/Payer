@@ -56,6 +56,8 @@ declare namespace Payer.Administration {
 declare namespace Payer.Administration {
 }
 declare namespace Payer.Administration {
+}
+declare namespace Payer.Administration {
     interface RoleForm {
         RoleName: Serenity.StringEditor;
     }
@@ -677,6 +679,8 @@ declare namespace Payer.Common {
     }
 }
 declare namespace Payer.Default {
+}
+declare namespace Payer.Default {
     interface CustomerTablesForm {
         Number: Serenity.IntegerEditor;
         Places: Serenity.IntegerEditor;
@@ -726,6 +730,8 @@ declare namespace Payer.Default {
             List = "Default/CustomerTables/List"
         }
     }
+}
+declare namespace Payer.Default {
 }
 declare namespace Payer.Default {
     interface CustomersForm {
@@ -787,6 +793,8 @@ declare namespace Payer.Default {
     }
 }
 declare namespace Payer.Default {
+}
+declare namespace Payer.Default {
     interface ItemsForm {
         Name: Serenity.StringEditor;
         Price: Serenity.DecimalEditor;
@@ -834,6 +842,8 @@ declare namespace Payer.Default {
             List = "Default/Items/List"
         }
     }
+}
+declare namespace Payer.Default {
 }
 declare namespace Payer.Default {
     interface MailsMessagesForm {
@@ -890,6 +900,8 @@ declare namespace Payer.Default {
             List = "Default/MailsMessages/List"
         }
     }
+}
+declare namespace Payer.Default {
 }
 declare namespace Payer.Default {
     interface PersonsForm {
@@ -950,6 +962,8 @@ declare namespace Payer.Default {
     }
 }
 declare namespace Payer.Default {
+}
+declare namespace Payer.Default {
     interface TipsForm {
         Date: Serenity.DateEditor;
         WaiterId: Serenity.IntegerEditor;
@@ -1003,6 +1017,8 @@ declare namespace Payer.Default {
             List = "Default/Tips/List"
         }
     }
+}
+declare namespace Payer.Default {
 }
 declare namespace Payer.Default {
     interface TransactionItemsForm {
@@ -1081,6 +1097,8 @@ declare namespace Payer.Default {
             List = "Default/TransactionItems/List"
         }
     }
+}
+declare namespace Payer.Default {
 }
 declare namespace Payer.Default {
     interface TransactionsForm {
@@ -1164,6 +1182,8 @@ declare namespace Payer.Default {
             List = "Default/Transactions/List"
         }
     }
+}
+declare namespace Payer.Default {
 }
 declare namespace Payer.Default {
     interface WaitersForm {
@@ -2089,6 +2109,8 @@ declare namespace Payer.Northwind {
         NotShipped = 0,
         Shipped = 1
     }
+}
+declare namespace Payer.Northwind {
 }
 declare namespace Payer.Northwind {
 }

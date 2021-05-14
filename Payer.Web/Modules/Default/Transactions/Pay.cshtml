@@ -1,6 +1,7 @@
 ﻿
-@model Payer.Models.Transaction
-
+@{
+    ViewData["Title"] = Serenity.LocalText.Get("Db.Default.Transactions");
+}
 <h1>TAX INVOICE</h1>
 
 <table class="table table-bordered" style="text-align: left;">
@@ -16,31 +17,29 @@
 
     </thead>
     <tbody>
-       
-      
+
+
         @for (int i = 0; i < @Model.TransactionItems.Count; i++)
         {
             var transactionItem = @Model.TransactionItems[i];
-          
-        <tr>
-            <td><input id="checkedItem" type="checkbox" ></td>
-            <td>@(1+i)</td>
-            <td>@transactionItem.Item.Name</td>
-            <td>@transactionItem.Item.Price</td>
+
+            <tr>
+                <td><input id="checkedItem" type="checkbox"></td>
+                <td>@(1+i)</td>
+                <td>@transactionItem.Item.Name</td>
+                <td>@transactionItem.Item.Price</td>
 
 
-        </tr>
+            </tr>
         }
     </tbody>
 </table>
 
-<form method="post" action="TransactionsController\PayButton" style="display:flex">
-    @Html.AntiForgeryToken()
-    <textarea id="amountArea" rows="1" name="amountAre" style="width:80px" disabled>15</textarea>
-    <button type="submit" class="btn btn-primary btn-sm" id="payy" style="margin-left:20px">Pay</button>
 
+<textarea id="amountArea" rows="1" name="amountAre" style="width:80px" disabled>15</textarea>
 
-
-    <label style="margin-right:20px">:Total Amount</label>
-    
+<form role="form" asp-action="PayButton" asp-controller="Transactions" method="post">
+    <input type="submit" value="Login" class="btn btn-info btn-block">
 </form>
+<label style="margin-right:20px">:Total Amount</label>
+

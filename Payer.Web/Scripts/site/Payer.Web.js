@@ -69,6 +69,12 @@ var Payer;
 (function (Payer) {
     var Administration;
     (function (Administration) {
+    })(Administration = Payer.Administration || (Payer.Administration = {}));
+})(Payer || (Payer = {}));
+var Payer;
+(function (Payer) {
+    var Administration;
+    (function (Administration) {
         var RoleForm = /** @class */ (function (_super) {
             __extends(RoleForm, _super);
             function RoleForm(prefix) {
@@ -1902,6 +1908,12 @@ var Payer;
             OrderShippingState[OrderShippingState["Shipped"] = 1] = "Shipped";
         })(OrderShippingState = Northwind.OrderShippingState || (Northwind.OrderShippingState = {}));
         Serenity.Decorators.registerEnumType(OrderShippingState, 'Payer.Northwind.OrderShippingState', 'Northwind.OrderShippingState');
+    })(Northwind = Payer.Northwind || (Payer.Northwind = {}));
+})(Payer || (Payer = {}));
+var Payer;
+(function (Payer) {
+    var Northwind;
+    (function (Northwind) {
     })(Northwind = Payer.Northwind || (Payer.Northwind = {}));
 })(Payer || (Payer = {}));
 var Payer;

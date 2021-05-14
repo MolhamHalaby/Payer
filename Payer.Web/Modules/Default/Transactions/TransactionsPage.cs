@@ -42,11 +42,9 @@ namespace Payer.Default.Pages
             return View(MVC.Views.Default.Transactions.Pay, transaction);//here we pass the model to the view
         }
 
-        [HttpGet]
-        public ActionResult PayButton(FormCollection data)
+        [HttpPost]
+        public ActionResult PayButton()
         {
-            // String s = data["amountAre"];
-            //  Response.Write(s);
             return View("~/Modules/Default/Transactions/TransactionsIndex.cshtml");
         }
 
