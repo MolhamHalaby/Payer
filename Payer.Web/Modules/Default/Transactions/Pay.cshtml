@@ -39,12 +39,10 @@
             // this will contain a reference to the checkbox   
             if (this.checked) {
                 var amount = document.getElementById("amountArea").value;
-                var t = document.getElementById("table"), // This have to be the ID of your table, not the tag
-                var  d = t.getElementsByTagName("tr")[0],
-                var  r = d.getElementsByTagName("td")[0];
-                var price = document.getElementById("price").value;
-                alert(parseInt(r,10));
-                document.getElementById("amountArea").value = (parseInt(amount) + parseInt(r)).toString();
+                //var index = document.getElementById("table").rows.getElementById("index").cells[1].innerHTML;
+                var price = document.getElementById("table").rows[index].cells[3].innerHTML;
+               
+                document.getElementById("amountArea").value = (parseInt(amount) + parseInt(price)).toString();
               
             } else {
                 // the checkbox is now no longer checked
