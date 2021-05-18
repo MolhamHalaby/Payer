@@ -7,7 +7,7 @@ namespace Payer.Models
     using System.Data.Entity.Spatial;
 
     public partial class TransactionItem
-    {
+    {   
         public int Id { get; set; }
 
         public int TransactionId { get; set; }

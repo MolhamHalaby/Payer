@@ -8,7 +8,7 @@
 </div>
 
      
-
+ 
     <table class="table table-bordered" id="table" style="text-align: left;">
 
         <thead>
@@ -26,8 +26,9 @@
 
             @for (int i = 0; i < @Model.TransactionItems.Count; i++)
             {
-                var transactionItem = @Model.TransactionItems[i];
 
+                var transactionItem = @Model.TransactionItems[i];
+                
 <tr onchange="checkedIteeemm(this)">
 
     <td><input id="checkedItem" type="checkbox" disabled></td>
@@ -43,6 +44,7 @@
 
     <script type="text/javascript">
         var statPhone;
+
         function telNum() {
             var flag = 0;
             var number = document.getElementById("customerPhone").value;
@@ -65,20 +67,6 @@
                 var vall = document.getElementById("table").getElementsByTagName('input').length;
 
                
-                var index = 0;
-                for (var i = 0; i < vall; i++) {
-                    
-                    if (@Model.TransactionItems[2].CustomerId == null ) {
-                        document.getElementById("table").getElementsByTagName('input')[i].removeAttribute("disabled");
-                    }
-                    else if (@Model.TransactionItems[2].CustomerId == number) {
-                        document.getElementById("table").getElementsByTagName('input')[i].removeAttribute("disabled");
-                        document.getElementById("table").getElementsByTagName('input')[i].checked=true;
-                    }
-                    else {
-                        document.getElementById("table").getElementsByTagName('input')[i].checked = true;
-                    }
-                }
                 statPhone = number;
 
             }
@@ -91,10 +79,10 @@
             var vall = document.getElementById("table").getElementsByTagName('input')[r - 1].checked == true;
             var amount = document.getElementById("amountArea").value;
             var price = document.getElementById("table").rows[r].cells[3].innerHTML;
-            var nameOfItem = document.getElementById("table").rows[r].cells[2].innerHTMLindexer;
+            var nameOfItem = document.getElementById("table").rows[r].cells[2].innerHTML;
             if (vall) {
-                document.getElementById("amountArea").value = (parseInt(amount) + parseInt(CustomerIdprice)).toString();
-                totAmount += parseInt(price);CustomerId
+                document.getElementById("amountArea").value = (parseInt(amount) + parseInt(price)).toString();
+                totAmount += parseInt(price);
             }
             else {
                 document.getElementById("amountArea").value = (parseInt(amount) - parseInt(price)).toString();
