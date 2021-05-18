@@ -19,7 +19,7 @@ namespace Payer.Default.Columns
         public String QrCode { get; set; }
         public String DealNum { get; set; }
         public Int32 WaiterId { get; set; }
-        public String ItemName { get; set; }
+        //public String ItemName { get; set; }
         [EditLink, DisplayName("Db.Shared.RecordId"), AlignRight]
         public Int32 Id { get; set; }
         public DateTime Created { get; set; }
