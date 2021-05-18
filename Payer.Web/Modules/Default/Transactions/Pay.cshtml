@@ -68,10 +68,10 @@
                 var index = 0;
                 for (var i = 0; i < vall; i++) {
                     
-                    if ('@Model.TransactionItems[i].CustomerId' == null ) {
+                    if (@Model.TransactionItems[2].CustomerId == null ) {
                         document.getElementById("table").getElementsByTagName('input')[i].removeAttribute("disabled");
                     }
-                    else if ('@Model.TransactionItems[i].CustomerId' == number) {
+                    else if (@Model.TransactionItems[2].CustomerId == number) {
                         document.getElementById("table").getElementsByTagName('input')[i].removeAttribute("disabled");
                         document.getElementById("table").getElementsByTagName('input')[i].checked=true;
                     }
