@@ -24,7 +24,7 @@ namespace Payer.Models
 
         public int WaiterId { get; set; }
 
-        public int ItemId { get; set; }
+       // public int ItemId { get; set; }
 
         public int Id { get; set; }
 
@@ -34,7 +34,7 @@ namespace Payer.Models
 
         public virtual CustomerTable CustomerTable { get; set; }
 
-        public virtual Item Item { get; set; }
+        
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual List<TransactionItem> TransactionItems { get; set; }

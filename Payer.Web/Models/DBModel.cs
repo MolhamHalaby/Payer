@@ -48,10 +48,10 @@ namespace Payer.Models
                 .WithRequired(e => e.Item)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<Item>()
+     /*       modelBuilder.Entity<Item>()
                 .HasMany(e => e.Transactions)
                 .WithRequired(e => e.Item)
-                .WillCascadeOnDelete(false);
+                .WillCascadeOnDelete(false);*/
 
             modelBuilder.Entity<Person>()
                 .HasMany(e => e.Customers)

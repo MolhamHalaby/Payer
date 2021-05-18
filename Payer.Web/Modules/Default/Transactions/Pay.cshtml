@@ -42,10 +42,11 @@
 
 
     <script type="text/javascript">
+        var statPhone;
         function telNum() {
             var flag = 0;
-            var number = document.getElementById("customerPhone").value;    
-           
+            var number = document.getElementById("customerPhone").value;
+
                 if (number[0] != '0' || number[1] != '5' || number.length < 10) {
                     alert("Enter a valid phone number in this format: 05xxxxxxxx");
                     flag = 1;
@@ -57,18 +58,32 @@
                             flag = 1;
                         }
                 }
-                           
+
             if (flag == 0) {
                 document.getElementById("payy").removeAttribute('disabled');
                 document.getElementById("tipArea").removeAttribute('disabled');
                 var vall = document.getElementById("table").getElementsByTagName('input').length;
-                for (var i = 0; i < vall; i++) {
-                    document.getElementById("table").getElementsByTagName('input')[i].removeAttribute("disabled");
+
+               
+                var index = 0;
+                for (var @i = 0; i < vall; i++) {
+                    
+                    if ('@Model.TransactionItems[i].CustomerId' == null ) {
+                        document.getElementById("table").getElementsByTagName('input')[i].removeAttribute("disabled");
+                    }
+                    else if ('@Model.TransactionItems'[i].CustomerId == number) {
+                        document.getElementById("table").getElementsByTagName('input')[i].removeAttribute("disabled");
+                        document.getElementById("table").getElementsByTagName('input')[i].checked=true;
+                    }
+                    else {
+                        document.getElementById("table").getElementsByTagName('input')[i].checked = true;
+                    }
                 }
-                
+                statPhone = number;
+
             }
-           
-            
+
+
         }
         var totAmount = 0
         function checkedIteeemm(x) {
@@ -76,14 +91,32 @@
             var vall = document.getElementById("table").getElementsByTagName('input')[r - 1].checked == true;
             var amount = document.getElementById("amountArea").value;
             var price = document.getElementById("table").rows[r].cells[3].innerHTML;
+            var nameOfItem = document.getElementById("table").rows[r].cells[2].innerHTMLindexer;
             if (vall) {
-                document.getElementById("amountArea").value = (parseInt(amount) + parseInt(price)).toString();
-                totAmount += parseInt(price);
+                document.getElementById("amountArea").value = (parseInt(amount) + parseInt(CustomerIdprice)).toString();
+                totAmount += parseInt(price);CustomerId
             }
             else {
                 document.getElementById("amountArea").value = (parseInt(amount) - parseInt(price)).toString();
                 totAmount -= parseInt(price);
             }
+
+            $.ajax({
+                url: "/Default/Transactions/checkNewItem",
+                type: 'post',
+              //  dataType: 'Json',
+              //  contentType: "application/json; charset=utf-8",
+                data: { 'phone': statPhone, 'itemName': nameOfItem, 'tranId': @Model.Id },
+                cache: false,
+                success: function (response) {
+                    if (response == true)
+                        alert("done!");
+                },
+                error: function (response) {
+                    alert("Error");
+                },
+
+            });
 
 
         }

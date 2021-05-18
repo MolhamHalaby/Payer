@@ -50,6 +50,34 @@ namespace Payer.Default.Pages
             return Json(true);
         }
 
+        [HttpPost]
+        public JsonResult checkNewItem(int phone , String itemName, int tranId)
+        {
+              
+             using(var db= new DBModel())
+             {
+                 var m = db.TransactionItems.Where(t => t.Item.Name == itemName)
+                     .Where(ti => ti.TransactionId == tranId).Where(tt =>tt.CustomerId==null).FirstOrDefault();
+                  if(m!=null)
+                {
+                    
+                    m.CustomerId = phone;
+                    db.Entry(m).State = EntityState.Modified;
+                    db.SaveChanges();
+
+                    return Json(true);
+                }
+                  else
+                    return Json(false);
+
+             
+
+            }
+
+          
+
+           
+        }
 
 
         public ActionResult DisplayQrCode(int id)

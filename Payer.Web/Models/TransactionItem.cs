@@ -18,7 +18,6 @@ namespace Payer.Models
 
         public double? TotalPaid { get; set; }
 
-        public virtual Customer Customer { get; set; }
 
         public virtual Item Item { get; set; }
 

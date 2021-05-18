@@ -36,7 +36,7 @@ namespace Payer.Default.Entities
             set { Fields.ItemId[this] = value; }
         }
 
-        [DisplayName("Customer"), ForeignKey("[dbo].[Customers]", "Id"), LeftJoin("jCustomer"), TextualField("CustomerClubMember")]
+        [DisplayName("Customer")]//, ForeignKey("[dbo].[Customers]", "Id"), LeftJoin("jCustomer"), TextualField("CustomerClubMember")]
         public Int32? CustomerId
         {
             get { return Fields.CustomerId[this]; }
@@ -119,7 +119,7 @@ namespace Payer.Default.Entities
             get { return Fields.ItemPrice[this]; }
             set { Fields.ItemPrice[this] = value; }
         }
-
+/*
         [DisplayName("Customer Club Member"), Expression("jCustomer.[ClubMember]")]
         public String CustomerClubMember
         {
@@ -133,7 +133,7 @@ namespace Payer.Default.Entities
             get { return Fields.CustomerPersonId[this]; }
             set { Fields.CustomerPersonId[this] = value; }
         }
-
+*/
         IIdField IIdRow.IdField
         {
             get { return Fields.Id; }
@@ -166,8 +166,8 @@ namespace Payer.Default.Entities
             public StringField ItemName;
             public DoubleField ItemPrice;
 
-            public StringField CustomerClubMember;
-            public Int32Field CustomerPersonId;
+         /*   public StringField CustomerClubMember;
+            public Int32Field CustomerPersonId;*/
         }
     }
 }
