@@ -2,8 +2,9 @@
 
 @{ 
 
-    ViewBag.title = "index";
+    ViewBag.title = "Payer.Models.Transaction";
 }
+
 <h1>TAX INVOICE</h1>
 
 <div style="float:left">
@@ -68,11 +69,11 @@
                 document.getElementById("tipArea").removeAttribute('disabled');
                 var vall = document.getElementById("table").getElementsByTagName('input').length;
 
-               
+
                 var index = 0;
-                for (var @i = 0; i < vall; i++) {
-                    
-                    if ('@Model.TransactionItems[i].CustomerId' == null ) {
+                for (var i = 0; i < vall; i++) {
+                    alert(DataView.CustomerId[i]);
+                    if (DataView.CustomerId[i] == null ) {
                         document.getElementById("table").getElementsByTagName('input')[i].removeAttribute("disabled");
                     }
                     else if ('@Model.TransactionItems'[i].CustomerId == number) {
@@ -143,7 +144,7 @@
 
         });
     }
-</script>
+    </script>
 
 <script>
     //func for displaying the ip
