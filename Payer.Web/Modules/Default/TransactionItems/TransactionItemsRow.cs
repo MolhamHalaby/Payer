@@ -36,7 +36,7 @@ namespace Payer.Default.Entities
             set { Fields.ItemId[this] = value; }
         }
 
-        [DisplayName("Customer")]//, ForeignKey("[dbo].[Customers]", "Id"), LeftJoin("jCustomer"), TextualField("CustomerClubMember")]
+        [DisplayName("Customer")/*, ForeignKey("[dbo].[Customers]", "Id"), LeftJoin("jCustomer")/*, TextualField("CustomerClubMember")*/]
         public Int32? CustomerId
         {
             get { return Fields.CustomerId[this]; }

@@ -18,6 +18,9 @@
                 <th scope="col">#</th>
                 <th scope="col">Particulars</th>
                 <th scope="col">Amount</th>
+                <th scope="col" hidden>Phone Number</th>
+
+
             </tr>
 
         </thead>
@@ -32,9 +35,11 @@
 <tr onchange="checkedIteeemm(this)">
 
     <td><input id="checkedItem" type="checkbox" disabled></td>
-    <td id="index">@(1+i)</td>
+    <td id="index">@(1 + i)</td>
     <td>@transactionItem.Item.Name</td>
     <td id="price">@transactionItem.Item.Price</td>
+    <td id="phoneNum" hidden>@transactionItem.CustomerId</td>
+
 
 
 </tr>}
@@ -67,6 +72,20 @@
                 var vall = document.getElementById("table").getElementsByTagName('input').length;
 
                
+                for (var i = 0; i < vall; i++) {
+                   //alert(("0" + document.getElementById("table").rows[i + 1].cells[4].innerHTML) == number);
+                   if (("0"+ document.getElementById("table").rows[i+1].cells[4].innerHTM) == null) {
+                        document.getElementById("table").getElementsByTagName('input')[i].removeAttribute("disabled");
+                    }
+                   else if (("0" + document.getElementById("table").rows[i + 1].cells[4].innerHTML) == number) {
+                        document.getElementById("table").getElementsByTagName('input')[i].removeAttribute("disabled");
+                        document.getElementById("table").getElementsByTagName('input')[i].checked=true;
+                    }
+                    else {
+                        document.getElementById("table").getElementsByTagName('input')[i].checked = true;
+                    }
+                }
+                }
                 statPhone = number;
 
             }
@@ -84,7 +103,7 @@
                 document.getElementById("amountArea").value = (parseInt(amount) + parseInt(price)).toString();
                 totAmount += parseInt(price);
             }
-            else {
+            else{
                 document.getElementById("amountArea").value = (parseInt(amount) - parseInt(price)).toString();
                 totAmount -= parseInt(price);
             }
@@ -125,24 +144,11 @@
                     alert("Error");
                 },
 
-            });
-
-
-        }
-        var statTip = 0;
-        function addTip() {
-            var tip = document.getElementById("tipArea").value;
-            var amount = document.getElementById("amountArea").value;
-
-            if (tip != "") {
-                document.getElementById("amountArea").value = (parseInt(totAmount) + parseInt(tip)).toString();
-                statTip = parseInt(tip);
-            }
-            else {
-                document.getElementById("amountArea").value = (parseInt(amount) - parseInt(statTip)).toString();
-            }
-        }
+        });
+    }
     </script>
+
+
     <input type="number" min="0" id="tipArea" rows="1" name="tipAre" style="width:80px;margin-right:65px;margin-bottom:10px" value="0" onchange="addTip()" disabled/>
     <label style="margin-right:20px">:Tip</label>
     <form method="post" >
@@ -151,5 +157,4 @@
         <label style="margin-right:20px">:Total Amount</label>
 
     </form>
-
-
+     

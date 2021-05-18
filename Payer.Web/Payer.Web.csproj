@@ -241,6 +241,7 @@
     <Content Include="Content\images\expand.gif" />
     <Content Include="Content\images\header-columns-bg.gif" />
     <Content Include="Content\images\header-columns-over-bg.gif" />
+    <Content Include="Modules\Default\Transactions\WebForm1.aspx" />
     <Content Include="qrImage.jpg" />
     <Content Include="Content\images\sort-asc.gif" />
     <Content Include="Content\images\sort-desc.gif" />
@@ -2093,6 +2094,13 @@
     <Compile Include="Modules\Administration\UserRole\UserRoleListResponse.cs" />
     <Compile Include="Modules\Administration\UserRole\UserRoleListRequest.cs" />
     <Compile Include="Modules\Administration\UserRole\UserRoleEndpoint.cs" />
+    <Compile Include="Modules\Default\Transactions\WebForm1.aspx.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Modules\Default\Transactions\WebForm1.aspx.designer.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+    </Compile>
     <Compile Include="QCCode.aspx.cs">
       <DependentUpon>QCCode.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2448,6 +2456,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\pay\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />

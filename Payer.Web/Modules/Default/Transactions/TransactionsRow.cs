@@ -49,14 +49,14 @@ namespace Payer.Default.Entities
             get { return Fields.WaiterId[this]; }
             set { Fields.WaiterId[this] = value; }
         }
-
-    /*    [DisplayName("Item"), NotNull, ForeignKey("[dbo].[Items]", "Id"), LeftJoin("jItem"), TextualField("ItemName")]
+/*
+        [DisplayName("Item"), NotNull, ForeignKey("[dbo].[Items]", "Id"), LeftJoin("jItem"), TextualField("ItemName")]
         public Int32? ItemId
         {
             get { return Fields.ItemId[this]; }
             set { Fields.ItemId[this] = value; }
-        }*/
-
+        }
+*/
         [DisplayName("Id"), Identity]
         public Int32? Id
         {
@@ -112,8 +112,8 @@ namespace Payer.Default.Entities
             get { return Fields.WaiterPersonId[this]; }
             set { Fields.WaiterPersonId[this] = value; }
         }
-
-  /*      [DisplayName("Item Name"), Expression("jItem.[Name]")]
+/*
+        [DisplayName("Item Name"), Expression("jItem.[Name]")]
         public String ItemName
         {
             get { return Fields.ItemName[this]; }
@@ -125,8 +125,8 @@ namespace Payer.Default.Entities
         {
             get { return Fields.ItemPrice[this]; }
             set { Fields.ItemPrice[this] = value; }
-        }*/
-
+        }
+*/
         IIdField IIdRow.IdField
         {
             get { return Fields.Id; }
@@ -157,7 +157,7 @@ namespace Payer.Default.Entities
             public StringField QrCode;
             public StringField DealNum;
             public Int32Field WaiterId;
-            //public Int32Field ItemId;
+           // public Int32Field ItemId;
             public Int32Field Id;
             public DateTimeField Created;
             public DateTimeField Closed;
@@ -169,8 +169,8 @@ namespace Payer.Default.Entities
             public Int32Field WaiterUserId;
             public Int32Field WaiterPersonId;
 
-          //  public StringField ItemName;
-          //  public DoubleField ItemPrice;
+            //public StringField ItemName;
+           // public DoubleField ItemPrice;
 
             public StringField GenerateQrCode;
 

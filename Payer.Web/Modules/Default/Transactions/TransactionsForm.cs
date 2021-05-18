@@ -18,7 +18,7 @@ namespace Payer.Default.Forms
         public String QrCode { get; set; }
         public String DealNum { get; set; }
         public Int32 WaiterId { get; set; }
-      //  public Int32 ItemId { get; set; }
+        //public Int32 ItemId { get; set; }
         public DateTime Created { get; set; }
         public DateTime Closed { get; set; }
     }

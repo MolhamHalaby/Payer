@@ -18,6 +18,7 @@ namespace Payer.Default.Pages
     using System.Linq;
     using System.Threading.Tasks;
     using System.Data.Entity;
+    using Payer.Models;
 
     [RoutePrefix("Default/Transactions"), Route("{action=Index}")]
     [PageAuthorize(typeof(Entities.TransactionsRow))]
@@ -35,18 +36,23 @@ namespace Payer.Default.Pages
 
             using (var db = new DBModel())
             {
+                
                 transaction = await db.Transactions
                     .Include(t => t.TransactionItems)
                     .Include(t => t.TransactionItems.Select(ti => ti.Item))
                     .FirstOrDefaultAsync(t => t.Id == id);
+                
             }
             return View(MVC.Views.Default.Transactions.Pay, transaction);//here we pass the model to the view
         }
 
         [HttpPost]
-        public JsonResult PayButton()
+        public JsonResult PayButton(String str)
         {
-            View(MVC.Views.Default.Transactions.TransactionsIndex);
+           
+
+
+                //View(MVC.Views.Default.Transactions.TransactionsIndex);
             return Json(true);
         }
 
