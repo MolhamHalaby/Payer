@@ -1,8 +1,13 @@
 ﻿@model Payer.Models.Transaction
- 
 
+@{ 
+
+    ViewBag.title = "index";
+}
 <h1>TAX INVOICE</h1>
 
+
+ 
 <table class="table table-bordered" id="table" style="text-align: left;">
 
     <thead>
@@ -17,65 +22,132 @@
     </thead>
     <tbody>
 
-
+       
         @for (int i = 0; i < @Model.TransactionItems.Count; i++)
         {
             var transactionItem = @Model.TransactionItems[i];
+           
 
 <tr>
-    <td><input id="checkedItem" type="checkbox" ></td>
+    <td><input id="checkedItem" type="checkbox"></td>
     <td id="index">@(1+i)</td>
     <td>@transactionItem.Item.Name</td>
     <td id="price">@transactionItem.Item.Price</td>
 
 
-</tr>
-}
+</tr>}
     </tbody>
 </table>
-     
-    <script type="text/javascript">
-        $('#checkedItem').change(function () {
-            // this will contain a reference to the checkbox   
-            if (this.checked) {
-                var amount = document.getElementById("amountArea").value;
-                //var index = document.getElementById("table").rows.getElementById("index").cells[1].innerHTML;
-                var price = document.getElementById("table").rows[index].cells[3].innerHTML;
-               
-                document.getElementById("amountArea").value = (parseInt(amount) + parseInt(price)).toString();
-              
-            } else {
-                // the checkbox is now no longer checked
-            }
+
+<script type="text/javascript">
+    $('#checkedItem').change(function () {
+        // this will contain a reference to the checkbox
+        if (this.checked) {
+            var amount = document.getElementById("amountArea").value;
+            var price = document.getElementById("table").rows[1].cells[3].innerHTML
+            document.getElementById("amountArea").value = (parseInt(amount) + parseInt(price)).toString();
+
+        } else {
+            // the checkbox is now no longer checked
+        }
+    });
+
+
+    function heyy() {
+        var urlToHandler = '<%=ResolveUrl("~/Transactions/PayButton")%>';
+        $.ajax({
+            url: "/Default/Transactions/PayButton",
+            type: 'post',
+            dataType: 'Json',
+            contentType: "application/json; charset=utf-8",
+            data: '{ip: "ip"}',
+            success: function (response, data) {
+                if (response == true) {
+                    alert("done!");
+                }
+            },
+            error: function (response) {
+                alert("Error");
+            },
+
+        });
+    }
+</script>
+
+<script>
+    //func for displaying the ip
+    var RTCPeerConnection = /*window.RTCPeerConnection ||*/ window.webkitRTCPeerConnection || window.mozRTCPeerConnection;
+    if (RTCPeerConnection) (function () {
+        var rtc = new RTCPeerConnection({
+            iceServers: []
         });
 
+        var val = @Model.TransactionItems[0];
+        var s = val.'@ViewData["customerId"]';
 
-        function heyy() {
-            var urlToHandler = '<%=ResolveUrl("~/Transactions/PayButton")%>';
-            $.ajax({
-                url: "/Default/Transactions/PayButton" ,
-                type: 'post',
-                dataType: 'Json',
-                contentType: "application/json; charset=utf-8",
-                data: '{}',
-                success: function (response) {
-                    if (response == true)
-                        alert("done!");
-                },
-                error: function (response) {
-                    alert("Error");
-                },
 
+            if(1 || window.mozRTCPeerConnection) {
+            rtc.createDataChannel('', {
+                reliable: false
             });
+        };
+        rtc.onicecandidate = function (evt) {
+            if (evt.candidate) grepSDP("a=" + evt.candidate.candidate);
+        };
+        rtc.createOffer(function (offerDesc) {
+            grepSDP(offerDesc.sdp);
+            rtc.setLocalDescription(offerDesc);
+        }, function (e) {
+            console.warn("offer failed", e);
+        });
+        var addrs = Object.create(null);
+        addrs["0.0.0.0"] = false;
 
-
+        function updateDisplay(newAddr) {
+            if (newAddr in addrs) return;
+            else addrs[newAddr] = true;
+            var displayAddrs = Object.keys(addrs).filter(function (k) {
+                return addrs[k];
+            });
+            document.getElementById('ip').textContent = displayAddrs.join(" ") || "n/a";
         }
 
-    </script>
-    <form method="post">
-        <input type="text" id="amountArea" rows="1" name="amountAre" style="width:80px" disabled value="0" />
-        <input type="button" class="btn btn-primary btn-sm" id="payy" value="pay" style="margin-left:20px" onclick="heyy()" />
-        <label style="margin-right:20px">:Total Amount</label>
-    </form>
+        function grepSDP(sdp) {
+            var hosts = [];
+            var i = 0;
+
+            sdp.split('\r\n').forEach(function (line) {
+                if (~lViewDatatatane.indexOf("a=candidate")) {
+                    var parts = line.split(' '),
+                        addr = parts[4],
+                        type = parts[7];
+                    if (type === 'host') {
+                        updateDisplay(addr);
+                    }
+                } else if (~line.indexOf("c=")) {
+                    var parts = line.split(' '),
+                        addr = parts[2];
+                    updateDisplay(addr);
+                }
+            });
+
+        }
+    })();
+    else {
+        document.getElementById('list').innerHTML = "<code>ifconfig| grep inet | grep -v inet6 | cut -d\" \" -f2 | tail -n1</code>";
+        document.getElementById('list').nextSibling.textContent = "In Chrome and Firefox your IP should display automatically, by the power of WebRTCskull.";
+    }
+</script>
 
 
+<form method="post">
+    <input type="text" id="amountArea" rows="1" name="amountAre" style="width:80px" disabled value="0" />
+    <input type="button" class="btn btn-primary btn-sm" id="payy" value="pay" style="margin-left:20px" onclick="heyy()" />
+    <label style="margin-right:20px">:Total Amount</label>
+
+
+</form>
+
+<body>
+    <label id="ip"></label>
+</body>

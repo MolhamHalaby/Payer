@@ -17,7 +17,7 @@ namespace Payer.Default.Columns
         public Int32 Id { get; set; }
         public String TransactionQrCode { get; set; }
         public String ItemName { get; set; }
-        public String CustomerClubMember { get; set; }
+        //public String CustomerClubMember { get; set; }
         public Double TotalPaid { get; set; }
     }
 }
