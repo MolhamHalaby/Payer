@@ -76,7 +76,7 @@
                     if (DataView.CustomerId[i] == null ) {
                         document.getElementById("table").getElementsByTagName('input')[i].removeAttribute("disabled");
                     }
-                    else if ('@Model.TransactionItems'[i].CustomerId == number) {
+                    else if ('@Model.TransactionItems[i].CustomerId' == number) {
                         document.getElementById("table").getElementsByTagName('input')[i].removeAttribute("disabled");
                         document.getElementById("table").getElementsByTagName('input')[i].checked=true;
                     }
