@@ -72,7 +72,7 @@
                
                 for (var i = 0; i < vall; i++) {
                    //alert(("0" + document.getElementById("table").rows[i + 1].cells[4].innerHTML) == number);
-                   if (("0"+ document.getElementById("table").rows[i+1].cells[4].innerHTM) == null) {
+                   if (("0"+ document.getElementById("table").rows[i+1].cells[4].innerHTML) == null) {
                         document.getElementById("table").getElementsByTagName('input')[i].removeAttribute("disabled");
                     }
                    else if (("0" + document.getElementById("table").rows[i + 1].cells[4].innerHTML) == number) {
@@ -103,6 +103,7 @@
             else{
                 document.getElementById("amountArea").value = (parseInt(amount) - parseInt(price)).toString();
                 totAmount -= parseInt(price);
+                statPhone = 0;
             }
 
             $.ajax({
