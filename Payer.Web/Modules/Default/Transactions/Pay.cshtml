@@ -6,69 +6,140 @@
 }
 <h1>TAX INVOICE</h1>
 
+<div style="float:left">
+    <input  type="tel" pattern="[0]{1}[5]{1}[0-9]{1}[0-9]{7}" placeholder="05xxxxxxxx" id="customerPhone" rows="1" maxlength="10" name="phone" style="width:150px;" onchange="telNum()" required/>   
+    <label  style="margin-right:20px">:Enter Phone Number</label>
+</div>
 
- 
-<table class="table table-bordered" id="table" style="text-align: left;">
+     
 
-    <thead>
+    <table class="table table-bordered" id="table" style="text-align: left;">
 
-        <tr>
-            <th scope="col">Checks</th>
-            <th scope="col">#</th>
-            <th scope="col">Particulars</th>
-            <th scope="col">Amount</th>
-        </tr>
+        <thead>
 
-    </thead>
-    <tbody>
+            <tr>
+                <th scope="col">Checks</th>
+                <th scope="col">#</th>
+                <th scope="col">Particulars</th>
+                <th scope="col">Amount</th>
+            </tr>
 
-       
-        @for (int i = 0; i < @Model.TransactionItems.Count; i++)
-        {
-            var transactionItem = @Model.TransactionItems[i];
-           
+        </thead>
+        <tbody>
 
-<tr>
-    <td><input id="checkedItem" type="checkbox"></td>
+
+            @for (int i = 0; i < @Model.TransactionItems.Count; i++)
+            {
+                var transactionItem = @Model.TransactionItems[i];
+
+<tr onchange="checkedIteeemm(this)">
+
+    <td><input id="checkedItem" type="checkbox" disabled></td>
     <td id="index">@(1+i)</td>
     <td>@transactionItem.Item.Name</td>
     <td id="price">@transactionItem.Item.Price</td>
 
 
 </tr>}
-    </tbody>
-</table>
-
-<script type="text/javascript">
-    $('#checkedItem').change(function () {
-        // this will contain a reference to the checkbox
-        if (this.checked) {
-            var amount = document.getElementById("amountArea").value;
-            var price = document.getElementById("table").rows[1].cells[3].innerHTML
-            document.getElementById("amountArea").value = (parseInt(amount) + parseInt(price)).toString();
-
-        } else {
-            // the checkbox is now no longer checked
-        }
-    });
+        </tbody>
+    </table>
 
 
-    function heyy() {
-        var urlToHandler = '<%=ResolveUrl("~/Transactions/PayButton")%>';
-        $.ajax({
-            url: "/Default/Transactions/PayButton",
-            type: 'post',
-            dataType: 'Json',
-            contentType: "application/json; charset=utf-8",
-            data: '{ip: "ip"}',
-            success: function (response, data) {
-                if (response == true) {
-                    alert("done!");
+    <script type="text/javascript">
+        var statPhone;
+        function telNum() {
+            var flag = 0;
+            var number = document.getElementById("customerPhone").value;
+
+                if (number[0] != '0' || number[1] != '5' || number.length < 10) {
+                    alert("Enter a valid phone number in this format: 05xxxxxxxx");
+                    flag = 1;
                 }
-            },
-            error: function (response) {
-                alert("Error");
-            },
+                else {
+                    for (var i = 2; i < number.length; i++)
+                        if (number[i] < '0' || number[i] > '9') {
+                            alert("Enter a valid phone number in this format: 05xxxxxxxx");
+                            flag = 1;
+                        }
+                }
+
+            if (flag == 0) {
+                document.getElementById("payy").removeAttribute('disabled');
+                document.getElementById("tipArea").removeAttribute('disabled');
+                var vall = document.getElementById("table").getElementsByTagName('input').length;
+
+               
+                var index = 0;
+                for (var @i = 0; i < vall; i++) {
+                    
+                    if ('@Model.TransactionItems[i].CustomerId' == null ) {
+                        document.getElementById("table").getElementsByTagName('input')[i].removeAttribute("disabled");
+                    }
+                    else if ('@Model.TransactionItems'[i].CustomerId == number) {
+                        document.getElementById("table").getElementsByTagName('input')[i].removeAttribute("disabled");
+                        document.getElementById("table").getElementsByTagName('input')[i].checked=true;
+                    }
+                    else {
+                        document.getElementById("table").getElementsByTagName('input')[i].checked = true;
+                    }
+                }
+                statPhone = number;
+
+            }
+
+
+        }
+        var totAmount = 0
+        function checkedIteeemm(x) {
+            var r = x.rowIndex;
+            var vall = document.getElementById("table").getElementsByTagName('input')[r - 1].checked == true;
+            var amount = document.getElementById("amountArea").value;
+            var price = document.getElementById("table").rows[r].cells[3].innerHTML;
+            var nameOfItem = document.getElementById("table").rows[r].cells[2].innerHTMLindexer;
+            if (vall) {
+                document.getElementById("amountArea").value = (parseInt(amount) + parseInt(CustomerIdprice)).toString();
+                totAmount += parseInt(price);CustomerId
+            }
+            else {
+                document.getElementById("amountArea").value = (parseInt(amount) - parseInt(price)).toString();
+                totAmount -= parseInt(price);
+            }
+
+            $.ajax({
+                url: "/Default/Transactions/checkNewItem",
+                type: 'post',
+              //  dataType: 'Json',
+              //  contentType: "application/json; charset=utf-8",
+                data: { 'phone': statPhone, 'itemName': nameOfItem, 'tranId': @Model.Id },
+                cache: false,
+                success: function (response) {
+                    if (response == true)
+                        alert("done!");
+                },
+                error: function (response) {
+                    alert("Error");
+                },
+
+            });
+
+
+        }
+
+        function heyy() {
+
+            $.ajax({
+                url: "/Default/Transactions/PayButton",
+                type: 'post',
+                dataType: 'Json',
+                contentType: "application/json; charset=utf-8",
+                data: '{}',
+                success: function (response) {
+                    if (response == true)
+                        alert("done!");
+                },
+                error: function (response) {
+                    alert("Error");
+                },
 
         });
     }
@@ -116,6 +187,11 @@
             var hosts = [];
             var i = 0;
 
+        }
+        var statTip = 0;
+        function addTip() {
+            var tip = document.getElementById("tipArea").value;
+            var amount = document.getElementById("amountArea").value;
             sdp.split('\r\n').forEach(function (line) {
                 if (~lViewDatatatane.indexOf("a=candidate")) {
                     var parts = line.split(' '),
@@ -131,6 +207,23 @@
                 }
             });
 
+            if (tip != "") {
+                document.getElementById("amountArea").value = (parseInt(totAmount) + parseInt(tip)).toString();
+                statTip = parseInt(tip);
+            }
+            else {
+                document.getElementById("amountArea").value = (parseInt(amount) - parseInt(statTip)).toString();
+            }
+        }
+    </script>
+    <input type="number" min="0" id="tipArea" rows="1" name="tipAre" style="width:80px;margin-right:65px;margin-bottom:10px" value="0" onchange="addTip()" disabled/>
+    <label style="margin-right:20px">:Tip</label>
+    <form method="post" >
+        <input type="button" class="btn btn-primary btn-sm" id="payy" value="Pay" style="margin-left:20px" onclick="heyy()"disabled />
+        <input type="text" id="amountArea" rows="1" name="amountAre" style="width:80px" disabled value="0" />
+        <label style="margin-right:20px">:Total Amount</label>
+
+    </form>
         }
     })();
     else {

@@ -166,8 +166,8 @@ namespace Payer.Default.Entities
             public StringField ItemName;
             public DoubleField ItemPrice;
 
-            //public StringField CustomerClubMember;
-           // public Int32Field CustomerPersonId;
+         /*   public StringField CustomerClubMember;
+            public Int32Field CustomerPersonId;*/
         }
     }
 }
