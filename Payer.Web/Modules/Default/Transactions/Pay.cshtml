@@ -8,7 +8,7 @@
 </div>
 
      
-
+ 
     <table class="table table-bordered" id="table" style="text-align: left;">
 
         <thead>
@@ -29,8 +29,9 @@
 
             @for (int i = 0; i < @Model.TransactionItems.Count; i++)
             {
-                var transactionItem = @Model.TransactionItems[i];
 
+                var transactionItem = @Model.TransactionItems[i];
+                
 <tr onchange="checkedIteeemm(this)">
 
     <td><input id="checkedItem" type="checkbox" disabled></td>
@@ -48,6 +49,7 @@
 
     <script type="text/javascript">
         var statPhone;
+
         function telNum() {
             var flag = 0;
             var number = document.getElementById("customerPhone").value;
@@ -82,6 +84,7 @@
                     else {
                         document.getElementById("table").getElementsByTagName('input')[i].checked = true;
                     }
+                }
                 }
                 statPhone = number;
 
