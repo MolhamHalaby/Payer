@@ -81,8 +81,10 @@
                    else if (("0" + document.getElementById("table").rows[i+1].cells[4].innerHTML) == number) {
                         document.getElementById("table").getElementsByTagName('input')[i].removeAttribute("disabled");
                         document.getElementById("table").getElementsByTagName('input')[i].checked = true;
+                        var amount = document.getElementById("amountArea").value;
                         var price = document.getElementById("table").rows[i + 1].cells[3].innerHTML;
                         document.getElementById("amountArea").value = (parseInt(amount) + parseInt(price)).toString();
+                        totAmount += parseInt(price);
                     }
                     else {
                         document.getElementById("table").getElementsByTagName('input')[i].checked = true;
@@ -132,7 +134,7 @@
 
         }
 
-        function heyy() {
+        function toPayButton() {
 
             $.ajax({
                 url: "/Default/Transactions/PayButton",
@@ -170,7 +172,7 @@
     <input type="number" min="0" id="tipArea" rows="1" name="tipAre" style="width:80px;margin-right:65px;margin-bottom:10px" value="0" onchange="addTip()" disabled/>
     <label style="margin-right:20px">:Tip</label>
     <form method="post" >
-        <input type="button" class="btn btn-primary btn-sm" id="payy" value="Pay" style="margin-left:20px" onclick="heyy()"disabled />
+        <input type="button" class="btn btn-primary btn-sm" id="payy" value="Pay" style="margin-left:20px" onclick="toPayButton()"disabled />
         <input type="text" id="amountArea" rows="1" name="amountAre" style="width:80px" disabled value="0" />
         <label style="margin-right:20px">:Total Amount</label>
 
