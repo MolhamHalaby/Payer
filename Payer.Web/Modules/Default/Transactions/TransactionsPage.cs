@@ -57,26 +57,47 @@ namespace Payer.Default.Pages
         }
 
         [HttpPost]
-        public JsonResult checkNewItem(int phone , String itemName, int tranId)
+        public JsonResult checkNewItem(int phone , String itemName, int tranId,int flag)
         {
-              
+            
              using(var db= new DBModel())
              {
-                 var m = db.TransactionItems.Where(t => t.Item.Name == itemName)
-                     .Where(ti => ti.TransactionId == tranId).Where(tt =>tt.CustomerId==null).FirstOrDefault();
-                  if(m!=null)
+
+                if (flag == 0)
                 {
-                    
-                    m.CustomerId = phone;
-                    db.Entry(m).State = EntityState.Modified;
-                    db.SaveChanges();
+                    var m = db.TransactionItems.Where(t => t.Item.Name == itemName)
+                       .Where(ti => ti.TransactionId == tranId).Where(tt => tt.CustomerId == phone).FirstOrDefault();
 
-                    return Json(true);
+                    if (m != null)
+                    {
+                      
+                        m.CustomerId = null;
+                        db.Entry(m).State = EntityState.Modified;
+                        db.SaveChanges();
+
+                        return Json(true);
+                    }
+                    else
+                        return Json(false);
+
                 }
-                  else
-                    return Json(false);
+                else
+                {
+                    var m = db.TransactionItems.Where(t => t.Item.Name == itemName)
+                      .Where(ti => ti.TransactionId == tranId).Where(tt => tt.CustomerId == null).FirstOrDefault();
 
-             
+                    if (m != null)
+                    {
+
+                        m.CustomerId = phone;
+                        db.Entry(m).State = EntityState.Modified;
+                        db.SaveChanges();
+
+                        return Json(true);
+                    }
+                    else
+                        return Json(false);
+                }
 
             }
 

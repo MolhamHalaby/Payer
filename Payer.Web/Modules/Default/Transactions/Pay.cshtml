@@ -49,7 +49,7 @@
 
     <script type="text/javascript">
         var statPhone;
-
+        var flagg;
         function telNum() {
             var flag = 0;
             var number = document.getElementById("customerPhone").value;
@@ -73,18 +73,21 @@
 
                
                 for (var i = 0; i < vall; i++) {
-                   //alert(("0" + document.getElementById("table").rows[i + 1].cells[4].innerHTML) == number);
-                   if (("0"+ document.getElementById("table").rows[i+1].cells[4].innerHTM) == null) {
+                 
+                    if ((document.getElementById("table").rows[i+1].cells[4].innerHTML) == "") {
+                       
                         document.getElementById("table").getElementsByTagName('input')[i].removeAttribute("disabled");
                     }
-                   else if (("0" + document.getElementById("table").rows[i + 1].cells[4].innerHTML) == number) {
+                   else if (("0" + document.getElementById("table").rows[i+1].cells[4].innerHTML) == number) {
                         document.getElementById("table").getElementsByTagName('input')[i].removeAttribute("disabled");
-                        document.getElementById("table").getElementsByTagName('input')[i].checked=true;
+                        document.getElementById("table").getElementsByTagName('input')[i].checked = true;
+                        var price = document.getElementById("table").rows[i + 1].cells[3].innerHTML;
+                        document.getElementById("amountArea").value = (parseInt(amount) + parseInt(price)).toString();
                     }
                     else {
                         document.getElementById("table").getElementsByTagName('input')[i].checked = true;
                     }
-                }
+                
                 }
                 statPhone = number;
 
@@ -102,18 +105,19 @@
             if (vall) {
                 document.getElementById("amountArea").value = (parseInt(amount) + parseInt(price)).toString();
                 totAmount += parseInt(price);
+                flagg = 1;
             }
             else{
                 document.getElementById("amountArea").value = (parseInt(amount) - parseInt(price)).toString();
                 totAmount -= parseInt(price);
+                flagg = 0;
+
             }
 
             $.ajax({
                 url: "/Default/Transactions/checkNewItem",
                 type: 'post',
-              //  dataType: 'Json',
-              //  contentType: "application/json; charset=utf-8",
-                data: { 'phone': statPhone, 'itemName': nameOfItem, 'tranId': @Model.Id },
+                data: { 'phone': statPhone, 'itemName': nameOfItem, 'tranId': @Model.Id ,'flag' : flagg},
                 cache: false,
                 success: function (response) {
                     if (response == true)
