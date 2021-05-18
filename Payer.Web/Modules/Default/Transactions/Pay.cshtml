@@ -146,7 +146,21 @@
                 },
 
         });
-    }
+        }
+
+        var statTip = 0;
+        function addTip() {
+            var tip = document.getElementById("tipArea").value;
+            var amount = document.getElementById("amountArea").value;
+
+            if (tip != "") {
+                document.getElementById("amountArea").value = (parseInt(totAmount) + parseInt(tip)).toString();
+                statTip = parseInt(tip);
+            }
+            else {
+                document.getElementById("amountArea").value = (parseInt(amount) - parseInt(statTip)).toString();
+            }
+        }
     </script>
 
 
