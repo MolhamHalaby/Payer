@@ -322,6 +322,8 @@ namespace MVC
             public static class Transactions
             {
                 public const string Pay = "~/Modules/Default/Transactions/Pay.cshtml";
+                public const string PayButton = "~/Modules/Default/Transactions/PayButton.cshtml";
+
                 public const string QRViewer = "~/Modules/Default/Transactions/QRViewer.cshtml";
                 public const string TransactionsIndex = "~/Modules/Default/Transactions/TransactionsIndex.cshtml";
             }

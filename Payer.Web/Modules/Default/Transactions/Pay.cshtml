@@ -52,6 +52,11 @@
         var flagg;
         function telNum() {
             var flag = 0;
+            if (statPhone != null) {
+                document.getElementById("amountArea").value = 0;
+                totAmount = 0;
+
+            }
             var number = document.getElementById("customerPhone").value;
 
                 if (number[0] != '0' || number[1] != '5' || number.length < 10) {
@@ -71,11 +76,11 @@
                 document.getElementById("tipArea").removeAttribute('disabled');
                 var vall = document.getElementById("table").getElementsByTagName('input').length;
 
-               
+
                 for (var i = 0; i < vall; i++) {
-                 
+
                     if ((document.getElementById("table").rows[i+1].cells[4].innerHTML) == "") {
-                       
+
                         document.getElementById("table").getElementsByTagName('input')[i].removeAttribute("disabled");
                     }
                    else if (("0" + document.getElementById("table").rows[i+1].cells[4].innerHTML) == number) {
@@ -88,8 +93,10 @@
                     }
                     else {
                         document.getElementById("table").getElementsByTagName('input')[i].checked = true;
+                        document.getElementById("table").getElementsByTagName('input')[i].disabled = true;
+
                     }
-                
+
                 }
                 statPhone = number;
 
@@ -108,11 +115,13 @@
                 document.getElementById("amountArea").value = (parseInt(amount) + parseInt(price)).toString();
                 totAmount += parseInt(price);
                 flagg = 1;
+                document.getElementById("table").rows[r].cells[4].innerHTML = parseInt(statPhone);
             }
             else{
                 document.getElementById("amountArea").value = (parseInt(amount) - parseInt(price)).toString();
                 totAmount -= parseInt(price);
                 flagg = 0;
+                document.getElementById("table").rows[r].cells[4].innerHTML = null;
 
             }
 
@@ -136,19 +145,24 @@
 
         function toPayButton() {
 
+            //window.location.href = Q.resolveUrl('~/Default/Transactions/DisplayQrCode?id=' + id);
+
             $.ajax({
-                url: "/Default/Transactions/PayButton",
-                type: 'post',
-                dataType: 'Json',
-                contentType: "application/json; charset=utf-8",
-                data: '{}',
+                url: '/Default/Transactions/PayButton',
+                type: 'POST',
+                contentType: "text",
+                cache: false,
+                //dataType: 'script',
+                //contentType: "application/json; charset=utf-8 
+                data: {
+                    itemName: 'azoze'
+                },
                 success: function (response) {
-                    if (response == true)
-                        alert("done!");
+                    window.location.href = '/Default/Transactions/PayButton';
+                     alert("done");
+                   //$('p').append(data)
                 },
-                error: function (response) {
-                    alert("Error");
-                },
+                
 
         });
         }

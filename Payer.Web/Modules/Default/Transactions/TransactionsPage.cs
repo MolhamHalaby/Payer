@@ -18,12 +18,13 @@ namespace Payer.Default.Pages
     using System.Linq;
     using System.Threading.Tasks;
     using System.Data.Entity;
-    using Payer.Models;
+    
 
     [RoutePrefix("Default/Transactions"), Route("{action=Index}")]
     [PageAuthorize(typeof(Entities.TransactionsRow))]
     public class TransactionsController : Controller
     {
+
         public ActionResult Index()
         {
             
@@ -46,16 +47,37 @@ namespace Payer.Default.Pages
             return View(MVC.Views.Default.Transactions.Pay, transaction);//here we pass the model to the view
         }
 
-        [HttpPost]
-        public JsonResult PayButton(String str)
+      // [HttpPost]
+        public ActionResult PayButton(String itemName)
         {
-           
+            var sss = "dsfg";
+            // var transItem = new TransactionItem();
+            // transItem.CustomerId = 25;
+            // transItem.Id = 2;
+            //  transItem.TransactionId = 3;
 
+            /*  var transaction = new Transaction();
 
-                //View(MVC.Views.Default.Transactions.TransactionsIndex);
-            return Json(true);
+              using (var db = new DBModel())
+              {
+
+                  transaction = await db.Transactions
+                      .Include(t => t.TransactionItems)
+                      .Include(t => t.TransactionItems.Select(ti => ti.Item))
+                      .FirstOrDefaultAsync(t => t.Id == 3);
+
+              }*/
+            // var tra = new TransactionItem();
+
+            // tra.CustomerId = 25;
+            ViewBag.hi = itemName;
+
+            //return Json(true);
+             return PartialView(MVC.Views.Default.Transactions.PayButton);
+            //return PartialView("~/Modules/Default/Transactions/PayButton.cshtml");
         }
 
+       
         [HttpPost]
         public JsonResult checkNewItem(int phone , String itemName, int tranId,int flag)
         {
