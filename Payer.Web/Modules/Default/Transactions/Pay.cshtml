@@ -1,5 +1,7 @@
 ﻿@model Payer.Models.Transaction
 
+
+
 <h1>TAX INVOICE</h1>
 
 <div style="float:left">
@@ -7,10 +9,10 @@
     <label  style="margin-right:20px">:Enter Phone Number</label>
 </div>
 
-     
+    
  
     <table class="table table-bordered" id="table" style="text-align: left;">
-
+     
         <thead>
 
             <tr>
@@ -18,7 +20,7 @@
                 <th scope="col">#</th>
                 <th scope="col">Particulars</th>
                 <th scope="col">Amount</th>
-                <th scope="col" hidden>Phone Number</th>
+                <th scope="col">Phone Number</th>
 
 
             </tr>
@@ -38,7 +40,7 @@
     <td id="index">@(1 + i)</td>
     <td>@transactionItem.Item.Name</td>
     <td id="price">@transactionItem.Item.Price</td>
-    <td id="phoneNum" hidden>@transactionItem.CustomerId</td>
+    <td id="phoneNum" >@transactionItem.CustomerId</td>
 
 
 
@@ -48,12 +50,36 @@
 
 
     <script type="text/javascript">
+
+        $(document).ready(function () {
+            function refresh() {
+                var div = $('#table'),
+                    divHtml = div.html();
+
+                div.html(divHtml);
+
+            }
+
+            setInterval(function () {
+
+                refresh();
+                
+        telNum();
+            }, 5000); //300000 is 5minutes in ms
+        })
+
         var statPhone;
         var flagg;
         function telNum() {
-            var flag = 0;
-            var number = document.getElementById("customerPhone").value;
 
+            var flag = 0;
+            if (statPhone != null) {
+                document.getElementById("amountArea").value = 0;
+                totAmount = 0;
+            }
+
+            var number = document.getElementById("customerPhone").value;
+            alert(number);
                 if (number[0] != '0' || number[1] != '5' || number.length < 10) {
                     alert("Enter a valid phone number in this format: 05xxxxxxxx");
                     flag = 1;
@@ -71,11 +97,12 @@
                 document.getElementById("tipArea").removeAttribute('disabled');
                 var vall = document.getElementById("table").getElementsByTagName('input').length;
 
-               
+
+
                 for (var i = 0; i < vall; i++) {
-                 
+
                     if ((document.getElementById("table").rows[i+1].cells[4].innerHTML) == "") {
-                       
+
                         document.getElementById("table").getElementsByTagName('input')[i].removeAttribute("disabled");
                     }
                    else if (("0" + document.getElementById("table").rows[i+1].cells[4].innerHTML) == number) {
@@ -88,11 +115,13 @@
                     }
                     else {
                         document.getElementById("table").getElementsByTagName('input')[i].checked = true;
+                        document.getElementById("table").getElementsByTagName('input')[i].disabled = true;
+
                     }
-                
+
                 }
                 statPhone = number;
-
+               // document.getElementById("customerPhone").value = statPhone;
             }
 
 
@@ -108,11 +137,14 @@
                 document.getElementById("amountArea").value = (parseInt(amount) + parseInt(price)).toString();
                 totAmount += parseInt(price);
                 flagg = 1;
+                document.getElementById("table").rows[r].cells[4].innerHTML = parseInt(statPhone);
             }
             else{
                 document.getElementById("amountArea").value = (parseInt(amount) - parseInt(price)).toString();
                 totAmount -= parseInt(price);
                 flagg = 0;
+                document.getElementById("table").rows[r].cells[4].innerHTML = null;
+
 
             }
 
@@ -123,6 +155,7 @@
                 cache: false,
                 success: function (response) {
                     if (response == true)
+                        //location.href = location.href;
                         alert("done!");
                 },
                 error: function (response) {
@@ -139,12 +172,19 @@
             $.ajax({
                 url: "/Default/Transactions/PayButton",
                 type: 'post',
-                dataType: 'Json',
-                contentType: "application/json; charset=utf-8",
-                data: '{}',
+               // dataType: 'Json',
+             //   contentType: "application/json; charset=utf-8",
+                data: {
+                    tip: document.getElementById("tipArea").value,
+                    //customerAmount: document.getElementById("amountArea").value,
+                    waiterForTip: @Model.WaiterId,
+          //          CustomerPhoneNum: statPhone,
+                   // trannId: @Model.Id,
+                },
                 success: function (response) {
-                    if (response == true)
-                        alert("done!");
+                    alert("done");
+
+                    window.location.href = "/Default/Transactions/PayButton?phone=" + statPhone + "&customerAmount=" + parseInt(document.getElementById("amountArea").value) ;
                 },
                 error: function (response) {
                     alert("Error");

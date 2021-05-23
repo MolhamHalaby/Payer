@@ -45,15 +45,63 @@ namespace Payer.Default.Pages
             }
             return View(MVC.Views.Default.Transactions.Pay, transaction);//here we pass the model to the view
         }
-
-        [HttpPost]
-        public JsonResult PayButton(String str)
+        
+        public async Task<ActionResult> UpdateTable(int tranId)
         {
+            var transaction = new Transaction();
+
+            using (var db = new DBModel())
+            {
+
+                transaction = await db.Transactions
+                    .Include(t => t.TransactionItems)
+                    .Include(t => t.TransactionItems.Select(ti => ti.Item))
+                    .FirstOrDefaultAsync(t => t.Id == tranId);
+
+            }
+            //return Json(transaction);
+            return Json(transaction,JsonRequestBehavior.AllowGet);
+        }
+
+
+       [HttpPost]
+        public ActionResult PayButton(float tip,int waiterForTip)
+        {
+            var x = new Tip();
+            using (var db = new DBModel())
+            {
+                var m = db.Tips.Where(t => t.WaiterId == waiterForTip).FirstOrDefault();
+                if(m!=null)
+                {
+                    m.Value = m.Value + tip;
+                    m.Date = DateTime.Now;
+                    db.Entry(m).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+                else
+                {
+                    
+                    x.Value = tip;
+                    x.WaiterId = waiterForTip;
+                    x.Date = DateTime.Now;
+                    db.Tips.Add(x);                   
+                    db.Entry(x).State = EntityState.Added;
+                    db.SaveChanges();
+                }
+
+            }
            
+            
+            ViewBag.Amount = 5;
+            ViewBag.Phone = 6;
+             return View(MVC.Views.Default.Transactions.PayButton);
 
-
-                //View(MVC.Views.Default.Transactions.TransactionsIndex);
-            return Json(true);
+        }
+        public ActionResult PayButton(int phone,int customerAmount)
+        {
+            ViewBag.Phone = phone;
+            ViewBag.Amount = customerAmount;
+            return View(MVC.Views.Default.Transactions.PayButton);
         }
 
         [HttpPost]
