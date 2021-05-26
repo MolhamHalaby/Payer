@@ -19,7 +19,7 @@ namespace Payer.Default.Pages
     using System.Threading.Tasks;
     using System.Data.Entity;
     using Payer.Models;
-
+    
     [RoutePrefix("Default/Transactions"), Route("{action=Index}")]
     [PageAuthorize(typeof(Entities.TransactionsRow))]
     public class TransactionsController : Controller
