@@ -50,8 +50,8 @@ namespace Payer.Default.Pages
         {
             var transaction = new Transaction();
 
-            using (var db = new DBModel())
-            {
+             using (var db = new DBModel())
+             {
 
                 transaction = await db.Transactions
                     .Include(t => t.TransactionItems)

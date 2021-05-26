@@ -1,7 +1,5 @@
 ﻿@model Payer.Models.Transaction
 
-
-
 <h1>TAX INVOICE</h1>
 
 <div style="float:left">
@@ -23,14 +21,14 @@
                 <th scope="col" >Phone Number</th>
 
 
-            </tr>
+        </tr>
 
-        </thead>
-        <tbody>
+    </thead>
+    <tbody>
 
 
-            @for (int i = 0; i < @Model.TransactionItems.Count; i++)
-            {
+        @for (int i = 0; i < @Model.TransactionItems.Count; i++)
+        {
 
                 var transactionItem = @Model.TransactionItems[i];
 
@@ -64,7 +62,6 @@
                 var div = $('#table'),
                     divHtml = div.html();
 
-                div.html(divHtml);
 
             }
 
@@ -113,6 +110,7 @@
             if (statPhone != null) {
                 document.getElementById("amountArea").value = 0;
                 totAmount = 0;
+
             }
 
             var number = document.getElementById("customerPhone").value;
@@ -229,6 +227,7 @@
 
             }
 
+
             $.ajax({
                 url: "/Default/Transactions/checkNewItem",
                 type: 'post',
@@ -249,6 +248,8 @@
         }
 
         function toPayButton() {
+
+            //window.location.href = Q.resolveUrl('~/Default/Transactions/DisplayQrCode?id=' + id);
 
             $.ajax({
                 url: "/Default/Transactions/PayButton",
@@ -271,6 +272,7 @@
                     alert("Error");
                 },
 
+
         });
         }
 
@@ -287,15 +289,14 @@
                 document.getElementById("amountArea").value = (parseInt(amount) - parseInt(statTip)).toString();
             }
         }
-    </script>
+</script>
 
 
-    <input type="number" min="0" id="tipArea" rows="1" name="tipAre" style="width:80px;margin-right:65px;margin-bottom:10px" value="0" onchange="addTip()" disabled/>
-    <label style="margin-right:20px">:Tip</label>
-    <form method="post" >
-        <input type="button" class="btn btn-primary btn-sm" id="payy" value="Pay" style="margin-left:20px" onclick="toPayButton()"disabled />
-        <input type="text" id="amountArea" rows="1" name="amountAre" style="width:80px" disabled value="0" />
-        <label style="margin-right:20px">:Total Amount</label>
+<input type="number" min="0" id="tipArea" rows="1" name="tipAre" style="width:80px;margin-right:65px;margin-bottom:10px" value="0" onchange="addTip()" disabled />
+<label style="margin-right:20px">:Tip</label>
+<form method="post">
+    <input type="button" class="btn btn-primary btn-sm"  id="payy" value="Pay" style="margin-left:20px" onclick="toPayButton()" disabled />
+    <input type="text" id="amountArea" rows="1" name="amountAre" style="width:80px" disabled value="0" />
+    <label style="margin-right:20px">:Total Amount</label>
 
-    </form>
-     
+</form>

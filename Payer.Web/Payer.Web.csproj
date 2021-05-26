@@ -880,7 +880,7 @@
     <Content Include="wkhtmltopdf-license.txt" />
     <Content Include="Modules\Default\Transactions\QRViewer.cshtml" />
     <Content Include="Modules\Default\Transactions\Pay.cshtml" />
-    <Content Include="Modules\Default\Transactions\PayingDetails.cshtml" />
+    <Content Include="Modules\Default\Tips\Pull.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-ui-1.12.1.js" />
     <Content Include="Scripts\jquery-ui-1.12.1.min.js" />
@@ -1755,7 +1755,6 @@
     <Content Include="Scripts\SlickGrid\README.md" />
     <Content Include="tools\Node\lessc.cmd" />
     <Content Include="tools\JsEngine\lib.d.ts_" />
-    <Content Include="Modules\Default\Transactions\PayButton.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
