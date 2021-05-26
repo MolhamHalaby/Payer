@@ -18,13 +18,12 @@ namespace Payer.Default.Pages
     using System.Linq;
     using System.Threading.Tasks;
     using System.Data.Entity;
-    
+    using Payer.Models;
 
     [RoutePrefix("Default/Transactions"), Route("{action=Index}")]
     [PageAuthorize(typeof(Entities.TransactionsRow))]
     public class TransactionsController : Controller
     {
-
         public ActionResult Index()
         {
             
@@ -46,28 +45,29 @@ namespace Payer.Default.Pages
             }
             return View(MVC.Views.Default.Transactions.Pay, transaction);//here we pass the model to the view
         }
-
-
-       /*
-         public async Task<ActionResult> UpdateTable(int id, int tranId)
-         {
-             var transaction = new Transaction();
+       
+        public async Task<ActionResult> UpdateTable(int tranId)
+        {
+            var transaction = new Transaction();
 
              using (var db = new DBModel())
              {
 
-                 transaction = await db.Transactions
-                     .Include(t => t.TransactionItems)
-                     .Include(t => t.TransactionItems.Select(ti => ti.Item))
-                     .FirstOrDefaultAsync(t => t.Id == id);
+                transaction = await db.Transactions
+                    .Include(t => t.TransactionItems)
+                    .Include(t => t.TransactionItems.Select(ti => ti.Item))
+                    .FirstOrDefaultAsync(t => t.Id == tranId);
+                return Content(JsonConvert.SerializeObject(transaction, new JsonSerializerSettings
+                {
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                    NullValueHandling = NullValueHandling.Ignore
+                }));
 
-             }
-            ViewBag.Phone = tranId;
-            return View(MVC.Views.Default.Transactions.Pay, transaction);
-           // return Json(transaction);
-             //return Json(transaction,JsonRequestBehavior.AllowGet);
-         }
-       */
+            }
+
+            //return View(transaction);
+        }
+
 
         [HttpPost]
         public ActionResult PayButton(float tip,int waiterForTip)
@@ -109,7 +109,6 @@ namespace Payer.Default.Pages
             return View(MVC.Views.Default.Transactions.PayButton);
         }
 
-       
         [HttpPost]
         public JsonResult checkNewItem(int phone , String itemName, int tranId,int flag)
         {

@@ -14,7 +14,6 @@
     { 
         private static string[] databaseKeys = new[] {
             "Default"
-            , "Northwind"
         };
 
         /// <summary>
