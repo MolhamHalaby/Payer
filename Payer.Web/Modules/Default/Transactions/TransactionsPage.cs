@@ -45,7 +45,7 @@ namespace Payer.Default.Pages
             }
             return View(MVC.Views.Default.Transactions.Pay, transaction);//here we pass the model to the view
         }
-        
+       
         public async Task<ActionResult> UpdateTable(int tranId)
         {
             var transaction = new Transaction();
@@ -57,14 +57,19 @@ namespace Payer.Default.Pages
                     .Include(t => t.TransactionItems)
                     .Include(t => t.TransactionItems.Select(ti => ti.Item))
                     .FirstOrDefaultAsync(t => t.Id == tranId);
+                return Content(JsonConvert.SerializeObject(transaction, new JsonSerializerSettings
+                {
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+                    NullValueHandling = NullValueHandling.Ignore
+                }));
 
             }
-            //return Json(transaction);
-            return Json(transaction,JsonRequestBehavior.AllowGet);
+
+            //return View(transaction);
         }
 
 
-       [HttpPost]
+        [HttpPost]
         public ActionResult PayButton(float tip,int waiterForTip)
         {
             var x = new Tip();

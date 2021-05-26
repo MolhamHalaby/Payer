@@ -1005,7 +1005,6 @@
     <Content Include="Scripts\serenity\slick\serenity-slick.min.js" />
     <Content Include="Scripts\serenity\widget\serenity-widget.js" />
     <Content Include="Scripts\serenity\widget\serenity-widget.min.js" />
-    <Content Include="Scripts\site\texts\northwind\northwind.ru.json" />
     <Content Include="Scripts\site\texts\samples\samples.ru.json" />
     <Content Include="Scripts\SlickGrid\Controls\slick.columnpicker.js" />
     <Content Include="Scripts\SlickGrid\Controls\slick.pager.js" />
@@ -1118,9 +1117,6 @@
     <TypeScriptCompile Include="Imports\ServerTypings\Default.WaitersColumns.ts">
       <DependentUpon>ServerTypings.tt</DependentUpon>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="Imports\ServerTypings\Northwind.PermissionKeys.ts">
-      <DependentUpon>ServerTypings.tt</DependentUpon>
-    </TypeScriptCompile>
     <TypeScriptCompile Include="Imports\ServerTypings\Texts.ts">
       <DependentUpon>ServerTypings.tt</DependentUpon>
     </TypeScriptCompile>
@@ -1134,8 +1130,6 @@
     <TypeScriptCompile Include="node_modules\%40types\sortablejs\index.d.ts" />
     <TypeScriptCompile Include="node_modules\%40types\toastr\index.d.ts" />
     <Content Include="Content\site\images\accordion-arrows.png" />
-    <EmbeddedResource Include="Migrations\NorthwindDB\NorthwindDBScript_Sqlite.sql" />
-    <Content Include="Modules\BasicSamples\Dialogs\OtherFormInTabOneBar\OtherFormOneBarDialog.Template.html" />
     <Content Include="Modules\Membership\Account\SignUp\AccountSignUp.AdminLTE.cshtml" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -1143,11 +1137,9 @@
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
     <Content Include="Imports\Web.config" />
     <Content Include="Migrations\Web.config" />
-    <Content Include="Modules\BasicSamples\Grids\WrappedHeaders\Index.cshtml" />
     <Content Include="Content\site\CssBundles.json" />
     <Content Include="Scripts\vue.js" />
     <Content Include="Scripts\vue.min.js" />
-    <EmbeddedResource Include="Migrations\NorthwindDB\NorthwindDBScript_SqlServer.sql" />
     <Content Include="Content\adminlte\img\avatar.png" />
     <Content Include="Content\adminlte\img\avatar04.png" />
     <Content Include="Content\adminlte\img\avatar2.png" />
@@ -1291,7 +1283,6 @@
     <Content Include="Content\site\site.htmlcontent.css" />
     <Content Include="Content\site\site.css" />
     <Content Include="Content\site\site.mixins.less" />
-    <Content Include="Content\site\site.northwind.less" />
     <Content Include="Content\site\site.membership.less" />
     <Content Include="Content\adminlte\.csslintrc" />
     <Content Include="Content\adminlte\404_500_errors.less" />
@@ -1382,14 +1373,10 @@
     <Content Include="favicon.ico" />
     <Content Include="Imports\MultipleOutputHelper.ttinclude" />
     <Content Include="Content\site\site.administration.less" />
-    <EmbeddedResource Include="Migrations\NorthwindDB\NorthwindDBScript_Postgres.sql" />
-    <EmbeddedResource Include="Migrations\NorthwindDB\NorthwindDBScript_PostgresData.sql" />
-    <EmbeddedResource Include="Migrations\NorthwindDB\NorthwindDBScript_MySql.sql" />
     <Content Include="Imports\ClientTypes\ClientTypes.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ClientTypes.log</LastGenOutput>
     </Content>
-    <Content Include="Migrations\NorthwindDB\NorthwindDBScript_Oracle.sql" />
     <Content Include="Scripts\adminlte\app.js" />
     <Content Include="Scripts\adminlte\app.min.js" />
     <Content Include="Scripts\adminlte\demo.js" />
@@ -1490,15 +1477,7 @@
     <Content Include="Scripts\ionslider\ion.rangeSlider.min.js" />
     <Content Include="Scripts\ionslider\ion.rangeSlider.skinFlat.css" />
     <Content Include="Scripts\ionslider\ion.rangeSlider.skinNice.css" />
-    <Content Include="Modules\BasicSamples\Dialogs\ChartInDialog\Index.cshtml" />
     <Content Include="Content\site\site.basicsamples.less" />
-    <Content Include="Modules\BasicSamples\Grids\ViewWithoutID\Index.cshtml" />
-    <Content Include="Modules\BasicSamples\Dialogs\CloneableEntityDialog\Index.cshtml" />
-    <Content Include="Modules\BasicSamples\Editors\LookupFilterByMultipleValues\Index.cshtml" />
-    <Content Include="Modules\BasicSamples\Grids\GridFilteredByCriteria\Index.cshtml" />
-    <Content Include="Modules\BasicSamples\Dialogs\DefaultValuesInNewDialog\Index.cshtml" />
-    <Content Include="Modules\BasicSamples\Editors\FilteredLookupInDetail\Index.cshtml" />
-    <Content Include="Modules\BasicSamples\Grids\GroupingAndSummariesInGrid\Index.cshtml" />
     <Content Include="Imports\CodeGenerationHelpers.ttinclude" />
     <Content Include="Imports\ClientTypes\ClientTypes.log">
       <AutoGen>True</AutoGen>
@@ -1506,9 +1485,6 @@
       <DependentUpon>ClientTypes.tt</DependentUpon>
     </Content>
     <TypeScriptCompile Include="Modules\Common\Helpers\StaticTextBlock.ts" />
-    <TypeScriptCompile Include="Imports\ServerTypings\Northwind.CustomerGrossSalesRow.ts">
-      <DependentUpon>ServerTypings.tt</DependentUpon>
-    </TypeScriptCompile>
     <TypeScriptCompile Include="Modules\Administration\Language\LanguageDialog.ts" />
     <TypeScriptCompile Include="Modules\Administration\Language\LanguageGrid.ts" />
     <TypeScriptCompile Include="Modules\Administration\RolePermission\RolePermissionDialog.ts" />
@@ -1522,73 +1498,11 @@
     <TypeScriptCompile Include="Modules\Administration\User\Authentication\Authorization.ts" />
     <TypeScriptCompile Include="Modules\Administration\User\UserGrid.ts" />
     <TypeScriptCompile Include="Modules\Administration\User\UserDialog.ts" />
-    <Content Include="Modules\BasicSamples\Grids\CancellableBulkAction\Index.cshtml" />
-    <Content Include="Modules\BasicSamples\Grids\ConditionalFormatting\Index.cshtml" />
-    <Content Include="Modules\BasicSamples\Grids\CustomLinksInGrid\Index.cshtml" />
-    <Content Include="Modules\BasicSamples\Grids\DragDropInTreeGrid\Index.cshtml" />
-    <Content Include="Modules\BasicSamples\Grids\InitialValuesForQuickFilters\Index.cshtml" />
-    <Content Include="Modules\BasicSamples\Grids\InlineImageInGrid\Index.cshtml" />
-    <Content Include="Modules\BasicSamples\Dialogs\GetInsertedRecordId\Index.cshtml" />
-    <Content Include="Modules\BasicSamples\Grids\RemovingAddButton\Index.cshtml" />
-    <Content Include="Modules\BasicSamples\Dialogs\DialogBoxes\Index.cshtml" />
-    <Content Include="Modules\BasicSamples\Dialogs\ReadOnlyDialog\Index.cshtml" />
-    <Content Include="Modules\BasicSamples\Dialogs\SerialAutoNumber\Index.cshtml" />
-    <Content Include="Modules\BasicSamples\Dialogs\PopulateLinkedData\Index.cshtml" />
-    <Content Include="Modules\BasicSamples\Grids\ProductExcelImport\SampleProductList.xlsx" />
-    <Content Include="Modules\BasicSamples\Grids\ProductExcelImport\Index.cshtml" />
-    <Content Include="Modules\BasicSamples\Grids\VSGalleryQA\Index.cshtml" />
-    <Content Include="Modules\BasicSamples\Grids\StoredProcedureGrid\Index.cshtml" />
-    <Content Include="Modules\BasicSamples\Editors\ChangingLookupText\Index.cshtml" />
-    <Content Include="Modules\BasicSamples\Grids\EnablingRowSelection\Index.cshtml" />
-    <Content Include="Modules\BasicSamples\Editors\SelectWithHardcodedValues\Index.cshtml" />
-    <Content Include="Modules\BasicSamples\Editors\StaticTextBlock\Index.cshtml" />
-    <Content Include="Modules\BasicSamples\Dialogs\OtherFormInTab\Index.cshtml" />
-    <Content Include="Modules\BasicSamples\Grids\InlineActionButtons\Index.cshtml" />
-    <Content Include="Modules\BasicSamples\Grids\TreeGrid\Index.cshtml" />
-    <Content Include="Modules\BasicSamples\Dialogs\OtherFormInTabOneBar\Index.cshtml" />
-    <Content Include="Modules\BasicSamples\Grids\QuickFilterCustomization\Index.cshtml" />
-    <Content Include="Modules\BasicSamples\Dialogs\EntityDialogAsPanel\Index.cshtml" />
     <None Include="Imports\ServerTypings\ServerTypings.log">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ServerTypings.tt</DependentUpon>
     </None>
-    <Content Include="Modules\BasicSamples\Dialogs\OtherFormInTab\OtherFormInTabDialog.Template.html" />
-    <TypeScriptCompile Include="Modules\BasicSamples\Dialogs\EntityDialogAsPanel\EntityDialogAsPanel.ts" />
-    <TypeScriptCompile Include="Modules\BasicSamples\Dialogs\OtherFormInTabOneBar\OtherFormOneBarDialog.ts" />
-    <TypeScriptCompile Include="Modules\BasicSamples\Dialogs\OtherFormInTabOneBar\OtherFormOneBarGrid.ts" />
-    <TypeScriptCompile Include="Modules\BasicSamples\Dialogs\OtherFormInTab\OtherFormInTabGrid.ts" />
-    <TypeScriptCompile Include="Modules\BasicSamples\Dialogs\OtherFormInTab\OtherFormInTabDialog.ts" />
-    <TypeScriptCompile Include="Modules\BasicSamples\Dialogs\DialogBoxes\DialogBoxes.ts" />
-    <TypeScriptCompile Include="Modules\BasicSamples\Dialogs\PopulateLinkedData\PopulateLinkedDataDialog.ts" />
-    <TypeScriptCompile Include="Modules\BasicSamples\Dialogs\PopulateLinkedData\PopulateLinkedDataGrid.ts" />
-    <TypeScriptCompile Include="Modules\BasicSamples\Dialogs\SerialAutoNumber\SerialAutoNumberDialog.ts" />
-    <TypeScriptCompile Include="Modules\BasicSamples\Dialogs\SerialAutoNumber\SerialAutoNumberGrid.ts" />
-    <TypeScriptCompile Include="Modules\BasicSamples\Dialogs\ReadOnlyDialog\ReadOnlyDialog.ts" />
-    <TypeScriptCompile Include="Modules\BasicSamples\Dialogs\ReadOnlyDialog\ReadOnlyGrid.ts" />
-    <TypeScriptCompile Include="Modules\BasicSamples\Editors\StaticTextBlock\StaticTextBlockDialog.ts" />
-    <TypeScriptCompile Include="Modules\BasicSamples\Editors\SelectWithHardcodedValues\HardcodedValuesDialog.ts" />
-    <TypeScriptCompile Include="Modules\BasicSamples\Editors\SelectWithHardcodedValues\HardcodedValuesEditor.ts" />
-    <TypeScriptCompile Include="Modules\BasicSamples\Editors\ChangingLookupText\ChangingLookupTextDialog.ts" />
-    <TypeScriptCompile Include="Modules\BasicSamples\Editors\ChangingLookupText\ChangingLookupTextEditor.ts" />
-    <TypeScriptCompile Include="Modules\BasicSamples\Grids\QuickFilterCustomization\QuickFilterCustomization.ts" />
-    <TypeScriptCompile Include="Modules\BasicSamples\Grids\InlineActionButtons\InlineActionGrid.ts" />
-    <TypeScriptCompile Include="Modules\BasicSamples\Grids\ProductExcelImport\ProductExcelImportDialog.ts" />
-    <TypeScriptCompile Include="Modules\BasicSamples\Grids\ProductExcelImport\ProductExcelImportGrid.ts" />
-    <TypeScriptCompile Include="Modules\BasicSamples\Grids\WrappedHeaders\WrappedHeadersGrid.ts" />
-    <TypeScriptCompile Include="Modules\BasicSamples\Grids\RemovingAddButton\RemovingAddButton.ts" />
-    <TypeScriptCompile Include="Modules\BasicSamples\Dialogs\GetInsertedRecordId\GetInsertedRecordIdDialog.ts" />
-    <TypeScriptCompile Include="Modules\BasicSamples\Dialogs\GetInsertedRecordId\GetInsertedRecordIdGrid.ts" />
-    <TypeScriptCompile Include="Modules\BasicSamples\Grids\InlineImageInGrid\InlineImageFormatter.ts" />
-    <TypeScriptCompile Include="Modules\BasicSamples\Grids\InlineImageInGrid\InlineImageInGrid.ts" />
-    <TypeScriptCompile Include="Modules\BasicSamples\Grids\ConditionalFormatting\ConditionalFormattingGrid.ts" />
-    <TypeScriptCompile Include="Modules\BasicSamples\Grids\InitialValuesForQuickFilters\InitialValuesForQuickFilters.ts" />
-    <TypeScriptCompile Include="Modules\BasicSamples\Grids\CustomLinksInGrid\CustomLinksInGrid.ts" />
-    <TypeScriptCompile Include="Modules\BasicSamples\Grids\EnablingRowSelection\RowSelectionGrid.ts" />
-    <TypeScriptCompile Include="Modules\BasicSamples\Grids\EnablingRowSelection\SelectableEntityGrid.ts" />
-    <TypeScriptCompile Include="Modules\BasicSamples\Grids\StoredProcedureGrid\CustomerGrossSalesGrid.ts" />
-    <TypeScriptCompile Include="Modules\BasicSamples\Grids\TreeGrid\TreeGrid.ts" />
-    <TypeScriptCompile Include="Modules\BasicSamples\Grids\VSGalleryQA\VSGalleryQAGrid.ts" />
     <TypeScriptCompile Include="Modules\Common\Helpers\EnumSelectFormatter.ts" />
     <TypeScriptCompile Include="Modules\Common\Helpers\LanguageList.ts" />
     <TypeScriptCompile Include="Modules\Common\Helpers\DialogUtils.ts" />
@@ -1673,9 +1587,6 @@
     <TypeScriptCompile Include="Imports\ServerTypings\GetNextNumberResponse.ts">
       <DependentUpon>ServerTypings.tt</DependentUpon>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="Imports\ServerTypings\Northwind.OrderListRequest.ts">
-      <DependentUpon>ServerTypings.tt</DependentUpon>
-    </TypeScriptCompile>
     <TypeScriptCompile Include="Modules\Common\Navigation\ThemeSelection.ts" />
     <TypeScriptCompile Include="Modules\Common\Navigation\SidebarSearch.ts" />
     <TypeScriptCompile Include="Modules\Common\Navigation\LanguageSelection.ts" />
@@ -1687,27 +1598,6 @@
     <TypeScriptCompile Include="Modules\Membership\Account\ForgotPassword\ForgotPasswordPanel.ts" />
     <TypeScriptCompile Include="Modules\Membership\Account\ResetPassword\ResetPasswordPanel.ts" />
     <TypeScriptCompile Include="Modules\Membership\Account\SignUp\SignUpPanel.ts" />
-    <TypeScriptCompile Include="Modules\Northwind\Category\CategoryDialog.ts" />
-    <TypeScriptCompile Include="Modules\Northwind\Category\CategoryGrid.ts" />
-    <TypeScriptCompile Include="Modules\Northwind\Customer\CustomerGrid.ts" />
-    <TypeScriptCompile Include="Modules\Northwind\Customer\EmployeeListFormatter.ts" />
-    <TypeScriptCompile Include="Modules\Northwind\Customer\CustomerOrderDialog.ts" />
-    <TypeScriptCompile Include="Modules\Northwind\Customer\CustomerEditor.ts" />
-    <TypeScriptCompile Include="Modules\Northwind\Customer\CustomerDialog.ts" />
-    <TypeScriptCompile Include="Modules\Northwind\Employee\EmployeeFormatter.ts" />
-    <TypeScriptCompile Include="Modules\Northwind\Note\NoteDialog.ts" />
-    <TypeScriptCompile Include="Modules\Northwind\Order\OrderDialog.ts" />
-    <TypeScriptCompile Include="Modules\Northwind\Order\FreightFormatter.ts" />
-    <TypeScriptCompile Include="Modules\Northwind\Region\RegionDialog.ts" />
-    <TypeScriptCompile Include="Modules\Northwind\Region\RegionGrid.ts" />
-    <TypeScriptCompile Include="Modules\Northwind\Shared\PhoneEditor.ts" />
-    <TypeScriptCompile Include="Modules\Northwind\Shipper\ShipperDialog.ts" />
-    <TypeScriptCompile Include="Modules\Northwind\Shipper\ShipperFormatter.ts" />
-    <TypeScriptCompile Include="Modules\Northwind\Shipper\ShipperGrid.ts" />
-    <TypeScriptCompile Include="Modules\Northwind\Supplier\SupplierGrid.ts" />
-    <TypeScriptCompile Include="Modules\Northwind\Supplier\SupplierDialog.ts" />
-    <TypeScriptCompile Include="Modules\Northwind\Territory\TerritoryDialog.ts" />
-    <TypeScriptCompile Include="Modules\Northwind\Territory\TerritoryGrid.ts" />
     <Content Include="Modules\Common\Reporting\ReportDialog.Template.html" />
     <Content Include="Modules\Membership\Account\ForgotPassword\AccountForgotPassword.AdminLTE.cshtml" />
     <Content Include="Modules\Membership\Account\ResetPassword\AccountResetPassword.AdminLTE.cshtml" />
@@ -1735,24 +1625,16 @@
     <Content Include="Scripts\site\texts\site.texts.zh-CN.json" />
     <Content Include="Scripts\site\texts\site.texts.it.json" />
     <Content Include="Scripts\site\texts\site.texts.pt.json" />
-    <Content Include="Scripts\site\texts\northwind\northwind.invariant.json" />
-    <Content Include="Scripts\site\texts\northwind\northwind.de.json" />
     <Content Include="Scripts\site\texts\samples\samples.de.json" />
-    <Content Include="Scripts\site\texts\northwind\northwind.es.json" />
     <Content Include="Scripts\site\texts\samples\samples.es.json" />
-    <Content Include="Scripts\site\texts\northwind\northwind.pt.json" />
     <Content Include="Scripts\site\texts\samples\samples.pt.json" />
-    <Content Include="Scripts\site\texts\northwind\northwind.tr.json" />
     <Content Include="Scripts\site\texts\site.texts.pt-BR.json" />
-    <Content Include="Scripts\site\texts\northwind\northwind.pt-BR.json" />
     <Content Include="Scripts\site\texts\samples\samples.pt-BR.json" />
     <Content Include="tslint.json" />
     <Content Include="Scripts\vegas\vegas.min.js.map" />
     <Content Include="Scripts\site\texts\site.texts.fa.json" />
-    <Content Include="Scripts\site\texts\northwind\northwind.fa.json" />
     <Content Include="Scripts\site\texts\samples\samples.fa.json" />
     <Content Include="Scripts\site\texts\site.texts.vi-VN.json" />
-    <Content Include="Scripts\site\texts\northwind\northwind.vi-VN.json" />
     <Content Include="Scripts\site\texts\samples\samples.vi-VN.json" />
     <Content Include="package.json" />
     <Content Include="Scripts\site\texts\site.texts.ru.json" />
@@ -1881,52 +1763,15 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
     <Content Include="Modules\Administration\User\UserIndex.cshtml" />
-    <Content Include="Modules\Northwind\Category\CategoryIndex.cshtml" />
-    <Content Include="Modules\Northwind\Customer\CustomerIndex.cshtml" />
-    <Content Include="Modules\Northwind\OrderDetail\OrderDetailIndex.cshtml" />
-    <Content Include="Modules\Northwind\Order\OrderIndex.cshtml" />
-    <Content Include="Modules\Northwind\Product\ProductIndex.cshtml" />
-    <Content Include="Modules\Northwind\Region\RegionIndex.cshtml" />
-    <Content Include="Modules\Northwind\Shipper\ShipperIndex.cshtml" />
-    <Content Include="Modules\Northwind\Supplier\SupplierIndex.cshtml" />
-    <Content Include="Modules\Northwind\Territory\TerritoryIndex.cshtml" />
     <Content Include="Modules\Administration\Language\LanguageIndex.cshtml" />
     <Content Include="Modules\Administration\Translation\TranslationIndex.cshtml" />
     <Content Include="Modules\Administration\Role\RoleIndex.cshtml" />
-    <TypeScriptCompile Include="Modules\BasicSamples\Dialogs\ChartInDialog\ChartInDialog.ts" />
-    <TypeScriptCompile Include="Modules\BasicSamples\Dialogs\CloneableEntityDialog\CloneableEntityDialog.ts" />
-    <TypeScriptCompile Include="Modules\BasicSamples\Dialogs\CloneableEntityDialog\CloneableEntityGrid.ts" />
-    <TypeScriptCompile Include="Modules\BasicSamples\Dialogs\DefaultValuesInNewDialog\DefaultValuesInNewGrid.ts" />
-    <TypeScriptCompile Include="Modules\BasicSamples\Editors\FilteredLookupInDetail\FilteredLookupDetailDialog.ts" />
-    <TypeScriptCompile Include="Modules\BasicSamples\Editors\FilteredLookupInDetail\FilteredLookupInDetailDialog.ts" />
-    <TypeScriptCompile Include="Modules\BasicSamples\Editors\FilteredLookupInDetail\FilteredLookupDetailEditor.ts" />
-    <TypeScriptCompile Include="Modules\BasicSamples\Editors\FilteredLookupInDetail\FilteredLookupInDetailGrid.ts" />
-    <TypeScriptCompile Include="Modules\BasicSamples\Editors\LookupFilterByMultipleValues\LookupFilterByMultipleGrid.ts" />
-    <TypeScriptCompile Include="Modules\BasicSamples\Editors\LookupFilterByMultipleValues\LookupFilterByMultipleDialog.ts" />
-    <TypeScriptCompile Include="Modules\BasicSamples\Editors\LookupFilterByMultipleValues\ProduceSeafoodCategoryEditor.ts" />
-    <TypeScriptCompile Include="Modules\BasicSamples\Grids\CancellableBulkAction\CancellableBulkActionGrid.ts" />
-    <TypeScriptCompile Include="Modules\BasicSamples\Grids\GridFilteredByCriteria\GridFilteredByCriteria.ts" />
-    <TypeScriptCompile Include="Modules\BasicSamples\Grids\GroupingAndSummariesInGrid\GroupingAndSummariesInGrid.ts" />
-    <TypeScriptCompile Include="Modules\BasicSamples\Grids\ViewWithoutID\ViewWithoutIDGrid.ts" />
     <TypeScriptCompile Include="Modules\Common\Helpers\GridEditorDialog.ts" />
     <TypeScriptCompile Include="Modules\Common\Reporting\ReportHelper.ts" />
     <TypeScriptCompile Include="Modules\Common\Helpers\GridEditorBase.ts" />
     <TypeScriptCompile Include="Modules\Common\Helpers\ExcelExportHelper.ts" />
     <TypeScriptCompile Include="Modules\Common\Helpers\BasicProgressDialog.ts" />
     <TypeScriptCompile Include="Modules\Common\Helpers\BulkServiceAction.ts" />
-    <TypeScriptCompile Include="Modules\Northwind\Customer\CustomerOrdersGrid.ts" />
-    <TypeScriptCompile Include="Modules\Northwind\Note\NotesEditor.ts" />
-    <TypeScriptCompile Include="Modules\Northwind\OrderDetail\OrderDetailDialog.ts" />
-    <TypeScriptCompile Include="Modules\Northwind\OrderDetail\OrderDetailsEditor.ts" />
-    <TypeScriptCompile Include="Modules\BasicSamples\Grids\CancellableBulkAction\OrderBulkAction.ts" />
-    <TypeScriptCompile Include="Modules\Northwind\Order\OrderGrid.ts" />
-    <TypeScriptCompile Include="Modules\Northwind\Product\ProductDialog.ts" />
-    <TypeScriptCompile Include="Modules\Northwind\Product\ProductGrid.ts" />
-    <TypeScriptCompile Include="Imports\ServerTypings\Northwind.CustomerDetailsRow.ts">
-      <DependentUpon>ServerTypings.tt</DependentUpon>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="Modules\BasicSamples\Grids\DragDropInTreeGrid\DragDropSampleGrid.ts" />
-    <TypeScriptCompile Include="Modules\BasicSamples\Grids\DragDropInTreeGrid\DragDropSampleDialog.ts" />
     <TypeScriptCompile Include="Scripts\serenity\core\serenity-core.d.ts" />
     <TypeScriptCompile Include="Scripts\serenity\dialogs\serenity-dialogs.d.ts" />
     <TypeScriptCompile Include="Scripts\serenity\editors\serenity-editors.d.ts" />
@@ -2125,37 +1970,6 @@
     <Compile Include="Modules\AdminLTE\Tables\TablesController.cs" />
     <Compile Include="Modules\AdminLTE\Forms\FormsController.cs" />
     <Compile Include="Modules\AdminLTE\UIElements\UIElementsController.cs" />
-    <Compile Include="Modules\BasicSamples\BasicSamplesEndpoint.cs" />
-    <Compile Include="Modules\BasicSamples\BasicSamplesHelper.cs" />
-    <Compile Include="Modules\BasicSamples\BasicSamplesModels.cs" />
-    <Compile Include="Modules\BasicSamples\BasicSamplesPage.cs" />
-    <Compile Include="Modules\BasicSamples\Dialogs\BasicSamplesNavigation.Dialogs.cs" />
-    <Compile Include="Modules\BasicSamples\Dialogs\BasicSamplesPage.Dialogs.cs" />
-    <Compile Include="Modules\BasicSamples\Dialogs\PopulateLinkedData\PopulateLinkedDataForm.cs" />
-    <Compile Include="Modules\BasicSamples\DynamicNavigation\DynamicNavigationSample.cs" />
-    <Compile Include="Modules\BasicSamples\Editors\BasicSamplesNavigation.Editors.cs" />
-    <Compile Include="Modules\BasicSamples\Editors\BasicSamplesPage.Editors.cs" />
-    <Compile Include="Modules\BasicSamples\Editors\StaticTextBlock\StaticTextBlockForm.cs" />
-    <Compile Include="Modules\BasicSamples\Editors\SelectWithHardcodedValues\HardcodedValuesForm.cs" />
-    <Compile Include="Modules\BasicSamples\Editors\ChangingLookupText\ChangingLookupTextForm.cs" />
-    <Compile Include="Modules\BasicSamples\Editors\FilteredLookupInDetail\FilteredLookupInDetailForm.cs" />
-    <Compile Include="Modules\BasicSamples\Editors\LookupFilterByMultipleValues\LookupFilterByMultipleForm.cs" />
-    <Compile Include="Modules\BasicSamples\Grids\BasicSamplesNavigation.Grids.cs" />
-    <Compile Include="Modules\BasicSamples\Grids\BasicSamplesPage.Grids.cs" />
-    <Compile Include="Modules\BasicSamples\Grids\InlineImageInGrid\InlineImageInGridColumns.cs" />
-    <Compile Include="Modules\BasicSamples\Grids\ProductExcelImport\ProductExcelImportForm.cs" />
-    <Compile Include="Modules\BasicSamples\Grids\ProductExcelImport\ProductExcelImportEndpoint.cs" />
-    <Compile Include="Modules\BasicSamples\Grids\StoredProcedureGrid\CustomerGrossSalesColumns.cs" />
-    <Compile Include="Modules\BasicSamples\Grids\StoredProcedureGrid\CustomerGrossSalesListRequest.cs" />
-    <Compile Include="Modules\BasicSamples\Grids\StoredProcedureGrid\CustomerGrossSalesEndpoint.cs" />
-    <Compile Include="Modules\BasicSamples\Grids\StoredProcedureGrid\CustomerGrossSalesRepository.cs" />
-    <Compile Include="Modules\Northwind\Customer\CustomerGrossSalesRow.cs" />
-    <Compile Include="Modules\BasicSamples\Grids\VSGalleryQA\VSGalleryQAColumns.cs" />
-    <Compile Include="Modules\BasicSamples\Grids\VSGalleryQA\VSGalleryQAParser.cs" />
-    <Compile Include="Modules\BasicSamples\Grids\VSGalleryQA\VSGalleryQAEndpoint.cs" />
-    <Compile Include="Modules\BasicSamples\Grids\VSGalleryQA\VSGalleryQAPost.cs" />
-    <Compile Include="Modules\BasicSamples\Grids\VSGalleryQA\VSGalleryQAThread.cs" />
-    <Compile Include="Modules\BasicSamples\BasicSamplesNavigation.cs" />
     <Compile Include="Modules\Common\Helpers\EmailHelper.cs" />
     <Compile Include="Modules\Common\Helpers\ExcelImportRequest.cs" />
     <Compile Include="Modules\Common\Dashboard\DashboardPageModel.cs" />
@@ -2185,46 +1999,12 @@
     <Compile Include="Imports\ClientTypes\Common.EnumSelectFormatterAttribute.cs">
       <DependentUpon>ClientTypes.tt</DependentUpon>
     </Compile>
-    <Compile Include="Imports\ClientTypes\Northwind.CustomerEditorAttribute.cs">
-      <DependentUpon>ClientTypes.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Imports\ClientTypes\Northwind.EmployeeFormatterAttribute.cs">
-      <DependentUpon>ClientTypes.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Imports\ClientTypes\Northwind.EmployeeListFormatterAttribute.cs">
-      <DependentUpon>ClientTypes.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Imports\ClientTypes\Northwind.FreightFormatterAttribute.cs">
-      <DependentUpon>ClientTypes.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Imports\ClientTypes\Northwind.NotesEditorAttribute.cs">
-      <DependentUpon>ClientTypes.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Imports\ClientTypes\Northwind.OrderDetailsEditorAttribute.cs">
-      <DependentUpon>ClientTypes.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Imports\ClientTypes\Northwind.PhoneEditorAttribute.cs">
-      <DependentUpon>ClientTypes.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Imports\ClientTypes\Northwind.ShipperFormatterAttribute.cs">
-      <DependentUpon>ClientTypes.tt</DependentUpon>
-    </Compile>
     <Compile Include="Imports\ClientTypes\StaticTextBlockAttribute.cs">
       <DependentUpon>ClientTypes.tt</DependentUpon>
     </Compile>
     <Compile Include="Migrations\DefaultDB\DefaultDB_20160515_072600_UserPreferences.cs" />
     <Compile Include="Migrations\DefaultDB\DefaultDB_20161029_130000_ExceptionLog.cs" />
     <Compile Include="Migrations\MigrationUtils.cs" />
-    <Compile Include="Migrations\NorthwindDB\NorthwindDB_20161126_141700_ForwardDates.cs" />
-    <Compile Include="Migrations\NorthwindDB\NorthwindDB_20161118_195400_DragDropSample.cs" />
-    <Compile Include="Migrations\NorthwindDB\NorthwindDB_20161013_002500_CustomerDetails.cs" />
-    <Compile Include="Migrations\NorthwindDB\NorthwindDB_20160908_180100_CustomerGrossSales.cs" />
-    <Compile Include="Migrations\NorthwindDB\NorthwindDB_20160216_154900_DataLocalization.cs" />
-    <Compile Include="Migrations\NorthwindDB\NorthwindDB_20160121_141200_CustomerRepresentatives.cs" />
-    <Compile Include="Migrations\NorthwindDB\NorthwindDB_20151226_184500_Notes.cs" />
-    <Compile Include="Migrations\NorthwindDB\NorthwindDB_20151202_193700_ProductLog.cs" />
-    <Compile Include="Migrations\NorthwindDB\NorthwindDB_20151014_030700_OrderDetailID.cs" />
-    <Compile Include="Migrations\NorthwindDB\NorthwindDB_20141123_155100_Initial.cs" />
     <Compile Include="Migrations\DefaultDB\DefaultDB_20141111_113000_Permissions.cs" />
     <Compile Include="Migrations\DefaultDB\DefaultDB_20141103_140000_Initial.cs" />
     <Compile Include="Modules\Administration\Translation\TranslationUpdateRequest.cs" />
@@ -2239,7 +2019,6 @@
     </Compile>
     <Compile Include="Modules\Common\Navigation\NavigationItems.cs" />
     <Compile Include="Modules\Common\Navigation\NavigationModel.cs" />
-    <Content Include="Modules\Northwind\Customer\Northwind.CustomerDialog.Template.html" />
     <Compile Include="Modules\Common\Reporting\DynamicDataReport.cs" />
     <Compile Include="Modules\Common\Reporting\ExcelReportGenerator.cs" />
     <Content Include="Modules\Common\Reporting\ReportPage.cshtml" />
@@ -2263,41 +2042,8 @@
     <Compile Include="Modules\Membership\Account\SignUp\SignUpForm.cs" />
     <Compile Include="Modules\Membership\Account\SignUp\SignUpRequest.cs" />
     <Compile Include="Modules\Common\UserPreference\UserPreferenceRow.cs" />
-    <Compile Include="Modules\Northwind\CategoryLang\CategoryLangEndpoint.cs" />
-    <Compile Include="Modules\Northwind\CategoryLang\CategoryLangRepository.cs" />
-    <Compile Include="Modules\Northwind\CategoryLang\CategoryLangRow.cs" />
     <Compile Include="Modules\Common\Helpers\GetNextNumberHelper.cs" />
     <Compile Include="Modules\Common\Helpers\GetNextNumberRequest.cs" />
-    <Compile Include="Modules\Northwind\Customer\EmployeeListDecorator.cs" />
-    <Compile Include="Modules\Northwind\Customer\CustomerLookup.cs" />
-    <Compile Include="Modules\Northwind\Customer\CustomerCity.cs" />
-    <Compile Include="Modules\Northwind\Customer\CustomerRepresentativesRow.cs" />
-    <Compile Include="Modules\Northwind\Employee\Gender.cs" />
-    <Compile Include="Modules\Northwind\Category\CategoryColumns.cs" />
-    <Compile Include="Modules\Northwind\Customer\CustomerColumns.cs" />
-    <Compile Include="Modules\Northwind\Customer\CustomerCountryLookup.cs" />
-    <Compile Include="Modules\Northwind\NorthwindNavigation.cs" />
-    <Compile Include="Modules\Northwind\Note\NotesBehavior.cs" />
-    <Compile Include="Modules\Northwind\OrderDetail\OrderDetailColumns.cs" />
-    <Content Include="Modules\Northwind\Order\OrderDetailReport.cshtml" />
-    <Compile Include="Modules\Northwind\Order\OrderDetailReport.cs" />
-    <Compile Include="Modules\Northwind\Order\OrderListRequest.cs" />
-    <Compile Include="Modules\Northwind\Order\OrderShippingState.cs" />
-    <Compile Include="Modules\Northwind\Order\OrderShipCity.cs" />
-    <Compile Include="Modules\Northwind\Order\OrderShipCountry.cs" />
-    <Compile Include="Modules\Northwind\Order\OrderColumns.cs" />
-    <Compile Include="Modules\Northwind\NorthwindPermissionKeys.cs" />
-    <Compile Include="Modules\Northwind\Product\ProductColumns.cs" />
-    <Compile Include="Modules\Northwind\Product\ProductLogRow.cs" />
-    <Compile Include="Modules\Northwind\Region\RegionColumns.cs" />
-    <Compile Include="Modules\Northwind\Reports\ReportsPage.cs" />
-    <Compile Include="Modules\Northwind\Reports\CustomerGrossSalesReport.cs" />
-    <Compile Include="Modules\Northwind\Reports\SalesByCategoryReport.cs" />
-    <Compile Include="Modules\Northwind\Shipper\ShipperColumns.cs" />
-    <Compile Include="Modules\Northwind\Supplier\SupplierColumns.cs" />
-    <Compile Include="Modules\Northwind\Supplier\SupplierCountryLookup.cs" />
-    <Compile Include="Modules\Northwind\Territory\TerritoryColumns.cs" />
-    <Compile Include="Modules\Northwind\NorthwindTexts.cs" />
     <Compile Include="Modules\Texts.cs" />
     <Compile Include="Modules\Membership\Account\AccountPage.cs" />
     <Compile Include="Modules\Administration\User\Authentication\AuthorizationService.cs" />
@@ -2313,55 +2059,6 @@
     <Compile Include="Modules\Administration\User\UserRepository.cs" />
     <Compile Include="Modules\Administration\User\UserEndpoint.cs" />
     <Compile Include="Modules\Administration\User\UserPage.cs" />
-    <Compile Include="Modules\Northwind\Category\CategoryRow.cs" />
-    <Compile Include="Modules\Northwind\Category\CategoryForm.cs" />
-    <Compile Include="Modules\Northwind\Category\CategoryRepository.cs" />
-    <Compile Include="Modules\Northwind\Category\CategoryEndpoint.cs" />
-    <Compile Include="Modules\Northwind\Category\CategoryPage.cs" />
-    <Compile Include="Modules\Northwind\Customer\CustomerRow.cs" />
-    <Compile Include="Modules\Northwind\Customer\CustomerForm.cs" />
-    <Compile Include="Modules\Northwind\Customer\CustomerRepository.cs" />
-    <Compile Include="Modules\Northwind\Customer\CustomerEndpoint.cs" />
-    <Compile Include="Modules\Northwind\Customer\CustomerPage.cs" />
-    <Compile Include="Modules\Northwind\Employee\EmployeeRow.cs" />
-    <Compile Include="Modules\Northwind\EmployeeTerritory\EmployeeTerritoryRow.cs" />
-    <Compile Include="Modules\Northwind\OrderDetail\OrderDetailRow.cs" />
-    <Compile Include="Modules\Northwind\OrderDetail\OrderDetailForm.cs" />
-    <Compile Include="Modules\Northwind\OrderDetail\OrderDetailRepository.cs" />
-    <Compile Include="Modules\Northwind\OrderDetail\OrderDetailEndpoint.cs" />
-    <Compile Include="Modules\Northwind\OrderDetail\OrderDetailPage.cs" />
-    <Compile Include="Modules\Northwind\Order\OrderRow.cs" />
-    <Compile Include="Modules\Northwind\Order\OrderForm.cs" />
-    <Compile Include="Modules\Northwind\Order\OrderRepository.cs" />
-    <Compile Include="Modules\Northwind\Order\OrderEndpoint.cs" />
-    <Compile Include="Modules\Northwind\Order\OrderPage.cs" />
-    <Compile Include="Modules\Northwind\Product\ProductRow.cs" />
-    <Compile Include="Modules\Northwind\Product\ProductForm.cs" />
-    <Compile Include="Modules\Northwind\Product\ProductRepository.cs" />
-    <Compile Include="Modules\Northwind\Product\ProductEndpoint.cs" />
-    <Compile Include="Modules\Northwind\Product\ProductPage.cs" />
-    <Compile Include="Modules\Northwind\Region\RegionRow.cs" />
-    <Compile Include="Modules\Northwind\Region\RegionForm.cs" />
-    <Compile Include="Modules\Northwind\Region\RegionRepository.cs" />
-    <Compile Include="Modules\Northwind\Region\RegionEndpoint.cs" />
-    <Compile Include="Modules\Northwind\Region\RegionPage.cs" />
-    <Compile Include="Modules\Northwind\Shipper\ShipperRow.cs" />
-    <Compile Include="Modules\Northwind\Shipper\ShipperForm.cs" />
-    <Compile Include="Modules\Northwind\Shipper\ShipperRepository.cs" />
-    <Compile Include="Modules\Northwind\Shipper\ShipperEndpoint.cs" />
-    <Compile Include="Modules\Northwind\Shipper\ShipperPage.cs" />
-    <Compile Include="Modules\Northwind\Supplier\SupplierRow.cs" />
-    <Compile Include="Modules\Northwind\Supplier\SupplierForm.cs" />
-    <Compile Include="Modules\Northwind\Supplier\SupplierRepository.cs" />
-    <Compile Include="Modules\Northwind\Supplier\SupplierEndpoint.cs" />
-    <Compile Include="Modules\Northwind\Supplier\SupplierPage.cs" />
-    <Compile Include="Modules\Northwind\Territory\TerritoryRow.cs" />
-    <Compile Include="Modules\Northwind\Territory\TerritoryForm.cs" />
-    <Compile Include="Modules\Northwind\Territory\TerritoryRepository.cs" />
-    <Compile Include="Modules\Northwind\Territory\TerritoryEndpoint.cs" />
-    <Compile Include="Modules\Northwind\Territory\TerritoryPage.cs" />
-    <Compile Include="Modules\Northwind\CustomerDemographic\CustomerDemographicRow.cs" />
-    <Compile Include="Modules\Northwind\CustomerCustomerDemo\CustomerCustomerDemoRow.cs" />
     <Compile Include="Modules\Administration\Language\LanguageRow.cs" />
     <Compile Include="Modules\Administration\Language\LanguageColumns.cs" />
     <Compile Include="Modules\Administration\Language\LanguageForm.cs" />
@@ -2385,21 +2082,6 @@
     <Compile Include="Modules\Administration\UserPermission\UserPermissionRow.cs" />
     <Compile Include="Modules\Administration\UserPermission\UserPermissionRepository.cs" />
     <Compile Include="Modules\Administration\UserPermission\UserPermissionEndpoint.cs" />
-    <Compile Include="Modules\Northwind\Note\NoteRow.cs" />
-    <Compile Include="Modules\Northwind\Note\NoteRepository.cs" />
-    <Compile Include="Modules\Northwind\ProductLang\ProductLangRow.cs" />
-    <Compile Include="Modules\Northwind\ProductLang\ProductLangRepository.cs" />
-    <Compile Include="Modules\Northwind\ProductLang\ProductLangEndpoint.cs" />
-    <Compile Include="Modules\Northwind\SalesByCategory\SalesByCategoryRow.cs" />
-    <Compile Include="Modules\Northwind\SalesByCategory\SalesByCategoryColumns.cs" />
-    <Compile Include="Modules\Northwind\SalesByCategory\SalesByCategoryRepository.cs" />
-    <Compile Include="Modules\Northwind\SalesByCategory\SalesByCategoryEndpoint.cs" />
-    <Compile Include="Modules\Northwind\CustomerDetails\CustomerDetailsRow.cs" />
-    <Compile Include="Modules\BasicSamples\Grids\DragDropInTreeGrid\DragDropSampleRow.cs" />
-    <Compile Include="Modules\BasicSamples\Grids\DragDropInTreeGrid\DragDropSampleColumns.cs" />
-    <Compile Include="Modules\BasicSamples\Grids\DragDropInTreeGrid\DragDropSampleForm.cs" />
-    <Compile Include="Modules\BasicSamples\Grids\DragDropInTreeGrid\DragDropSampleRepository.cs" />
-    <Compile Include="Modules\BasicSamples\Grids\DragDropInTreeGrid\DragDropSampleEndpoint.cs" />
     <Compile Include="Modules\Default\Customers\CustomersRow.cs" />
     <Compile Include="Modules\Default\Customers\CustomersRepository.cs" />
     <Compile Include="Modules\Default\Customers\CustomersEndpoint.cs" />
@@ -2602,162 +2284,6 @@
       <DependentUpon>ServerTypings.tt</DependentUpon>
     </TypeScriptCompile>
     <TypeScriptCompile Include="Imports\ServerTypings\Membership.SignUpRequest.ts">
-      <DependentUpon>ServerTypings.tt</DependentUpon>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="Imports\ServerTypings\Northwind.CategoryColumns.ts">
-      <DependentUpon>ServerTypings.tt</DependentUpon>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="Imports\ServerTypings\Northwind.CategoryForm.ts">
-      <DependentUpon>ServerTypings.tt</DependentUpon>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="Imports\ServerTypings\Northwind.CategoryLangRow.ts">
-      <DependentUpon>ServerTypings.tt</DependentUpon>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="Imports\ServerTypings\Northwind.CategoryLangService.ts">
-      <DependentUpon>ServerTypings.tt</DependentUpon>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="Imports\ServerTypings\Northwind.CategoryRow.ts">
-      <DependentUpon>ServerTypings.tt</DependentUpon>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="Imports\ServerTypings\Northwind.CategoryService.ts">
-      <DependentUpon>ServerTypings.tt</DependentUpon>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="Imports\ServerTypings\Northwind.CustomerColumns.ts">
-      <DependentUpon>ServerTypings.tt</DependentUpon>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="Imports\ServerTypings\Northwind.CustomerCustomerDemoRow.ts">
-      <DependentUpon>ServerTypings.tt</DependentUpon>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="Imports\ServerTypings\Northwind.CustomerDemographicRow.ts">
-      <DependentUpon>ServerTypings.tt</DependentUpon>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="Imports\ServerTypings\Northwind.CustomerForm.ts">
-      <DependentUpon>ServerTypings.tt</DependentUpon>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="Imports\ServerTypings\Northwind.CustomerRepresentativesRow.ts">
-      <DependentUpon>ServerTypings.tt</DependentUpon>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="Imports\ServerTypings\Northwind.CustomerRow.ts">
-      <DependentUpon>ServerTypings.tt</DependentUpon>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="Imports\ServerTypings\Northwind.CustomerService.ts">
-      <DependentUpon>ServerTypings.tt</DependentUpon>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="Imports\ServerTypings\Northwind.EmployeeRow.ts">
-      <DependentUpon>ServerTypings.tt</DependentUpon>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="Imports\ServerTypings\Northwind.EmployeeTerritoryRow.ts">
-      <DependentUpon>ServerTypings.tt</DependentUpon>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="Imports\ServerTypings\Northwind.Gender.ts">
-      <DependentUpon>ServerTypings.tt</DependentUpon>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="Imports\ServerTypings\Northwind.NoteRow.ts">
-      <DependentUpon>ServerTypings.tt</DependentUpon>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="Imports\ServerTypings\Northwind.OrderColumns.ts">
-      <DependentUpon>ServerTypings.tt</DependentUpon>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="Imports\ServerTypings\Northwind.OrderDetailColumns.ts">
-      <DependentUpon>ServerTypings.tt</DependentUpon>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="Imports\ServerTypings\Northwind.OrderDetailForm.ts">
-      <DependentUpon>ServerTypings.tt</DependentUpon>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="Imports\ServerTypings\Northwind.OrderDetailRow.ts">
-      <DependentUpon>ServerTypings.tt</DependentUpon>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="Imports\ServerTypings\Northwind.OrderDetailService.ts">
-      <DependentUpon>ServerTypings.tt</DependentUpon>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="Imports\ServerTypings\Northwind.OrderForm.ts">
-      <DependentUpon>ServerTypings.tt</DependentUpon>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="Imports\ServerTypings\Northwind.OrderRow.ts">
-      <DependentUpon>ServerTypings.tt</DependentUpon>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="Imports\ServerTypings\Northwind.OrderService.ts">
-      <DependentUpon>ServerTypings.tt</DependentUpon>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="Imports\ServerTypings\Northwind.OrderShippingState.ts">
-      <DependentUpon>ServerTypings.tt</DependentUpon>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="Imports\ServerTypings\Northwind.ProductColumns.ts">
-      <DependentUpon>ServerTypings.tt</DependentUpon>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="Imports\ServerTypings\Northwind.ProductForm.ts">
-      <DependentUpon>ServerTypings.tt</DependentUpon>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="Imports\ServerTypings\Northwind.ProductLangRow.ts">
-      <DependentUpon>ServerTypings.tt</DependentUpon>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="Imports\ServerTypings\Northwind.ProductLangService.ts">
-      <DependentUpon>ServerTypings.tt</DependentUpon>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="Imports\ServerTypings\Northwind.ProductLogRow.ts">
-      <DependentUpon>ServerTypings.tt</DependentUpon>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="Imports\ServerTypings\Northwind.ProductRow.ts">
-      <DependentUpon>ServerTypings.tt</DependentUpon>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="Imports\ServerTypings\Northwind.ProductService.ts">
-      <DependentUpon>ServerTypings.tt</DependentUpon>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="Imports\ServerTypings\Northwind.RegionColumns.ts">
-      <DependentUpon>ServerTypings.tt</DependentUpon>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="Imports\ServerTypings\Northwind.RegionForm.ts">
-      <DependentUpon>ServerTypings.tt</DependentUpon>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="Imports\ServerTypings\Northwind.RegionRow.ts">
-      <DependentUpon>ServerTypings.tt</DependentUpon>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="Imports\ServerTypings\Northwind.RegionService.ts">
-      <DependentUpon>ServerTypings.tt</DependentUpon>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="Imports\ServerTypings\Northwind.SalesByCategoryColumns.ts">
-      <DependentUpon>ServerTypings.tt</DependentUpon>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="Imports\ServerTypings\Northwind.SalesByCategoryRow.ts">
-      <DependentUpon>ServerTypings.tt</DependentUpon>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="Imports\ServerTypings\Northwind.SalesByCategoryService.ts">
-      <DependentUpon>ServerTypings.tt</DependentUpon>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="Imports\ServerTypings\Northwind.ShipperColumns.ts">
-      <DependentUpon>ServerTypings.tt</DependentUpon>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="Imports\ServerTypings\Northwind.ShipperForm.ts">
-      <DependentUpon>ServerTypings.tt</DependentUpon>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="Imports\ServerTypings\Northwind.ShipperRow.ts">
-      <DependentUpon>ServerTypings.tt</DependentUpon>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="Imports\ServerTypings\Northwind.ShipperService.ts">
-      <DependentUpon>ServerTypings.tt</DependentUpon>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="Imports\ServerTypings\Northwind.SupplierColumns.ts">
-      <DependentUpon>ServerTypings.tt</DependentUpon>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="Imports\ServerTypings\Northwind.SupplierForm.ts">
-      <DependentUpon>ServerTypings.tt</DependentUpon>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="Imports\ServerTypings\Northwind.SupplierRow.ts">
-      <DependentUpon>ServerTypings.tt</DependentUpon>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="Imports\ServerTypings\Northwind.SupplierService.ts">
-      <DependentUpon>ServerTypings.tt</DependentUpon>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="Imports\ServerTypings\Northwind.TerritoryColumns.ts">
-      <DependentUpon>ServerTypings.tt</DependentUpon>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="Imports\ServerTypings\Northwind.TerritoryForm.ts">
-      <DependentUpon>ServerTypings.tt</DependentUpon>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="Imports\ServerTypings\Northwind.TerritoryRow.ts">
-      <DependentUpon>ServerTypings.tt</DependentUpon>
-    </TypeScriptCompile>
-    <TypeScriptCompile Include="Imports\ServerTypings\Northwind.TerritoryService.ts">
       <DependentUpon>ServerTypings.tt</DependentUpon>
     </TypeScriptCompile>
     <TypeScriptCompile Include="Imports\ServerTypings\ScriptUserDefinition.ts">

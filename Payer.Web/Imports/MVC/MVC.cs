@@ -373,54 +373,6 @@ namespace MVC
 
         }
 
-        public static class Northwind
-        {
-            public static class Category
-            {
-                public const string CategoryIndex = "~/Modules/Northwind/Category/CategoryIndex.cshtml";
-            }
-
-            public static class Customer
-            {
-                public const string CustomerIndex = "~/Modules/Northwind/Customer/CustomerIndex.cshtml";
-            }
-
-            public static class Order
-            {
-                public const string OrderDetailReport = "~/Modules/Northwind/Order/OrderDetailReport.cshtml";
-                public const string OrderIndex = "~/Modules/Northwind/Order/OrderIndex.cshtml";
-            }
-
-            public static class OrderDetail
-            {
-                public const string OrderDetailIndex = "~/Modules/Northwind/OrderDetail/OrderDetailIndex.cshtml";
-            }
-
-            public static class Product
-            {
-                public const string ProductIndex = "~/Modules/Northwind/Product/ProductIndex.cshtml";
-            }
-
-            public static class Region
-            {
-                public const string RegionIndex = "~/Modules/Northwind/Region/RegionIndex.cshtml";
-            }
-
-            public static class Shipper
-            {
-                public const string ShipperIndex = "~/Modules/Northwind/Shipper/ShipperIndex.cshtml";
-            }
-
-            public static class Supplier
-            {
-                public const string SupplierIndex = "~/Modules/Northwind/Supplier/SupplierIndex.cshtml";
-            }
-
-            public static class Territory
-            {
-                public const string TerritoryIndex = "~/Modules/Northwind/Territory/TerritoryIndex.cshtml";
-            }
-        }
 
         public static class Shared
         {
