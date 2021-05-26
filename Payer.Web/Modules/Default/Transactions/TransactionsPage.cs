@@ -46,35 +46,63 @@ namespace Payer.Default.Pages
             }
             return View(MVC.Views.Default.Transactions.Pay, transaction);//here we pass the model to the view
         }
-
-      // [HttpPost]
-        public ActionResult PayButton(String itemName)
+        
+        public async Task<ActionResult> UpdateTable(int tranId)
         {
-            var sss = "dsfg";
-            // var transItem = new TransactionItem();
-            // transItem.CustomerId = 25;
-            // transItem.Id = 2;
-            //  transItem.TransactionId = 3;
+            var transaction = new Transaction();
 
-            /*  var transaction = new Transaction();
+            using (var db = new DBModel())
+            {
 
-              using (var db = new DBModel())
-              {
+                transaction = await db.Transactions
+                    .Include(t => t.TransactionItems)
+                    .Include(t => t.TransactionItems.Select(ti => ti.Item))
+                    .FirstOrDefaultAsync(t => t.Id == tranId);
 
-                  transaction = await db.Transactions
-                      .Include(t => t.TransactionItems)
-                      .Include(t => t.TransactionItems.Select(ti => ti.Item))
-                      .FirstOrDefaultAsync(t => t.Id == 3);
+            }
+            //return Json(transaction);
+            return Json(transaction,JsonRequestBehavior.AllowGet);
+        }
 
-              }*/
-            // var tra = new TransactionItem();
 
-            // tra.CustomerId = 25;
-            ViewBag.hi = itemName;
+       [HttpPost]
+        public ActionResult PayButton(float tip,int waiterForTip)
+        {
+            var x = new Tip();
+            using (var db = new DBModel())
+            {
+                var m = db.Tips.Where(t => t.WaiterId == waiterForTip).FirstOrDefault();
+                if(m!=null)
+                {
+                    m.Value = m.Value + tip;
+                    m.Date = DateTime.Now;
+                    db.Entry(m).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+                else
+                {
+                    
+                    x.Value = tip;
+                    x.WaiterId = waiterForTip;
+                    x.Date = DateTime.Now;
+                    db.Tips.Add(x);                   
+                    db.Entry(x).State = EntityState.Added;
+                    db.SaveChanges();
+                }
 
-            //return Json(true);
-             return PartialView(MVC.Views.Default.Transactions.PayButton);
-            //return PartialView("~/Modules/Default/Transactions/PayButton.cshtml");
+            }
+           
+            
+            ViewBag.Amount = 5;
+            ViewBag.Phone = 6;
+             return View(MVC.Views.Default.Transactions.PayButton);
+
+        }
+        public ActionResult PayButton(int phone,int customerAmount)
+        {
+            ViewBag.Phone = phone;
+            ViewBag.Amount = customerAmount;
+            return View(MVC.Views.Default.Transactions.PayButton);
         }
 
        

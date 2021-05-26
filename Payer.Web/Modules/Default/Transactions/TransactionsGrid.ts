@@ -28,6 +28,8 @@ namespace Payer.Default {
 
             //later, try to put this href in a new tab and not the current window
         }
+
+
         protected getButtons(): Serenity.ToolButton[] {
             var buttons = super.getButtons();
             this.addButtonClick

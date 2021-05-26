@@ -1,5 +1,8 @@
-﻿@{
-    ViewBag.Title = "PayButton";
+﻿
+@{
+    ViewBag.Title = "Payment Details";
+    var CustomerPhone = "0" + @ViewBag.Phone;
+    var CustomerAmount = @ViewBag.Amount;
 }
 
 
@@ -9,68 +12,160 @@
 <body data-new-gr-c-s-check-loaded="14.1010.0" data-gr-ext-installed="">
     <div class="row g-3 align-items-center" style="margin-left: 40%; margin-top: 10%; block-size: 50px">
 
-        <div class="col-auto">
-            <label for="Name" class="col-form-label" style="margin-right: 10px">Name On Card:</label>
-            <input type="text" id="inputCardHolderName" class="form-control">
-        </div>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body {
+            font-family: Arial;
+            font-size: 17px;
+            padding: 8px;
+        }
 
-        <div class="col-auto" style="margin-top: 30px">
-            <label for="ExpirationDate" class="col-form-label" style="margin-right: 10px;">ExpirationDate:</label>
-            <select id="month" class="form-select">
-                <option selected="">Month</option>
-                <option value="1">01</option>
-                <option value="2">02</option>
-                <option value="3">03</option>
-                <option value="4">04</option>
-                <option value="5">05</option>
-                <option value="6">06</option>
-                <option value="7">07</option>
-                <option value="8">08</option>
-                <option value="9">09</option>
-                <option value="10">10</option>
-                <option value="11">11</option>
-                <option value="12">12</option>
-            </select>
-            <select id="year" class="form-select" style="margin-left:5px">
-                <option selected="">Year</option>
-                <option value="21">2021</option>
-                <option value="22">2022</option>
-                <option value="23">2023</option>
-                <option value="24">2024</option>
-                <option value="25">2025</option>
-                <option value="26">2026</option>
-                <option value="27">2027</option>
-            </select>
-        </div>
+        * {
+            box-sizing: border-box;
+        }
 
-        <div class="col-auto" style="margin-top: 30px">
-            <label for="CVV" class="col-form-label" style="margin-right: 10px; margin-left: 60px">CVV:</label>
-            <input type="text" id="CVVNumber" class="form-control">
-        </div>
+        .row {
+            display: -ms-flexbox; /* IE10 */
+            display: flex;
+            -ms-flex-wrap: wrap; /* IE10 */
+            flex-wrap: wrap;
+            margin: 0 -16px;
+        }
 
-        <div class="col-auto" style="margin-top: 30px">
-            <label for="card number" class="col-form-label" style="margin-right: 10px; margin-left: 5px">Card Number:</label>
-            <input type="text" id="CardNumber" class="form-control">
-        </div>
+        .col-25 {
+            -ms-flex: 25%; /* IE10 */
+            flex: 25%;
+        }
 
-        <div class="col-auto" style="margin-top: 30px">
-            <label for="Email" class="col-form-label" style="margin-right: 10px; margin-left: 52px">Email:</label>
-            <input type="email" id="Email" class="form-control">
+        .col-50 {
+            -ms-flex: 50%; /* IE10 */
+            flex: 50%;
+        }
 
+        .col-75 {
+            -ms-flex: 75%; /* IE10 */
+            flex: 75%;
+        }
 
-        </div>
+        .col-25,
+        .col-50,
+        .col-75 {
+            padding: 0 16px;
+        }
 
-            <ul>
-                <li> @ViewData["hi"]  </li>
-            </ul>
-            <input type="text" value="@ViewData["hi"]">
-            
-            <div class="col-auto" style="margin-top: 30px">
-                <button type="button" class="pay" style="margin-left: 15%">Pay</button>
+        .container {
+            background-color: #f2f2f2;
+            padding: 5px 20px 15px 20px;
+            border: 1px solid lightgrey;
+            border-radius: 3px;
+
+        }
+
+        input[type=text] {
+            width: 100%;
+            margin-bottom: 20px;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        label {
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .icon-container {
+            margin-bottom: 20px;
+            padding: 7px 0;
+            font-size: 24px;
+        }
+
+        .btn {
+            background-color: #04AA6D;
+            color: white;
+            padding: 12px;
+            margin: 10px 0;
+            border: none;
+            width: 100%;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 17px;
+        }
+
+            .btn:hover {
+                background-color: #45a049;
+            }
+
+        a {
+            color: #2196F3;
+        }
+
+        hr {
+            border: 1px solid lightgrey;
+        }
+
+        span.price {
+            float: right;
+            color: grey;
+        }
+    </style>
+</head>
+
+<body>
+
+    
+
+    <div class="row">
+        <div class="col-75">
+            <div class="container">
+                <form action="/action_page.php">
+
+                    <div class="row">
+                        
+
+                        <div class="col-50">
+                            <h3>Payment Details</h3>
+                            <label for="fname">Accepted Cards</label>
+                            <div class="icon-container">
+                                <i class="fa fa-cc-visa" style="color:navy;"></i>
+                                <i class="fa fa-cc-amex" style="color:blue;"></i>
+                                <i class="fa fa-cc-mastercard" style="color:red;"></i>
+                                <i class="fa fa-cc-discover" style="color:orange;"></i>
+                            </div>
+                            <label for="cname">Name on Card</label>
+                            <input type="text" id="cname" name="cardname" placeholder="Yosi Cohen">
+                            <label for="cphone">Phone</label>
+                            <input type="text" id="cphone" name="cusPhone" value=@CustomerPhone readonly>
+                            <label for="ccnum">Credit card number</label>
+                            <input type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444">
+                            <label for="expmonth">Exp Month</label>
+                            <input type="text" id="expmonth" name="expmonth" placeholder="September">
+                            <div class="row">
+                                <div class="col-50">
+                                    <label for="expyear">Exp Year</label>
+                                    <input type="text" id="expyear" name="expyear" placeholder="2018">
+                                </div>
+                                <div class="col-50">
+                                    <label for="cvv">CVV</label>
+                                    <input type="text" id="cvv" name="cvv" placeholder="352" maxlength="3">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+         
+                    <input type="submit" value="Submit" class="btn">
+                </form>
             </div>
-    </div>
+        </div>
 
+    </div>
 
     <div class="betternet-wrapper"></div>
 </body>
 </html>
+
+
+
