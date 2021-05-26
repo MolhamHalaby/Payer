@@ -997,7 +997,8 @@ declare namespace Payer.Default {
             WaiterId = "WaiterId",
             Value = "Value",
             WaiterUserId = "WaiterUserId",
-            WaiterPersonId = "WaiterPersonId"
+            WaiterPersonId = "WaiterPersonId",
+            PullTip = "PullTip"
         }
     }
 }
@@ -3988,7 +3989,11 @@ declare namespace Payer.Default {
         protected getInsertPermission(): string;
         protected getLocalTextPrefix(): string;
         protected getService(): string;
+        private rowSelection;
         constructor(container: JQuery);
+        protected getColumns(): Slick.Column[];
+        private PullTip;
+        protected onClick(e: JQueryEventObject, row: number, cell: number): void;
     }
 }
 declare namespace Payer.Default {

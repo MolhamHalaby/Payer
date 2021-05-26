@@ -61,7 +61,13 @@ namespace Payer.Default.Entities
         {
             get { return Fields.Id; }
         }
-
+        
+        [NotMapped]
+        public String PullTip
+        {
+            get { return Fields.PullTip[this]; }
+            set { Fields.PullTip[this] = value; }
+        }
         public static readonly RowFields Fields = new RowFields().Init();
 
         public TipsRow()
@@ -75,9 +81,13 @@ namespace Payer.Default.Entities
             public DateTimeField Date;
             public Int32Field WaiterId;
             public DoubleField Value;
+           
 
             public Int32Field WaiterUserId;
             public Int32Field WaiterPersonId;
+
+            public StringField PullTip;
+
         }
     }
 }

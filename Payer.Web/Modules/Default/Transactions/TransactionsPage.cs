@@ -46,26 +46,30 @@ namespace Payer.Default.Pages
             }
             return View(MVC.Views.Default.Transactions.Pay, transaction);//here we pass the model to the view
         }
-        
-        public async Task<ActionResult> UpdateTable(int tranId)
-        {
-            var transaction = new Transaction();
-
-            using (var db = new DBModel())
-            {
-
-                transaction = await db.Transactions
-                    .Include(t => t.TransactionItems)
-                    .Include(t => t.TransactionItems.Select(ti => ti.Item))
-                    .FirstOrDefaultAsync(t => t.Id == tranId);
-
-            }
-            //return Json(transaction);
-            return Json(transaction,JsonRequestBehavior.AllowGet);
-        }
 
 
-       [HttpPost]
+       /*
+         public async Task<ActionResult> UpdateTable(int id, int tranId)
+         {
+             var transaction = new Transaction();
+
+             using (var db = new DBModel())
+             {
+
+                 transaction = await db.Transactions
+                     .Include(t => t.TransactionItems)
+                     .Include(t => t.TransactionItems.Select(ti => ti.Item))
+                     .FirstOrDefaultAsync(t => t.Id == id);
+
+             }
+            ViewBag.Phone = tranId;
+            return View(MVC.Views.Default.Transactions.Pay, transaction);
+           // return Json(transaction);
+             //return Json(transaction,JsonRequestBehavior.AllowGet);
+         }
+       */
+
+        [HttpPost]
         public ActionResult PayButton(float tip,int waiterForTip)
         {
             var x = new Tip();

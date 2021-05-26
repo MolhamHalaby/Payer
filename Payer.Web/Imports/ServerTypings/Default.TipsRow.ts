@@ -22,7 +22,8 @@
             WaiterId = "WaiterId",
             Value = "Value",
             WaiterUserId = "WaiterUserId",
-            WaiterPersonId = "WaiterPersonId"
+            WaiterPersonId = "WaiterPersonId",
+            PullTip = "PullTip"
         }
     }
 }

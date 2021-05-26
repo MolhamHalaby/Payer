@@ -8178,7 +8178,9 @@ var Payer;
         var TipsGrid = /** @class */ (function (_super) {
             __extends(TipsGrid, _super);
             function TipsGrid(container) {
-                return _super.call(this, container) || this;
+                var _this = _super.call(this, container) || this;
+                _this.rowSelection = new Serenity.GridRowSelectionMixin(_this);
+                return _this;
             }
             TipsGrid.prototype.getColumnsKey = function () { return 'Default.Tips'; };
             TipsGrid.prototype.getDialogType = function () { return Default.TipsDialog; };
@@ -8186,6 +8188,36 @@ var Payer;
             TipsGrid.prototype.getInsertPermission = function () { return Default.TipsRow.insertPermission; };
             TipsGrid.prototype.getLocalTextPrefix = function () { return Default.TipsRow.localTextPrefix; };
             TipsGrid.prototype.getService = function () { return Default.TipsService.baseUrl; };
+            TipsGrid.prototype.getColumns = function () {
+                var _this = this;
+                var columns = _super.prototype.getColumns.call(this);
+                columns.unshift(Serenity.GridRowSelectionMixin.createSelectColumn(function () { return _this.rowSelection; }));
+                Q.first(columns, function (x) { return x.field == "PullTip" /* PullTip */; }).format =
+                    function (ctx) { return "<a href=\"javascript:;\" class=\"inline-action pull-tip\"><i class=\"btn btn-primary btn-sm\" style=\"line-height: 3px\">PULL</i></a>"; };
+                return columns;
+            };
+            TipsGrid.prototype.PullTip = function (id) {
+                //alert("azoze");
+                id = window.prompt("Please Enter Id", "ID:");
+                if (id != null)
+                    window.location.href = Q.resolveUrl('~/Default/Tips/Pull?id=' + id);
+            };
+            TipsGrid.prototype.onClick = function (e, row, cell) {
+                _super.prototype.onClick.call(this, e, row, cell);
+                if (e.isDefaultPrevented())
+                    return;
+                var item = this.itemAt(row);
+                var target = $(e.target);
+                // if user clicks "i" element, e.g. icon
+                if (target.parent().hasClass('inline-action'))
+                    target = target.parent();
+                if (target.hasClass('inline-action')) {
+                    e.preventDefault();
+                    if (target.hasClass('pull-tip')) {
+                        this.PullTip(item.WaiterId);
+                    }
+                }
+            };
             TipsGrid = __decorate([
                 Serenity.Decorators.registerClass()
             ], TipsGrid);

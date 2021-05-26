@@ -1,72 +1,56 @@
 ﻿@model Payer.Models.Transaction
 
-
-
 <h1>TAX INVOICE</h1>
 
 <div style="float:left">
-    <input  type="tel" pattern="[0]{1}[5]{1}[0-9]{1}[0-9]{7}" placeholder="05xxxxxxxx" id="customerPhone" rows="1" maxlength="10" name="phone" style="width:150px;" onchange="telNum()" required/>   
-    <label  style="margin-right:20px">:Enter Phone Number</label>
+    <input type="tel" pattern="[0]{1}[5]{1}[0-9]{1}[0-9]{7}" placeholder="05xxxxxxxx" id="customerPhone" rows="1" maxlength="10" name="phone" style="width:150px;" onchange="telNum()" required />
+    <label style="margin-right:20px">:Enter Phone Number</label>
 </div>
 
-    
- 
-    <table class="table table-bordered" id="table" style="text-align: left;">
-     
-        <thead>
-
-            <tr>
-                <th scope="col">Checks</th>
-                <th scope="col">#</th>
-                <th scope="col">Particulars</th>
-                <th scope="col">Amount</th>
-                <th scope="col">Phone Number</th>
 
 
-            </tr>
+<table class="table table-bordered" id="table" style="text-align: left;">
 
-        </thead>
-        <tbody>
+    <thead>
+
+        <tr>
+            <th scope="col">Checks</th>
+            <th scope="col">#</th>
+            <th scope="col">Particulars</th>
+            <th scope="col">Amount</th>
+            <th scope="col">Phone Number</th>
 
 
-            @for (int i = 0; i < @Model.TransactionItems.Count; i++)
-            {
+        </tr>
 
-                var transactionItem = @Model.TransactionItems[i];
-                
+    </thead>
+    <tbody>
+
+
+        @for (int i = 0; i < @Model.TransactionItems.Count; i++)
+        {
+
+            var transactionItem = @Model.TransactionItems[i];
+
 <tr onchange="checkedIteeemm(this)">
 
     <td><input id="checkedItem" type="checkbox" disabled></td>
     <td id="index">@(1 + i)</td>
     <td>@transactionItem.Item.Name</td>
     <td id="price">@transactionItem.Item.Price</td>
-    <td id="phoneNum" >@transactionItem.CustomerId</td>
+    <td id="phoneNum">@transactionItem.CustomerId</td>
 
 
 
-</tr>}
-        </tbody>
-    </table>
+</tr>
+}
+    </tbody>
+</table>
 
 
-    <script type="text/javascript">
+<script type="text/javascript">
 
-        $(document).ready(function () {
-            function refresh() {
-                var div = $('#table'),
-                    divHtml = div.html();
 
-                div.html(divHtml);
-
-            }
-
-            setInterval(function () {
-
-                refresh();
-                
-        telNum();
-            }, 5000); //300000 is 5minutes in ms
-        })
 
         var statPhone;
         var flagg;
@@ -78,8 +62,9 @@
                 totAmount = 0;
 
             }
+
             var number = document.getElementById("customerPhone").value;
-            alert(number);
+            
                 if (number[0] != '0' || number[1] != '5' || number.length < 10) {
                     alert("Enter a valid phone number in this format: 05xxxxxxxx");
                     flag = 1;
@@ -119,9 +104,45 @@
                     }
 
                 }
-                statPhone = number;
+
                // document.getElementById("customerPhone").value = statPhone;
             }
+
+           statPhone = number;
+          /*   $(function () {
+                $.ajax({
+                    type: "POST",
+                    url: "/Default/Transactions/Pay",
+                    data: {
+                        'id': 3,
+                    },
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+                        alert("User has been added successfully.");
+                        window.location.reload();
+                    }
+                });
+            })*/
+             $(document).ready(function () {
+
+
+                 function refresh() {
+                    var div = $('#table'),
+                        divHtml = div.html();
+
+                    div.html(divHtml);
+
+                }
+               
+                 setInterval(function () {
+                    
+                    refresh();
+                                      
+                }, 5000); //300000 is 5minutes in ms
+             })
+
+
 
 
         }
@@ -145,6 +166,7 @@
                 document.getElementById("table").rows[r].cells[4].innerHTML = null;
 
             }
+
 
             $.ajax({
                 url: "/Default/Transactions/checkNewItem",
@@ -189,7 +211,7 @@
                 error: function (response) {
                     alert("Error");
                 },
-                
+
 
         });
         }
@@ -207,15 +229,14 @@
                 document.getElementById("amountArea").value = (parseInt(amount) - parseInt(statTip)).toString();
             }
         }
-    </script>
+</script>
 
 
-    <input type="number" min="0" id="tipArea" rows="1" name="tipAre" style="width:80px;margin-right:65px;margin-bottom:10px" value="0" onchange="addTip()" disabled/>
-    <label style="margin-right:20px">:Tip</label>
-    <form method="post" >
-        <input type="button" class="btn btn-primary btn-sm" id="payy" value="Pay" style="margin-left:20px" onclick="toPayButton()"disabled />
-        <input type="text" id="amountArea" rows="1" name="amountAre" style="width:80px" disabled value="0" />
-        <label style="margin-right:20px">:Total Amount</label>
+<input type="number" min="0" id="tipArea" rows="1" name="tipAre" style="width:80px;margin-right:65px;margin-bottom:10px" value="0" onchange="addTip()" disabled />
+<label style="margin-right:20px">:Tip</label>
+<form method="post">
+    <input type="button" class="btn btn-primary btn-sm"  id="payy" value="Pay" style="margin-left:20px" onclick="toPayButton()" disabled />
+    <input type="text" id="amountArea" rows="1" name="amountAre" style="width:80px" disabled value="0" />
+    <label style="margin-right:20px">:Total Amount</label>
 
-    </form>
-     
+</form>

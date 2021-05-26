@@ -18,5 +18,6 @@ namespace Payer.Default.Columns
         public DateTime Date { get; set; }
         public Int32 WaiterId { get; set; }
         public Double Value { get; set; }
+        public string PullTip { get; set; }
     }
 }
