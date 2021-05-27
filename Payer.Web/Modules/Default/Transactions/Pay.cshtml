@@ -18,7 +18,7 @@
                 <th scope="col">#</th>
                 <th scope="col">Particulars</th>
                 <th scope="col">Amount</th>
-                <th scope="col" >Phone Number</th>
+              
 
 
         </tr>
@@ -38,7 +38,7 @@
     <td id="index">@(1 + i)</td>
     <td>@transactionItem.Item.Name</td>
     <td id="price">@transactionItem.Item.Price</td>
-    <td id="phoneNum" >@transactionItem.CustomerId</td>
+
 </tr>}
 
         </tbody>
@@ -49,10 +49,7 @@
         var transactionItems = [];
         var count = 0;
         var wait = 0;
-        function setTable() {
-            //build the table by transactionItems
-
-        }
+    
         $(document).ready(function () {
 
            // transactionItems = Newtonsoft.Json.JsonConvert.SerializeObject(Model.TransactionItems);
@@ -67,26 +64,26 @@
 
             setInterval(function () {
                // while (wait) { }
-               
+                toUpdateModel();
                 refresh();
                 var tempAmount = 0;
-                toUpdateModel();
+                
                // var trans=[];
                
                 for (var i = 0; i < transactionItems.length; i++)
                 {
                   //  alert("1");
-                    if (transactionItems[i].CustomerId != null ) {
-                        document.getElementById("table").rows[i + 1].cells[4].innerHTML = transactionItems[i].CustomerId;
+                  //  if (transactionItems[i].CustomerId != null ) {
+                  //      document.getElementById("table").rows[i + 1].cells[4].innerHTML = transactionItems[i].CustomerId;
                         if (transactionItems[i].CustomerId == "0" + document.getElementById("customerPhone").value)
                         {
                             tempAmount += parseInt(document.getElementById("table").rows[i+1].cells[3].innerHTML);
                         }
-                    }
+                  /*  }
                     else {
                         document.getElementById("table").rows[i + 1].cells[4].innerHTML = "";
 
-                    }
+                    }*/
 
                 }
 
@@ -95,7 +92,7 @@
                     telNum();
                     
                 
-        }, 1000); //300000 is 5minutes in ms
+        }, 100); //300000 is 5minutes in ms
 
         })
 
@@ -111,6 +108,12 @@
                 document.getElementById("amountArea").value = 0;
                 totAmount = 0;
 
+            }
+
+            for (var i = 0; i < transactionItems.length; i++) {
+                document.getElementById("table").getElementsByTagName('input')[i].disabled = true;
+                document.getElementById("payy").disabled = true;
+                document.getElementById("tipArea").disabled = true;
             }
 
             var number = document.getElementById("customerPhone").value;
@@ -139,8 +142,7 @@
         }
 
         function toUpdateModel() {
-             var x=[];
-                var y = {};
+             
             var data;
             var trId = @Model.Id;
             $(document).ready(function () {
@@ -167,12 +169,15 @@
               
                 var vall = document.getElementById("table").getElementsByTagName('input').length;
                 var PhoneNum = document.getElementById("customerPhone").value;
-               
+                
                 for (var i = 0; i < transactionItems.length; i++) {
-                   
+
                     if (transactionItems[i].CustomerId == null) {
 
-                        document.getElementById("table").getElementsByTagName('input')[i].removeAttribute("disabled");
+                        if (PhoneNum != "")
+                            document.getElementById("table").getElementsByTagName('input')[i].removeAttribute("disabled");
+                       
+                        document.getElementById("table").getElementsByTagName('input')[i].checked = false;
                     }
                     else if ("0" + transactionItems[i].CustomerId == PhoneNum) {
                      
@@ -211,27 +216,30 @@
             var price = document.getElementById("table").rows[r].cells[3].innerHTML;
             var nameOfItem = document.getElementById("table").rows[r].cells[2].innerHTML;
             if (vall) {
-                document.getElementById("amountArea").value = (parseInt(amount) + parseInt(price)).toString();
+               // document.getElementById("amountArea").value = (parseInt(amount) + parseInt(price)).toString();
                 totAmount += parseInt(price);
                 flagg = 1;
-                document.getElementById("table").rows[r].cells[4].innerHTML = parseInt(statPhone);
+              //  document.getElementById("table").rows[r].cells[4].innerHTML = parseInt(statPhone);
+                document.getElementById("table").getElementsByTagName('input')[r - 1].checked = true;
+
                 
                transactionItems[r-1].CustomerId = parseInt(statPhone);
             }
             else{
-                document.getElementById("amountArea").value = (parseInt(amount) - parseInt(price)).toString();
+                //document.getElementById("amountArea").value = (parseInt(amount) - parseInt(price)).toString();
                 totAmount -= parseInt(price);
                 flagg = 0;
-                document.getElementById("table").rows[r].cells[4].innerHTML = null;
-                transactionItems[r-1].CustomerId = null;
+               // document.getElementById("table").rows[r].cells[4].innerHTML = null;
+                transactionItems[r - 1].CustomerId = null;
+                document.getElementById("table").getElementsByTagName('input')[r - 1].checked = false;
 
             }
-
-
+            var tranItemId = transactionItems[r - 1].Id;
+            
             $.ajax({
                 url: "/Default/Transactions/checkNewItem",
                 type: 'post',
-                data: { 'phone': statPhone, 'itemName': nameOfItem, 'tranId': @Model.Id ,'flag' : flagg},
+                data: { 'phone': statPhone, 'itemName': nameOfItem, 'tranId': @Model.Id , 'flag': flagg, 'tranItemId': tranItemId},
                 cache: false,
                 success: function (response) {
                    /* if (response == true)

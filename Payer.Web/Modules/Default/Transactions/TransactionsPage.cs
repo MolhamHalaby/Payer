@@ -110,7 +110,7 @@ namespace Payer.Default.Pages
         }
 
         [HttpPost]
-        public JsonResult checkNewItem(int phone , String itemName, int tranId,int flag)
+        public JsonResult checkNewItem(int phone , String itemName, int tranId,int flag,int tranItemId)
         {
             
              using(var db= new DBModel())
@@ -119,7 +119,7 @@ namespace Payer.Default.Pages
                 if (flag == 0)
                 {
                     var m = db.TransactionItems.Where(t => t.Item.Name == itemName)
-                       .Where(ti => ti.TransactionId == tranId).Where(tt => tt.CustomerId == phone).FirstOrDefault();
+                       .Where(ti => ti.TransactionId == tranId).Where(tt => tt.CustomerId == phone).Where(ttt => ttt.Id==tranItemId).FirstOrDefault();
 
                     if (m != null)
                     {
@@ -137,7 +137,7 @@ namespace Payer.Default.Pages
                 else
                 {
                     var m = db.TransactionItems.Where(t => t.Item.Name == itemName)
-                      .Where(ti => ti.TransactionId == tranId).Where(tt => tt.CustomerId == null).FirstOrDefault();
+                      .Where(ti => ti.TransactionId == tranId).Where(tt => tt.CustomerId == null).Where(ttt => ttt.Id == tranItemId).FirstOrDefault();
 
                     if (m != null)
                     {
