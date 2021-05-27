@@ -7,8 +7,6 @@
     <label  style="margin-right:20px">:Enter Phone Number</label>
 </div>
 
-    
-
     <table class="table table-bordered" id="table" style="text-align: left;">
 
         <thead>
@@ -49,19 +47,12 @@
         var transactionItems = [];
         var count = 0;
         var wait = 0;
-        function setTable() {
-            //build the table by transactionItems
-
-        }
         $(document).ready(function () {
 
            // transactionItems = Newtonsoft.Json.JsonConvert.SerializeObject(Model.TransactionItems);
-
-
             function refresh() {
                 var div = $('#table'),
                     divHtml = div.html();
-
 
             }
 
@@ -75,8 +66,8 @@
                
                 for (var i = 0; i < transactionItems.length; i++)
                 {
-                  //  alert("1");
-                    if (transactionItems[i].CustomerId != null ) {
+                   
+                    if (transactionItems[i].CustomerId != null) {
                         document.getElementById("table").rows[i + 1].cells[4].innerHTML = transactionItems[i].CustomerId;
                         if (transactionItems[i].CustomerId == "0" + document.getElementById("customerPhone").value)
                         {
@@ -95,7 +86,7 @@
                     telNum();
                     
                 
-        }, 1000); //300000 is 5minutes in ms
+        }, 8000); //300000 is 5minutes in ms
 
         })
 
@@ -139,8 +130,7 @@
         }
 
         function toUpdateModel() {
-             var x=[];
-                var y = {};
+           
             var data;
             var trId = @Model.Id;
             $(document).ready(function () {
@@ -150,7 +140,7 @@
                     async: false,
                         success: function (res) {
                             transactionItems = (JSON.parse(res)).TransactionItems;
-                          //  alert("2");
+                            alert("2");
                             //wait = 0;
                         }
                 }).responseText);
@@ -164,10 +154,9 @@
 
             function telNum() {
 
-              
                 var vall = document.getElementById("table").getElementsByTagName('input').length;
                 var PhoneNum = document.getElementById("customerPhone").value;
-               
+                alert(3);
                 for (var i = 0; i < transactionItems.length; i++) {
                    
                     if (transactionItems[i].CustomerId == null) {
@@ -206,7 +195,7 @@
         function checkedIteeemm(x) {
             var r = x.rowIndex;
             //wait = 1;
-            var vall = document.getElementById("table").getElementsByTagName('input')[r - 1].checked == true;
+            var vall = document.getElementById("table").getElementsByTagName('input')[r-1].checked == true;
             var amount = document.getElementById("amountArea").value;
             var price = document.getElementById("table").rows[r].cells[3].innerHTML;
             var nameOfItem = document.getElementById("table").rows[r].cells[2].innerHTML;
@@ -223,7 +212,8 @@
                 totAmount -= parseInt(price);
                 flagg = 0;
                 document.getElementById("table").rows[r].cells[4].innerHTML = null;
-                transactionItems[r-1].CustomerId = null;
+                
+                transactionItems[r].CustomerId = null;
 
             }
 

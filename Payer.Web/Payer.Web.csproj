@@ -880,7 +880,6 @@
     <Content Include="wkhtmltopdf-license.txt" />
     <Content Include="Modules\Default\Transactions\QRViewer.cshtml" />
     <Content Include="Modules\Default\Transactions\Pay.cshtml" />
-    <Content Include="Modules\Default\Tips\Pull.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-ui-1.12.1.js" />
     <Content Include="Scripts\jquery-ui-1.12.1.min.js" />
