@@ -32,6 +32,7 @@ namespace Payer.Default {
 
         protected getButtons(): Serenity.ToolButton[] {
             var buttons = super.getButtons();
+            
             this.addButtonClick
             {
                 buttons.push(
