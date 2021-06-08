@@ -12,12 +12,12 @@ namespace Payer.Models
         {
         }
 
-        public virtual DbSet<Customer> Customers { get; set; }
+   //     public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<CustomerTable> CustomerTables { get; set; }
         public virtual DbSet<Exception> Exceptions { get; set; }
         public virtual DbSet<Item> Items { get; set; }
         public virtual DbSet<Language> Languages { get; set; }
-        public virtual DbSet<MailsMessage> MailsMessages { get; set; }
+      //  public virtual DbSet<MailsMessage> MailsMessages { get; set; }
         public virtual DbSet<Person> Persons { get; set; }
         public virtual DbSet<RolePermission> RolePermissions { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
@@ -33,10 +33,10 @@ namespace Payer.Models
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Customer>()
+         /*   modelBuilder.Entity<Customer>()
                 .HasMany(e => e.MailsMessages)
                 .WithRequired(e => e.Customer)
-                .WillCascadeOnDelete(false);
+                .WillCascadeOnDelete(false);*/
 
             modelBuilder.Entity<CustomerTable>()
                 .HasMany(e => e.Transactions)
@@ -48,10 +48,10 @@ namespace Payer.Models
                 .WithRequired(e => e.Item)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<Person>()
+           /* modelBuilder.Entity<Person>()
                 .HasMany(e => e.Customers)
                 .WithRequired(e => e.Person)
-                .WillCascadeOnDelete(false);
+                .WillCascadeOnDelete(false);*/
 
             modelBuilder.Entity<Person>()
                 .HasMany(e => e.Waiters)

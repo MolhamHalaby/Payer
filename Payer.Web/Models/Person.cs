@@ -12,7 +12,7 @@ namespace Payer.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Person()
         {
-            Customers = new HashSet<Customer>();
+          //  Customers = new HashSet<Customer>();
             Waiters = new HashSet<Waiter>();
         }
 
@@ -28,8 +28,8 @@ namespace Payer.Models
 
         public int Id { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Customer> Customers { get; set; }
+     //   [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+      //  public virtual ICollection<Customer> Customers { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Waiter> Waiters { get; set; }

@@ -1788,9 +1788,6 @@
     <TypeScriptCompile Include="Imports\ServerTypings\Default.CustomersService.ts">
       <DependentUpon>ServerTypings.tt</DependentUpon>
     </TypeScriptCompile>
-    <Content Include="Modules\Default\Customers\CustomersIndex.cshtml" />
-    <TypeScriptCompile Include="Modules\Default\Customers\CustomersDialog.ts" />
-    <TypeScriptCompile Include="Modules\Default\Customers\CustomersGrid.ts" />
     <TypeScriptCompile Include="Imports\ServerTypings\Default.CustomersForm.ts">
       <DependentUpon>ServerTypings.tt</DependentUpon>
     </TypeScriptCompile>
@@ -1825,9 +1822,6 @@
     <TypeScriptCompile Include="Imports\ServerTypings\Default.MailsMessagesService.ts">
       <DependentUpon>ServerTypings.tt</DependentUpon>
     </TypeScriptCompile>
-    <Content Include="Modules\Default\MailsMessages\MailsMessagesIndex.cshtml" />
-    <TypeScriptCompile Include="Modules\Default\MailsMessages\MailsMessagesDialog.ts" />
-    <TypeScriptCompile Include="Modules\Default\MailsMessages\MailsMessagesGrid.ts" />
     <TypeScriptCompile Include="Imports\ServerTypings\Default.MailsMessagesForm.ts">
       <DependentUpon>ServerTypings.tt</DependentUpon>
     </TypeScriptCompile>
@@ -1908,13 +1902,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\CustomerTable.cs" />
     <Compile Include="Models\DBModel.cs" />
     <Compile Include="Models\Exception.cs" />
     <Compile Include="Models\Item.cs" />
     <Compile Include="Models\Language.cs" />
-    <Compile Include="Models\MailsMessage.cs" />
     <Compile Include="Models\Person.cs" />
     <Compile Include="Models\Role.cs" />
     <Compile Include="Models\RolePermission.cs" />
@@ -2074,12 +2066,6 @@
     <Compile Include="Modules\Administration\UserPermission\UserPermissionRow.cs" />
     <Compile Include="Modules\Administration\UserPermission\UserPermissionRepository.cs" />
     <Compile Include="Modules\Administration\UserPermission\UserPermissionEndpoint.cs" />
-    <Compile Include="Modules\Default\Customers\CustomersRow.cs" />
-    <Compile Include="Modules\Default\Customers\CustomersRepository.cs" />
-    <Compile Include="Modules\Default\Customers\CustomersEndpoint.cs" />
-    <Compile Include="Modules\Default\Customers\CustomersPage.cs" />
-    <Compile Include="Modules\Default\Customers\CustomersColumns.cs" />
-    <Compile Include="Modules\Default\Customers\CustomersForm.cs" />
     <Compile Include="Modules\Default\DefaultNavigation.cs" />
     <Compile Include="Modules\Default\CustomerTables\CustomerTablesRow.cs" />
     <Compile Include="Modules\Default\CustomerTables\CustomerTablesRepository.cs" />
@@ -2093,12 +2079,6 @@
     <Compile Include="Modules\Default\Items\ItemsPage.cs" />
     <Compile Include="Modules\Default\Items\ItemsColumns.cs" />
     <Compile Include="Modules\Default\Items\ItemsForm.cs" />
-    <Compile Include="Modules\Default\MailsMessages\MailsMessagesRow.cs" />
-    <Compile Include="Modules\Default\MailsMessages\MailsMessagesRepository.cs" />
-    <Compile Include="Modules\Default\MailsMessages\MailsMessagesEndpoint.cs" />
-    <Compile Include="Modules\Default\MailsMessages\MailsMessagesPage.cs" />
-    <Compile Include="Modules\Default\MailsMessages\MailsMessagesColumns.cs" />
-    <Compile Include="Modules\Default\MailsMessages\MailsMessagesForm.cs" />
     <Compile Include="Modules\Default\Persons\PersonsRow.cs" />
     <Compile Include="Modules\Default\Persons\PersonsRepository.cs" />
     <Compile Include="Modules\Default\Persons\PersonsEndpoint.cs" />

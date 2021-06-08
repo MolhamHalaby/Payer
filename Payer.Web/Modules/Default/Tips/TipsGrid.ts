@@ -14,7 +14,7 @@ namespace Payer.Default {
         private rowSelection: Serenity.GridRowSelectionMixin;
         constructor(container: JQuery) {
             super(container);
-            this.rowSelection = new Serenity.GridRowSelectionMixin(this);
+            //this.rowSelection = new Serenity.GridRowSelectionMixin(this);
         }
 
 

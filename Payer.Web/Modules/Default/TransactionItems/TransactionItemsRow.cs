@@ -63,7 +63,7 @@ namespace Payer.Default.Entities
             get { return Fields.TransactionNoOfCustomers[this]; }
             set { Fields.TransactionNoOfCustomers[this] = value; }
         }
-
+/*
         [DisplayName("Transaction Qr Code"), Expression("jTransaction.[QrCode]")]
         public String TransactionQrCode
         {
@@ -77,7 +77,7 @@ namespace Payer.Default.Entities
             get { return Fields.TransactionDealNum[this]; }
             set { Fields.TransactionDealNum[this] = value; }
         }
-
+*/
         [DisplayName("Transaction Waiter Id"), Expression("jTransaction.[WaiterId]")]
         public Int32? TransactionWaiterId
         {
@@ -156,8 +156,8 @@ namespace Payer.Default.Entities
 
             public Int32Field TransactionCustomerTableId;
             public Int32Field TransactionNoOfCustomers;
-            public StringField TransactionQrCode;
-            public StringField TransactionDealNum;
+        //    public StringField TransactionQrCode;
+        //    public StringField TransactionDealNum;
             public Int32Field TransactionWaiterId;
             public Int32Field TransactionItemId;
             public DateTimeField TransactionCreated;

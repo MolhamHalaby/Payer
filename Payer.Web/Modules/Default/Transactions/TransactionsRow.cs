@@ -13,7 +13,7 @@ namespace Payer.Default.Entities
     [DisplayName("Transactions"), InstanceName("Transactions")]
     [ReadPermission("Administration:General")]
     [ModifyPermission("Administration:General")]
-    public sealed class TransactionsRow : Row, IIdRow, INameRow
+    public sealed class TransactionsRow : Row, IIdRow //INameRow
     {
         [DisplayName("Customer Table"), NotNull, ForeignKey("[dbo].[CustomerTables]", "Id"), LeftJoin("jCustomerTable")]
         public Int32? CustomerTableId
@@ -29,7 +29,7 @@ namespace Payer.Default.Entities
             set { Fields.NoOfCustomers[this] = value; }
         }
 
-        [DisplayName("Qr Code"), QuickSearch]
+    /*    [DisplayName("Qr Code"), QuickSearch]
         public String QrCode
         {
             get { return Fields.QrCode[this]; }
@@ -41,7 +41,7 @@ namespace Payer.Default.Entities
         {
             get { return Fields.DealNum[this]; }
             set { Fields.DealNum[this] = value; }
-        }
+        }*/
 
         [DisplayName("Waiter"), NotNull, ForeignKey("[dbo].[Waiters]", "Id"), LeftJoin("jWaiter")]
         public Int32? WaiterId
@@ -132,10 +132,10 @@ namespace Payer.Default.Entities
             get { return Fields.Id; }
         }
 
-        StringField INameRow.NameField
+      /*  StringField INameRow.NameField
         {
             get { return Fields.QrCode; }
-        }
+        }*/
 
         [NotMapped]
         public String GenerateQrCode
@@ -154,8 +154,8 @@ namespace Payer.Default.Entities
         {
             public Int32Field CustomerTableId;
             public Int32Field NoOfCustomers;
-            public StringField QrCode;
-            public StringField DealNum;
+         //   public StringField QrCode;
+         //   public StringField DealNum;
             public Int32Field WaiterId;
            // public Int32Field ItemId;
             public Int32Field Id;

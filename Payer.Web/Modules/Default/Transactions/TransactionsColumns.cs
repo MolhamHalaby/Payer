@@ -16,8 +16,8 @@ namespace Payer.Default.Columns
         public Int32 CustomerTableId { get; set; }
         public Int32 NoOfCustomers { get; set; }
         [EditLink]
-        public String QrCode { get; set; }
-        public String DealNum { get; set; }
+       // public String QrCode { get; set; }
+      //  public String DealNum { get; set; }
         public Int32 WaiterId { get; set; }
         //public String ItemName { get; set; }
         [EditLink, DisplayName("Db.Shared.RecordId"), AlignRight]

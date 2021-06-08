@@ -18,9 +18,9 @@ namespace Payer.Models
 
         public int? NoOfCustomers { get; set; }
 
-        public string QrCode { get; set; }
+       // public string QrCode { get; set; }
 
-        public string DealNum { get; set; }
+      //  public string DealNum { get; set; }
 
         public int WaiterId { get; set; }
 
