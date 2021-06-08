@@ -1,7 +1,7 @@
 ﻿
 @{ ViewBag.Title = "Payment Details";
-                var CustomerPhone = "0" + @ViewBag.Phone;
-                var CustomerAmount = @ViewBag.Amount; }
+    var CustomerPhone = "0" + @ViewBag.Phone;
+    var CustomerAmount = @ViewBag.Amount; }
 
 
 <!DOCTYPE html>
@@ -132,6 +132,8 @@
                             <input type="text" id="cname" name="cardname" placeholder="Yosi Cohen">
                             <label for="cphone">Phone</label>
                             <input type="text" id="cphone" name="cusPhone" value=@CustomerPhone readonly>
+                            <label for="cEmail">Email</label>
+                            <input type="text" id="cEmail" name="cusEmail" placeholder="Yosi.Cohen@gmail.com">
                             <label for="ccnum">Credit card number</label>
                             <input type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444">
                             <label for="expmonth">Exp Month</label>
@@ -139,7 +141,7 @@
                             <div class="row">
                                 <div class="col-50">
                                     <label for="expyear">Exp Year</label>
-                                    <input type="text" id="expyear" name="expyear" placeholder="2018">
+                                    <input type="text" id="expyear" name="expyear" placeholder="2021">
                                 </div>
                                 <div class="col-50">
                                     <label for="cvv">CVV</label>
@@ -150,15 +152,57 @@
 
                     </div>
 
-                    <input type="submit" value="Submit" class="btn">
+                    <input type="submit" value="Submit" class="btn" onclick="CardDetails()">
                 </form>
             </div>
         </div>
 
     </div>
 
+
+
+    <script>
+    function CardDetails() {
+
+       // var CustomerName = document.getElementById("cname").value;
+        //var CustomerPhone = document.getElementById("cphone").value;
+        var CustomerEmail = document.getElementById("cEmail").value;
+       // var CardNumber = document.getElementById("ccnum").value;
+       // var ExpMonth = document.getElementById("expmonth").value;
+        //var ExpYear = document.getElementById("expyear").value;
+        //var CVV = document.getElementById("cvv").value;
+
+        $.ajax({
+            url: "/Default/Transactions/SendEmailToCustomer",
+          //  type: 'post',
+            cache: false,
+            data: {
+            //    Name: CustomerName,
+            //    Phone : CustomerPhone,
+                Email : CustomerEmail,
+            //    CardNum : CardNumber,
+             //   Month : ExpMonth,
+           //     Year : ExpYear,
+           //     Cvv : CVV,
+                Amount: @CustomerAmount,
+            },
+            success: function (response) {
+                if (response == true)
+                    alert("Receipt Sent To Your Email");
+                else
+                    alert("One Of The Fields Is Incorrect");
+
+            },
+            error: function (response) {
+                alert("Error");
+            },
+
+
+        });
+
+
+    }
+
+    </script>
 </body>
 </html>
-
-
-

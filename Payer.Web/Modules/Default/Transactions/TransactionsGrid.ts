@@ -10,15 +10,15 @@ namespace Payer.Default {
         protected getLocalTextPrefix() { return TransactionsRow.localTextPrefix; }
         protected getService() { return TransactionsService.baseUrl; }
 
-        private rowSelection: Serenity.GridRowSelectionMixin;
+        //private rowSelection: Serenity.GridRowSelectionMixin;
         constructor(container: JQuery) {
             super(container);
-            this.rowSelection = new Serenity.GridRowSelectionMixin(this);
+            //this.rowSelection = new Serenity.GridRowSelectionMixin(this);
         }
 
         protected getColumns(): Slick.Column[] {
             var columns = super.getColumns();
-            columns.unshift(Serenity.GridRowSelectionMixin.createSelectColumn(() => this.rowSelection));
+           // columns.unshift(Serenity.GridRowSelectionMixin.createSelectColumn(() => this.rowSelection));
             Q.first(columns, x => x.field == TransactionsRow.Fields.GenerateQrCode).format =
                 ctx => `<a href="javascript:;" class="inline-action generate-qr-code"><i class="fa fa-qrcode"></i></a>`;
             return columns;
@@ -30,42 +30,7 @@ namespace Payer.Default {
         }
 
 
-        protected getButtons(): Serenity.ToolButton[] {
-            var buttons = super.getButtons();
-            this.addButtonClick
-            {
-                buttons.push(
-                    {
-                        title: Q.text("Generate QrCode"),	// *** Get button text from translation
-                        cssClass: 'stampe',
-                        icon: 'fa-print',
-                        onClick: () => {
-                            var selectedIDs = this.rowSelection.getSelectedAsInt32();
-                            if (selectedIDs.length == 0) {
-
-                                Q.notifyWarning("Please Choose Any Transuction");
-                            }
-                            else {
-                                var result = "";
-
-                                if (result.length > 0) {
-                                    window.open(result, "_blank");
-                                }
-
-
-                            }
-
-
-
-
-                        },
-                    }
-                );
-            }
-
-
-            return buttons;
-        }
+        
 
         protected onClick(e: JQueryEventObject, row: number, cell: number) {
             super.onClick(e, row, cell);

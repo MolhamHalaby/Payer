@@ -65,23 +65,21 @@
                 
                // var trans=[];
                
-                for (var i = 0; i < transactionItems.length; i++)
-                {
-                   
+                for (var i = 0; i < transactionItems.length; i++) {
+
                     if (transactionItems[i].CustomerId != null) {
-                        document.getElementById("table").rows[i + 1].cells[4].innerHTML = transactionItems[i].CustomerId;
-                        if (transactionItems[i].CustomerId == "0" + document.getElementById("customerPhone").value)
-                        {
-                            tempAmount += parseInt(document.getElementById("table").rows[i+1].cells[3].innerHTML);
+                      //  document.getElementById("table").rows[i + 1].cells[4].innerHTML = transactionItems[i].CustomerId;
+                        if (transactionItems[i].CustomerId == "0" + document.getElementById("customerPhone").value) {
+                            tempAmount += parseInt(document.getElementById("table").rows[i + 1].cells[3].innerHTML);
                         }
-                  /*  }
-                    else {
-                        document.getElementById("table").rows[i + 1].cells[4].innerHTML = "";
+                          }/*
+                          else {
+                              document.getElementById("table").rows[i + 1].cells[4].innerHTML = "";
+      
+                          }*/
 
-                    }*/
-
-                }
-
+                    }
+                
                 totAmount = tempAmount;
                 document.getElementById("amountArea").value = tempAmount.toString();
                     telNum();
@@ -236,9 +234,7 @@
                 data: { 'phone': statPhone, 'itemName': nameOfItem, 'tranId': @Model.Id , 'flag': flagg, 'tranItemId': tranItemId},
                 cache: false,
                 success: function (response) {
-                   /* if (response == true)
-                        //location.href = location.href;
-                        alert("done!");*/
+                 
                 },
                 error: function (response) {
                     alert("Error");
@@ -246,36 +242,32 @@
 
             });
 
-            //wait = 0;
+         
         }
 
         function toPayButton() {
 
-            //window.location.href = Q.resolveUrl('~/Default/Transactions/DisplayQrCode?id=' + id);
+            if (totAmount != 0) {
+                $.ajax({
+                    url: "/Default/Transactions/PayButton",
+                    type: 'post',
+                    data: {
+                        tip: document.getElementById("tipArea").value,
+                        waiterForTip: @Model.WaiterId,
 
-            $.ajax({
-                url: "/Default/Transactions/PayButton",
-                type: 'post',
-               // dataType: 'Json',
-             //   contentType: "application/json; charset=utf-8",
-                data: {
-                    tip: document.getElementById("tipArea").value,
-                    //customerAmount: document.getElementById("amountArea").value,
-                    waiterForTip: @Model.WaiterId,
-          //          CustomerPhoneNum: statPhone,
-                   // trannId: Model.Id,
-                },
-                success: function (response) {
-                    alert("done");
+                    },
+                    success: function (response) {
+                        
 
-                    window.location.href = "/Default/Transactions/PayButton?phone=" + statPhone + "&customerAmount=" + parseInt(document.getElementById("amountArea").value) ;
-                },
-                error: function (response) {
-                    alert("Error");
-                },
+                        window.location.href = "/Default/Transactions/PayButton?phone=" + statPhone + "&customerAmount=" + parseInt(document.getElementById("amountArea").value);
+                    },
+                    error: function (response) {
+                        alert("Error");
+                    },
 
 
-        });
+                });
+            }
         }
 
         var statTip = 0;

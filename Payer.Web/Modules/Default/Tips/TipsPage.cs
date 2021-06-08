@@ -28,8 +28,8 @@ namespace Payer.Default.Pages
             return View("~/Modules/Default/Tips/TipsIndex.cshtml");
         }
 
-
-       // [HttpPost]
+        //Pulling tip amount from Tips table via data base that relates to the specific waiter.
+     
         public ActionResult Pull(int id)  
         {
             var x = new Tip();
@@ -56,7 +56,7 @@ namespace Payer.Default.Pages
             }
 
                 return View(MVC.Views.Default.Tips.TipsIndex);
-           // return View("~/Modules/Default/Tips/TipsIndex.cshtml");
+    
         }
 
     }

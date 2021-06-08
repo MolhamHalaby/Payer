@@ -188,6 +188,7 @@
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
@@ -241,7 +242,6 @@
     <Content Include="Content\images\expand.gif" />
     <Content Include="Content\images\header-columns-bg.gif" />
     <Content Include="Content\images\header-columns-over-bg.gif" />
-    <Content Include="Modules\Default\Transactions\WebForm1.aspx" />
     <Content Include="qrImage.jpg" />
     <Content Include="Content\images\sort-asc.gif" />
     <Content Include="Content\images\sort-desc.gif" />
@@ -1940,13 +1940,6 @@
     <Compile Include="Modules\Administration\UserRole\UserRoleListResponse.cs" />
     <Compile Include="Modules\Administration\UserRole\UserRoleListRequest.cs" />
     <Compile Include="Modules\Administration\UserRole\UserRoleEndpoint.cs" />
-    <Compile Include="Modules\Default\Transactions\WebForm1.aspx.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Modules\Default\Transactions\WebForm1.aspx.designer.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
-    </Compile>
     <Compile Include="QCCode.aspx.cs">
       <DependentUpon>QCCode.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

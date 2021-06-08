@@ -19,7 +19,13 @@ namespace Payer.Default.Pages
     using System.Threading.Tasks;
     using System.Data.Entity;
     using Payer.Models;
-    
+    using System.Net.Mail;
+    using System.Windows.Forms;
+    using System.Configuration;
+    using System.Net.Mime;
+    using System.Net;
+    using System.Web;
+
     [RoutePrefix("Default/Transactions"), Route("{action=Index}")]
     [PageAuthorize(typeof(Entities.TransactionsRow))]
     public class TransactionsController : Controller
@@ -29,7 +35,8 @@ namespace Payer.Default.Pages
             
             return View("~/Modules/Default/Transactions/TransactionsIndex.cshtml");
         }
-
+        //Opening the page that contain table of items wich related to the same transaction
+        // and where the customers can split the bill between them.
         public async Task<ActionResult> Pay(int id)
         {
             var transaction = new Transaction();
@@ -45,7 +52,7 @@ namespace Payer.Default.Pages
             }
             return View(MVC.Views.Default.Transactions.Pay, transaction);//here we pass the model to the view
         }
-       
+       //Updating html table for all the customers that are opening the same page every few seconds.
         public async Task<ActionResult> UpdateTable(int tranId)
         {
             var transaction = new Transaction();
@@ -64,11 +71,10 @@ namespace Payer.Default.Pages
                 }));
 
             }
-
-            //return View(transaction);
+         
         }
 
-
+        // Saving tip amount for specific waiter in Tips table via data base after clicking on pay button
         [HttpPost]
         public ActionResult PayButton(float tip,int waiterForTip)
         {
@@ -102,13 +108,14 @@ namespace Payer.Default.Pages
              return View(MVC.Views.Default.Transactions.PayButton);
 
         }
+        // Display payment page to let custmer entering his card details.
         public ActionResult PayButton(int phone,int customerAmount)
         {
             ViewBag.Phone = phone;
             ViewBag.Amount = customerAmount;
             return View(MVC.Views.Default.Transactions.PayButton);
         }
-
+        // Updating TransactionItems table after check/unCheck a new Item
         [HttpPost]
         public JsonResult checkNewItem(int phone , String itemName, int tranId,int flag,int tranItemId)
         {
@@ -158,9 +165,28 @@ namespace Payer.Default.Pages
 
            
         }
+        // Sending Email to customer after payment process
+        public JsonResult SendEmailToCustomer(String Email,String Amount)
+        {
 
+            MailMessage mail = new MailMessage();
+            mail.From = new MailAddress("hmwlhm@gmail.com");
+            mail.To.Add(Email);
+            mail.Subject = "QR PAYER RECIEPT";
+              mail.Body = "Hello,\n You are charged in the amount: " + Amount;
 
-        public ActionResult DisplayQrCode(int id)
+            SmtpClient smtpMail = new SmtpClient("smtp.gmail.com");
+            smtpMail.UseDefaultCredentials = false;
+            smtpMail.Port = 587;
+            smtpMail.Credentials = new NetworkCredential("hmwlhm@gmail.com", "311154322");
+            smtpMail.EnableSsl = true;
+            smtpMail.DeliveryMethod = SmtpDeliveryMethod.Network;
+                        // and then send the mail
+            smtpMail.Send(mail);   
+            return Json(true);    
+        }
+        //Display Generating QR Code
+        public ActionResult DisplayQrCode(int id)   
         {
             //this is the generic link
             //var payerUrl = $"~/Default/Transactions/Pay?id={id}";
@@ -171,7 +197,7 @@ namespace Payer.Default.Pages
             return View(MVC.Views.Default.Transactions.QRViewer);
         }
 
-
+        //Creating qrCode Image that contains url to the Pay page.
         private string GetQCCodeBase64(string qrContent)
         {
             var QCwriter = new BarcodeWriter();
