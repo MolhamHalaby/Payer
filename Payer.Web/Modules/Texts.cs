@@ -56,7 +56,7 @@ namespace Payer
 
                 public static class Login
                 {
-                    public static LocalText FormTitle = "Welcome to SERENE (Serenity Application Template)";
+                    public static LocalText FormTitle = "Welcome To QR Payer";
                     public static LocalText SignInButton = "Sign In";
                     public static LocalText ForgotPassword = "Forgot password?";
                     public static LocalText SignUpButton = "Register a new account";
@@ -103,7 +103,7 @@ namespace Payer
                 public static LocalText LackPermissions = "You don't have required permissions to access this page!";
                 public static LocalText NotLoggedIn = "You need to be logged in to access this page!";
                 public static LocalText ClickToChangeUser = "click here to login with another user...";
-                public static LocalText ClickToLogin = "clik here to return to login page...";
+                public static LocalText ClickToLogin = "click here to return to login page...";
             }
 
             public static class Dashboard

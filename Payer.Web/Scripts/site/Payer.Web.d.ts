@@ -1814,6 +1814,7 @@ declare namespace Payer.Default {
         protected getLocalTextPrefix(): string;
         protected getService(): string;
         constructor(container: JQuery);
+        protected addButtonClick(): void;
     }
 }
 declare namespace Payer.Default {
@@ -1838,6 +1839,7 @@ declare namespace Payer.Default {
         protected getLocalTextPrefix(): string;
         protected getService(): string;
         constructor(container: JQuery);
+        protected addButtonClick(): void;
     }
 }
 declare namespace Payer.Default {
@@ -1862,6 +1864,7 @@ declare namespace Payer.Default {
         protected getLocalTextPrefix(): string;
         protected getService(): string;
         constructor(container: JQuery);
+        protected addButtonClick(): void;
     }
 }
 declare namespace Payer.Default {
@@ -1884,7 +1887,9 @@ declare namespace Payer.Default {
         protected getInsertPermission(): string;
         protected getLocalTextPrefix(): string;
         protected getService(): string;
+        protected getButtons(): Serenity.ToolButton[];
         private rowSelection;
+        private buttonAdd;
         constructor(container: JQuery);
         protected getColumns(): Slick.Column[];
         private PullTip;
@@ -1962,6 +1967,7 @@ declare namespace Payer.Default {
         protected getLocalTextPrefix(): string;
         protected getService(): string;
         constructor(container: JQuery);
+        protected addButtonClick(): void;
     }
 }
 declare namespace Payer.Membership {

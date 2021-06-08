@@ -13,6 +13,9 @@ namespace Payer.Default {
         protected getUpdatePermission() { return TransactionsRow.updatePermission; }
 
         protected form = new TransactionsForm(this.idPrefix);
+      
+        
 
     }
+
 }

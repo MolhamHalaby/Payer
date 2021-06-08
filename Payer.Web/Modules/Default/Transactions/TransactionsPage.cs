@@ -173,7 +173,7 @@ namespace Payer.Default.Pages
             mail.From = new MailAddress("hmwlhm@gmail.com");
             mail.To.Add(Email);
             mail.Subject = "QR PAYER RECIEPT";
-              mail.Body = "Hello,\n You are charged in the amount: " + Amount;
+              mail.Body = "Hello,\n You Are Charged In The Amount: " + Amount;
 
             SmtpClient smtpMail = new SmtpClient("smtp.gmail.com");
             smtpMail.UseDefaultCredentials = false;

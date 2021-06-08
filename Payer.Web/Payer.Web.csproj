@@ -1683,7 +1683,6 @@
     <Content Include="Scripts\site\texts\site.texts.tr.json" />
     <Content Include="Modules\Membership\Account\AccountLogin.cshtml" />
     <Content Include="Modules\Web.config" />
-    <Content Include="Modules\Common\Dashboard\DashboardIndex.cshtml" />
     <Content Include="Modules\Membership\_ViewStart.cshtml" />
     <Content Include="Modules\_ViewStart.cshtml" />
     <Content Include="Views\Templates\EntityDialog.Template.html" />
@@ -1918,7 +1917,6 @@
     <Compile Include="Modules\Administration\User\UserColumns.cs" />
     <Compile Include="Modules\Common\Helpers\EmailHelper.cs" />
     <Compile Include="Modules\Common\Helpers\ExcelImportRequest.cs" />
-    <Compile Include="Modules\Common\Dashboard\DashboardPageModel.cs" />
     <Compile Include="Modules\Common\File\FilePage.cs" />
     <Compile Include="Modules\Common\Helpers\DetailListSaveHandler.cs" />
     <Compile Include="Imports\ClientTypes\Administration.PermissionCheckEditorAttribute.cs">

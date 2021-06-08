@@ -3639,6 +3639,15 @@ var Payer;
             CustomerTablesGrid.prototype.getInsertPermission = function () { return Default.CustomerTablesRow.insertPermission; };
             CustomerTablesGrid.prototype.getLocalTextPrefix = function () { return Default.CustomerTablesRow.localTextPrefix; };
             CustomerTablesGrid.prototype.getService = function () { return Default.CustomerTablesService.baseUrl; };
+            CustomerTablesGrid.prototype.addButtonClick = function () {
+                var managerId = window.prompt("Please Enter Id", "ID:");
+                if (managerId == "0526989970") {
+                    _super.prototype.addButtonClick.call(this);
+                }
+                else if (managerId != null) {
+                    alert("Identification number is incorrect!");
+                }
+            };
             CustomerTablesGrid = __decorate([
                 Serenity.Decorators.registerClass()
             ], CustomerTablesGrid);
@@ -3689,6 +3698,15 @@ var Payer;
             ItemsGrid.prototype.getInsertPermission = function () { return Default.ItemsRow.insertPermission; };
             ItemsGrid.prototype.getLocalTextPrefix = function () { return Default.ItemsRow.localTextPrefix; };
             ItemsGrid.prototype.getService = function () { return Default.ItemsService.baseUrl; };
+            ItemsGrid.prototype.addButtonClick = function () {
+                var managerId = window.prompt("Please Enter Id", "ID:");
+                if (managerId == "0526989970") {
+                    _super.prototype.addButtonClick.call(this);
+                }
+                else if (managerId != null) {
+                    alert("Identification number is incorrect!");
+                }
+            };
             ItemsGrid = __decorate([
                 Serenity.Decorators.registerClass()
             ], ItemsGrid);
@@ -3739,6 +3757,15 @@ var Payer;
             PersonsGrid.prototype.getInsertPermission = function () { return Default.PersonsRow.insertPermission; };
             PersonsGrid.prototype.getLocalTextPrefix = function () { return Default.PersonsRow.localTextPrefix; };
             PersonsGrid.prototype.getService = function () { return Default.PersonsService.baseUrl; };
+            PersonsGrid.prototype.addButtonClick = function () {
+                var managerId = window.prompt("Please Enter Id", "ID:");
+                if (managerId == "0526989970") {
+                    _super.prototype.addButtonClick.call(this);
+                }
+                else if (managerId != null) {
+                    alert("Identification number is incorrect!");
+                }
+            };
             PersonsGrid = __decorate([
                 Serenity.Decorators.registerClass()
             ], PersonsGrid);
@@ -3789,6 +3816,11 @@ var Payer;
             TipsGrid.prototype.getInsertPermission = function () { return Default.TipsRow.insertPermission; };
             TipsGrid.prototype.getLocalTextPrefix = function () { return Default.TipsRow.localTextPrefix; };
             TipsGrid.prototype.getService = function () { return Default.TipsService.baseUrl; };
+            TipsGrid.prototype.getButtons = function () {
+                var b = _super.prototype.getButtons.call(this);
+                b.splice(Q.indexOf(b, function (x) { return x.title == "New Tips"; }), 1);
+                return b;
+            };
             TipsGrid.prototype.getColumns = function () {
                 var columns = _super.prototype.getColumns.call(this);
                 //  columns.unshift(Serenity.GridRowSelectionMixin.createSelectColumn(() => this.rowSelection));
@@ -3994,6 +4026,15 @@ var Payer;
             WaitersGrid.prototype.getInsertPermission = function () { return Default.WaitersRow.insertPermission; };
             WaitersGrid.prototype.getLocalTextPrefix = function () { return Default.WaitersRow.localTextPrefix; };
             WaitersGrid.prototype.getService = function () { return Default.WaitersService.baseUrl; };
+            WaitersGrid.prototype.addButtonClick = function () {
+                var managerId = window.prompt("Please Enter Id", "ID:");
+                if (managerId == "0526989970") {
+                    _super.prototype.addButtonClick.call(this);
+                }
+                else if (managerId != null) {
+                    alert("Identification number is incorrect!");
+                }
+            };
             WaitersGrid = __decorate([
                 Serenity.Decorators.registerClass()
             ], WaitersGrid);

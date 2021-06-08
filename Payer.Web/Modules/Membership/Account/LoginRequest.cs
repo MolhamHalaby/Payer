@@ -8,9 +8,9 @@ namespace Payer.Membership
     [BasedOnRow(typeof(Administration.Entities.UserRow))]
     public class LoginRequest : ServiceRequest
     {
-        [Placeholder("default username is 'admin'")]
+        [Placeholder("Enter UserName")]
         public string Username { get; set; }
-        [PasswordEditor, Placeholder("default password for 'admin' is 'serenity'"), Required(true)]
+        [PasswordEditor, Placeholder("Enter Password"), Required(true)]
         public string Password { get; set; }
     }
 }

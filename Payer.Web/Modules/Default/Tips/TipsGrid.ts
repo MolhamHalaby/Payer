@@ -10,12 +10,20 @@ namespace Payer.Default {
         protected getLocalTextPrefix() { return TipsRow.localTextPrefix; }
         protected getService() { return TipsService.baseUrl; }
 
-
+        protected getButtons(): Serenity.ToolButton[] {
+            var b = super.getButtons();
+            b.splice(Q.indexOf(b, x => x.title == "New Tips"), 1);
+            return b;
+        }
+        
         private rowSelection: Serenity.GridRowSelectionMixin;
+        private buttonAdd: Serenity.ToolButton[];
         constructor(container: JQuery) {
             super(container);
             //this.rowSelection = new Serenity.GridRowSelectionMixin(this);
+           
         }
+
 
 
         protected getColumns(): Slick.Column[] {

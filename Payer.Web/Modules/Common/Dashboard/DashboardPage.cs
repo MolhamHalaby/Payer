@@ -30,7 +30,7 @@ namespace Payer.Common.Pages
             //        }
             //        return model;
             //    });
-            return View(MVC.Views.Common.Dashboard.DashboardIndex, new DashboardPageModel());
+            return View("~/Modules/Default/Transactions/TransactionsIndex.cshtml");
         }
     }
 }

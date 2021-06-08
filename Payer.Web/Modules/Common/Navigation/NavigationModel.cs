@@ -16,7 +16,7 @@ namespace Payer.Navigation
 
         public NavigationModel()
         {
-            Items = TwoLevelCache.GetLocalStoreOnly("LeftNavigationModel:NavigationItems:" + (Authorization.UserId ?? "-1"), TimeSpan.Zero,
+              Items = TwoLevelCache.GetLocalStoreOnly("LeftNavigationModel:NavigationItems:" + (Authorization.UserId ?? "-1"), TimeSpan.Zero,
                 UserPermissionRow.Fields.GenerationKey, () =>
                     NavigationHelper.GetNavigationItems(x => 
                         x != null && x.StartsWith("~/") ? VirtualPathUtility.ToAbsolute(x) : x));
@@ -52,7 +52,7 @@ namespace Payer.Navigation
             currentPath[depth + 1] = 0;
             var url = link.Url ?? "";
 
-            if (url != null && url.StartsWith("~/", StringComparison.Ordinal))
+            if (url != null && url.StartsWith("~/", StringComparison.Ordinal)&& url == MVC.Views.Common.Dashboard.DashboardIndex)
                 url = VirtualPathUtility.ToAbsolute(url);
 
             if (currentUrl.IndexOf(url, StringComparison.OrdinalIgnoreCase) >= 0 &&

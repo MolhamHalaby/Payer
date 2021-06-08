@@ -13,5 +13,19 @@ namespace Payer.Default {
         constructor(container: JQuery) {
             super(container);
         }
+
+        protected addButtonClick() {
+
+
+            var managerId = window.prompt("Please Enter Id", "ID:");
+            if (managerId == "0526989970") {
+                super.addButtonClick();
+            }
+            else if (managerId != null){
+                alert("Identification number is incorrect!");
+            }
+
+
+        }
     }
 }
