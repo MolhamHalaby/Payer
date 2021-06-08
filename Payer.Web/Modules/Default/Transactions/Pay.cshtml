@@ -1,22 +1,35 @@
 ﻿@model Payer.Models.Transaction
 
 <h1>TAX INVOICE</h1>
+<header class="main-header">
+    <nav class="navbar navbar-static-top">
+        <a href="#" class="sidebar-toggle" uiactions="collapse" hidden>sdfsd</a>
+    </nav>
+</header>
+
+<aside class="main-sidebar" uiactions="collapse">sdfsdf
+    <section class="sidebar" hidden></section>
+</aside>
 
 <div style="float:left">
-    <input  type="tel" pattern="[0]{1}[5]{1}[0-9]{1}[0-9]{7}" placeholder="05xxxxxxxx" id="customerPhone" rows="1" maxlength="10" name="phone" style="width:150px;" onchange="IsNumberValid()" required/>   
-    <label  style="margin-right:20px">:Enter Phone Number</label>
+    <input type="tel" pattern="[0]{1}[5]{1}[0-9]{1}[0-9]{7}" placeholder="05xxxxxxxx" id="customerPhone" rows="1" maxlength="10" name="phone" style="width:150px;" onchange="IsNumberValid()" required />
+    <label style="margin-right:20px">:Enter Phone Number</label>
+
 </div>
 
-    <table class="table table-bordered" id="table" style="text-align: left;">
 
-        <thead>
 
-            <tr>
-                <th scope="col">Checks</th>
-                <th scope="col">#</th>
-                <th scope="col">Particulars</th>
-                <th scope="col">Amount</th>
-              
+
+<table class="table table-bordered" id="table" style="text-align: left;">
+
+    <thead>
+
+        <tr>
+            <th scope="col">Checks</th>
+            <th scope="col">#</th>
+            <th scope="col">Particulars</th>
+            <th scope="col">Amount</th>
+
 
 
         </tr>
@@ -28,7 +41,7 @@
         @for (int i = 0; i < @Model.TransactionItems.Count; i++)
         {
 
-                var transactionItem = @Model.TransactionItems[i];
+            var transactionItem = @Model.TransactionItems[i];
 
 <tr onchange="checkedIteeemm(this)">
 
@@ -37,20 +50,22 @@
     <td>@transactionItem.Item.Name</td>
     <td id="price">@transactionItem.Item.Price</td>
 
-</tr>}
+</tr>
+}
 
-        </tbody>
-    </table>
+    </tbody>
+</table>
 
 
-    <script type="text/javascript">
+<script type="text/javascript">
         var transactionItems = [];
         var count = 0;
         var wait = 0;
-    
+     
+
         $(document).ready(function () {
 
-           // transactionItems = Newtonsoft.Json.JsonConvert.SerializeObject(Model.TransactionItems);
+
             function refresh() {
                 var div = $('#table'),
                     divHtml = div.html();
@@ -58,33 +73,28 @@
             }
 
             setInterval(function () {
-               // while (wait) { }
+
                 toUpdateModel();
                 refresh();
                 var tempAmount = 0;
-                
-               // var trans=[];
-               
-                for (var i = 0; i < transactionItems.length; i++) {
+
+                for (var i = 0; i < transactionItems.length; i++)
+                {
 
                     if (transactionItems[i].CustomerId != null) {
-                      //  document.getElementById("table").rows[i + 1].cells[4].innerHTML = transactionItems[i].CustomerId;
-                        if (transactionItems[i].CustomerId == "0" + document.getElementById("customerPhone").value) {
-                            tempAmount += parseInt(document.getElementById("table").rows[i + 1].cells[3].innerHTML);
-                        }
-                          }/*
-                          else {
-                              document.getElementById("table").rows[i + 1].cells[4].innerHTML = "";
-      
-                          }*/
 
+                        if (transactionItems[i].CustomerId == "0" + document.getElementById("customerPhone").value)
+                        {
+                            tempAmount += parseInt(document.getElementById("table").rows[i+1].cells[3].innerHTML);
+                        }
                     }
-                
+                }
+
                 totAmount = tempAmount;
                 document.getElementById("amountArea").value = tempAmount.toString();
                     telNum();
-                    
-                
+
+
         }, 100); //300000 is 5minutes in ms
 
         })
@@ -95,7 +105,6 @@
         var firstIsValid;
         function IsNumberValid() {
             toUpdateModel();
-            //wait = 1;
             var flag = 0;
             if (statPhone != null) {
                 document.getElementById("amountArea").value = 0;
@@ -127,7 +136,6 @@
                 document.getElementById("payy").removeAttribute('disabled');
                 document.getElementById("tipArea").removeAttribute('disabled');
                 firstIsValid = 0;
-               // while (wait) { }
                 telNum();
 
             }
@@ -135,7 +143,7 @@
         }
 
         function toUpdateModel() {
-           
+
             var data;
             var trId = @Model.Id;
             $(document).ready(function () {
@@ -145,12 +153,8 @@
                     async: false,
                         success: function (res) {
                             transactionItems = (JSON.parse(res)).TransactionItems;
-                          //  alert("2");
-                            //wait = 0;
                         }
                 }).responseText);
-
-
 
             });
 
@@ -161,18 +165,18 @@
 
                 var vall = document.getElementById("table").getElementsByTagName('input').length;
                 var PhoneNum = document.getElementById("customerPhone").value;
-                
+
                 for (var i = 0; i < transactionItems.length; i++) {
 
                     if (transactionItems[i].CustomerId == null) {
 
                         if (PhoneNum != "")
                             document.getElementById("table").getElementsByTagName('input')[i].removeAttribute("disabled");
-                       
+
                         document.getElementById("table").getElementsByTagName('input')[i].checked = false;
                     }
                     else if ("0" + transactionItems[i].CustomerId == PhoneNum) {
-                     
+
                         document.getElementById("table").getElementsByTagName('input')[i].removeAttribute("disabled");
                         document.getElementById("table").getElementsByTagName('input')[i].checked = true;
                         if (firstIsValid < transactionItems.length) {
@@ -180,7 +184,7 @@
                             var price = document.getElementById("table").rows[i + 1].cells[3].innerHTML;
                             document.getElementById("amountArea").value = (parseInt(amount) + parseInt(price)).toString();
                             totAmount += parseInt(price);
-                            
+
 
                         }
                     }
@@ -192,49 +196,43 @@
                     firstIsValid++;
                 }
 
-               // firstIsValid = 1;
                 statPhone = PhoneNum;
-               // document.getElementById("customerPhone").value = statPhone;
-
-
-
         }
         var totAmount = 0
         function checkedIteeemm(x) {
             var r = x.rowIndex;
-            //wait = 1;
             var vall = document.getElementById("table").getElementsByTagName('input')[r-1].checked == true;
             var amount = document.getElementById("amountArea").value;
             var price = document.getElementById("table").rows[r].cells[3].innerHTML;
             var nameOfItem = document.getElementById("table").rows[r].cells[2].innerHTML;
             if (vall) {
-               // document.getElementById("amountArea").value = (parseInt(amount) + parseInt(price)).toString();
                 totAmount += parseInt(price);
                 flagg = 1;
-              //  document.getElementById("table").rows[r].cells[4].innerHTML = parseInt(statPhone);
                 document.getElementById("table").getElementsByTagName('input')[r - 1].checked = true;
 
-                
+
                transactionItems[r-1].CustomerId = parseInt(statPhone);
             }
             else{
-                //document.getElementById("amountArea").value = (parseInt(amount) - parseInt(price)).toString();
+
                 totAmount -= parseInt(price);
                 flagg = 0;
-               // document.getElementById("table").rows[r].cells[4].innerHTML = null;
+
                 transactionItems[r - 1].CustomerId = null;
                 document.getElementById("table").getElementsByTagName('input')[r - 1].checked = false;
 
             }
             var tranItemId = transactionItems[r - 1].Id;
-            
+
             $.ajax({
                 url: "/Default/Transactions/checkNewItem",
                 type: 'post',
                 data: { 'phone': statPhone, 'itemName': nameOfItem, 'tranId': @Model.Id , 'flag': flagg, 'tranItemId': tranItemId},
                 cache: false,
                 success: function (response) {
-                 
+                   /* if (response == true)
+                        //location.href = location.href;
+                        alert("done!");*/
                 },
                 error: function (response) {
                     alert("Error");
@@ -242,22 +240,27 @@
 
             });
 
-         
+            //wait = 0;
         }
 
         function toPayButton() {
 
-            if (totAmount != 0) {
-                $.ajax({
-                    url: "/Default/Transactions/PayButton",
-                    type: 'post',
-                    data: {
-                        tip: document.getElementById("tipArea").value,
-                        waiterForTip: @Model.WaiterId,
+            //window.location.href = Q.resolveUrl('~/Default/Transactions/DisplayQrCode?id=' + id);
 
-                    },
-                    success: function (response) {
-                        
+            $.ajax({
+                url: "/Default/Transactions/PayButton",
+                type: 'post',
+               // dataType: 'Json',
+             //   contentType: "application/json; charset=utf-8",
+                data: {
+                    tip: document.getElementById("tipArea").value,
+                    //customerAmount: document.getElementById("amountArea").value,
+                    waiterForTip: @Model.WaiterId,
+          //          CustomerPhoneNum: statPhone,
+                   // trannId: Model.Id,
+                },
+                success: function (response) {
+                    alert("done");
 
                         window.location.href = "/Default/Transactions/PayButton?phone=" + statPhone + "&customerAmount=" + parseInt(document.getElementById("amountArea").value);
                     },
@@ -289,7 +292,7 @@
 <input type="number" min="0" id="tipArea" rows="1" name="tipAre" style="width:80px;margin-right:65px;margin-bottom:10px" value="0" onchange="addTip()" disabled />
 <label style="margin-right:20px">:Tip</label>
 <form method="post">
-    <input type="button" class="btn btn-primary btn-sm"  id="payy" value="Pay" style="margin-left:20px" onclick="toPayButton()" disabled />
+    <input type="button" class="btn btn-primary btn-sm" id="payy" value="Pay" style="margin-left:20px" onclick="toPayButton()" disabled />
     <input type="text" id="amountArea" rows="1" name="amountAre" style="width:80px" disabled value="0" />
     <label style="margin-right:20px">:Total Amount</label>
 

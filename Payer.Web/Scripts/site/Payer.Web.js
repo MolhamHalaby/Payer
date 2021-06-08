@@ -2502,6 +2502,1998 @@ var Payer;
 })(Payer || (Payer = {}));
 var Payer;
 (function (Payer) {
+                var klass = 'edit string';
+                var item = ctx.item;
+                var pending = this.pendingChanges[item.ProductID];
+                var column = ctx.column;
+                if (pending && pending[column.field] !== undefined) {
+                    klass += ' dirty';
+                }
+                var value = this.getEffectiveValue(item, column.field);
+                return "<input type='text' class='" + klass +
+                    "' data-field='" + column.field +
+                    "' value='" + Q.attrEncode(value) +
+                    "' maxlength='" + column.sourceItem.maxLength + "'/>";
+            };
+            /**
+             * Sorry but you cannot use LookupEditor, e.g. Select2 here, only possible is a SELECT element
+             */
+            ProductGrid.prototype.selectFormatter = function (ctx, idField, lookup) {
+                var klass = 'edit';
+                var item = ctx.item;
+                var pending = this.pendingChanges[item.ProductID];
+                var column = ctx.column;
+                if (pending && pending[idField] !== undefined) {
+                    klass += ' dirty';
+                }
+                var value = this.getEffectiveValue(item, idField);
+                var markup = "<select class='" + klass +
+                    "' data-field='" + idField +
+                    "' style='width: 100%; max-width: 100%'>";
+                for (var _i = 0, _a = lookup.items; _i < _a.length; _i++) {
+                    var c = _a[_i];
+                    var id = c[lookup.idField];
+                    markup += "<option value='" + Q.attrEncode(id) + "'";
+                    if (id == value) {
+                        markup += " selected";
+                    }
+                    markup += ">" + Q.htmlEncode(c[lookup.textField]) + "</option>";
+                }
+                return markup + "</select>";
+            };
+            ProductGrid.prototype.getEffectiveValue = function (item, field) {
+                var pending = this.pendingChanges[item.ProductID];
+                if (pending && pending[field] !== undefined) {
+                    return pending[field];
+                }
+                return item[field];
+            };
+            ProductGrid.prototype.getColumns = function () {
+                var _this = this;
+                var columns = _super.prototype.getColumns.call(this);
+                var num = function (ctx) { return _this.numericInputFormatter(ctx); };
+                var str = function (ctx) { return _this.stringInputFormatter(ctx); };
+                Q.first(columns, function (x) { return x.field === 'QuantityPerUnit'; }).format = str;
+                var category = Q.first(columns, function (x) { return x.field === "CategoryName" /* CategoryName */; });
+                category.referencedFields = ["CategoryID" /* CategoryID */];
+                category.format = function (ctx) { return _this.selectFormatter(ctx, "CategoryID" /* CategoryID */, Northwind.CategoryRow.getLookup()); };
+                var supplier = Q.first(columns, function (x) { return x.field === "SupplierCompanyName" /* SupplierCompanyName */; });
+                supplier.referencedFields = ["SupplierID" /* SupplierID */];
+                supplier.format = function (ctx) { return _this.selectFormatter(ctx, "SupplierID" /* SupplierID */, Northwind.SupplierRow.getLookup()); };
+                Q.first(columns, function (x) { return x.field === "UnitPrice" /* UnitPrice */; }).format = num;
+                Q.first(columns, function (x) { return x.field === "UnitsInStock" /* UnitsInStock */; }).format = num;
+                Q.first(columns, function (x) { return x.field === "UnitsOnOrder" /* UnitsOnOrder */; }).format = num;
+                Q.first(columns, function (x) { return x.field === "ReorderLevel" /* ReorderLevel */; }).format = num;
+                return columns;
+            };
+            ProductGrid.prototype.inputsChange = function (e) {
+                var cell = this.slickGrid.getCellFromEvent(e);
+                var item = this.itemAt(cell.row);
+                var input = $(e.target);
+                var field = input.data('field');
+                var text = Q.coalesce(Q.trimToNull(input.val()), '0');
+                var pending = this.pendingChanges[item.ProductID];
+                var effective = this.getEffectiveValue(item, field);
+                var oldText;
+                if (input.hasClass("numeric"))
+                    oldText = Q.formatNumber(effective, '0.##');
+                else
+                    oldText = effective;
+                var value;
+                if (field === 'UnitPrice') {
+                    value = Q.parseDecimal(text);
+                    if (value == null || isNaN(value)) {
+                        Q.notifyError(Q.text('Validation.Decimal'), '', null);
+                        input.val(oldText);
+                        input.focus();
+                        return;
+                    }
+                }
+                else if (input.hasClass("numeric")) {
+                    var i = Q.parseInteger(text);
+                    if (isNaN(i) || i > 32767 || i < 0) {
+                        Q.notifyError(Q.text('Validation.Integer'), '', null);
+                        input.val(oldText);
+                        input.focus();
+                        return;
+                    }
+                    value = i;
+                }
+                else
+                    value = text;
+                if (!pending) {
+                    this.pendingChanges[item.ProductID] = pending = {};
+                }
+                pending[field] = value;
+                item[field] = value;
+                this.view.refresh();
+                if (input.hasClass("numeric"))
+                    value = Q.formatNumber(value, '0.##');
+                input.val(value).addClass('dirty');
+                this.setSaveButtonState();
+            };
+            ProductGrid.prototype.setSaveButtonState = function () {
+                this.toolbar.findButton('apply-changes-button').toggleClass('disabled', Object.keys(this.pendingChanges).length === 0);
+            };
+            ProductGrid.prototype.saveClick = function () {
+                if (Object.keys(this.pendingChanges).length === 0) {
+                    return;
+                }
+                // this calls save service for all modified rows, one by one
+                // you could write a batch update service
+                var keys = Object.keys(this.pendingChanges);
+                var current = -1;
+                var self = this;
+                (function saveNext() {
+                    if (++current >= keys.length) {
+                        self.refresh();
+                        return;
+                    }
+                    var key = keys[current];
+                    var entity = Q.deepClone(self.pendingChanges[key]);
+                    entity.ProductID = key;
+                    Q.serviceRequest('Northwind/Product/Update', {
+                        EntityId: key,
+                        Entity: entity
+                    }, function (response) {
+                        delete self.pendingChanges[key];
+                        saveNext();
+                    });
+                })();
+            };
+            ProductGrid.prototype.getQuickFilters = function () {
+                var flt = _super.prototype.getQuickFilters.call(this);
+                var q = Q.parseQueryString();
+                if (q["cat"]) {
+                    var category = Q.tryFirst(flt, function (x) { return x.field == "CategoryID"; });
+                    category.init = function (e) {
+                        e.element.getWidget(Serenity.LookupEditor).value = q["cat"];
+                    };
+                }
+                return flt;
+            };
+            ProductGrid = __decorate([
+                Serenity.Decorators.registerClass(),
+                Serenity.Decorators.filterable()
+            ], ProductGrid);
+            return ProductGrid;
+        }(Serenity.EntityGrid));
+        Northwind.ProductGrid = ProductGrid;
+    })(Northwind = Payer.Northwind || (Payer.Northwind = {}));
+})(Payer || (Payer = {}));
+/// <reference path="../../../Northwind/Product/ProductGrid.ts" />
+var Payer;
+(function (Payer) {
+    var BasicSamples;
+    (function (BasicSamples) {
+        /**
+         * Subclass of ProductGrid to override dialog type to CloneableEntityDialog
+         */
+        var CloneableEntityGrid = /** @class */ (function (_super) {
+            __extends(CloneableEntityGrid, _super);
+            function CloneableEntityGrid(container) {
+                return _super.call(this, container) || this;
+            }
+            CloneableEntityGrid.prototype.getDialogType = function () { return BasicSamples.CloneableEntityDialog; };
+            CloneableEntityGrid = __decorate([
+                Serenity.Decorators.registerClass()
+            ], CloneableEntityGrid);
+            return CloneableEntityGrid;
+        }(Payer.Northwind.ProductGrid));
+        BasicSamples.CloneableEntityGrid = CloneableEntityGrid;
+    })(BasicSamples = Payer.BasicSamples || (Payer.BasicSamples = {}));
+})(Payer || (Payer = {}));
+var Payer;
+(function (Payer) {
+    var Northwind;
+    (function (Northwind) {
+        var OrderGrid = /** @class */ (function (_super) {
+            __extends(OrderGrid, _super);
+            function OrderGrid(container) {
+                return _super.call(this, container) || this;
+            }
+            OrderGrid.prototype.getColumnsKey = function () { return "Northwind.Order"; };
+            OrderGrid.prototype.getDialogType = function () { return Northwind.OrderDialog; };
+            OrderGrid.prototype.getIdProperty = function () { return Northwind.OrderRow.idProperty; };
+            OrderGrid.prototype.getLocalTextPrefix = function () { return Northwind.OrderRow.localTextPrefix; };
+            OrderGrid.prototype.getService = function () { return Northwind.OrderService.baseUrl; };
+            OrderGrid.prototype.getQuickFilters = function () {
+                var _this = this;
+                var filters = _super.prototype.getQuickFilters.call(this);
+                filters.push({
+                    type: Serenity.LookupEditor,
+                    options: {
+                        lookupKey: Northwind.ProductRow.lookupKey
+                    },
+                    field: 'ProductID',
+                    title: 'Contains Product in Details',
+                    handler: function (w) {
+                        _this.view.params.ProductID = Q.toId(w.value);
+                    },
+                    cssClass: 'hidden-xs'
+                });
+                return filters;
+            };
+            OrderGrid.prototype.createQuickFilters = function () {
+                _super.prototype.createQuickFilters.call(this);
+                this.shippingStateFilter = this.findQuickFilter(Serenity.EnumEditor, "ShippingState" /* ShippingState */);
+            };
+            OrderGrid.prototype.getButtons = function () {
+                var _this = this;
+                var buttons = _super.prototype.getButtons.call(this);
+                buttons.push(Payer.Common.ExcelExportHelper.createToolButton({
+                    grid: this,
+                    service: Northwind.OrderService.baseUrl + '/ListExcel',
+                    onViewSubmit: function () { return _this.onViewSubmit(); },
+                    separator: true
+                }));
+                buttons.push(Payer.Common.PdfExportHelper.createToolButton({
+                    grid: this,
+                    onViewSubmit: function () { return _this.onViewSubmit(); }
+                }));
+                return buttons;
+            };
+            OrderGrid.prototype.getColumns = function () {
+                var columns = _super.prototype.getColumns.call(this);
+                columns.splice(1, 0, {
+                    field: 'Print Invoice',
+                    name: '',
+                    format: function (ctx) { return '<a class="inline-action print-invoice" title="invoice">' +
+                        '<i class="fa fa-file-pdf-o text-red"></i></a>'; },
+                    width: 24,
+                    minWidth: 24,
+                    maxWidth: 24
+                });
+                return columns;
+            };
+            OrderGrid.prototype.onClick = function (e, row, cell) {
+                _super.prototype.onClick.call(this, e, row, cell);
+                if (e.isDefaultPrevented())
+                    return;
+                var item = this.itemAt(row);
+                var target = $(e.target);
+                // if user clicks "i" element, e.g. icon
+                if (target.parent().hasClass('inline-action'))
+                    target = target.parent();
+                if (target.hasClass('inline-action')) {
+                    e.preventDefault();
+                    if (target.hasClass('print-invoice')) {
+                        Payer.Common.ReportHelper.execute({
+                            reportKey: 'Northwind.OrderDetail',
+                            params: {
+                                OrderID: item.OrderID
+                            }
+                        });
+                    }
+                }
+            };
+            OrderGrid.prototype.set_shippingState = function (value) {
+                this.shippingStateFilter.value = value == null ? '' : value.toString();
+            };
+            OrderGrid.prototype.addButtonClick = function () {
+                var eq = this.view.params.EqualityFilter;
+                this.editItem({
+                    CustomerID: eq ? eq.CustomerID : null
+                });
+            };
+            OrderGrid = __decorate([
+                Serenity.Decorators.registerClass(),
+                Serenity.Decorators.filterable()
+            ], OrderGrid);
+            return OrderGrid;
+        }(Serenity.EntityGrid));
+        Northwind.OrderGrid = OrderGrid;
+    })(Northwind = Payer.Northwind || (Payer.Northwind = {}));
+})(Payer || (Payer = {}));
+/// <reference path="../../../Northwind/Order/OrderGrid.ts" />
+var Payer;
+(function (Payer) {
+    var BasicSamples;
+    (function (BasicSamples) {
+        var DefaultValuesInNewGrid = /** @class */ (function (_super) {
+            __extends(DefaultValuesInNewGrid, _super);
+            function DefaultValuesInNewGrid(container) {
+                return _super.call(this, container) || this;
+            }
+            /**
+             * This method is called when New Item button is clicked.
+             * By default, it calls EditItem with an empty entity.
+             * This is a good place to fill in default values for New Item button.
+             */
+            DefaultValuesInNewGrid.prototype.addButtonClick = function () {
+                this.editItem({
+                    CustomerID: 'ANTON',
+                    RequiredDate: Q.formatDate(new Date(), 'yyyy-MM-dd'),
+                    EmployeeID: Payer.Northwind.EmployeeRow.getLookup().items
+                        .filter(function (x) { return x.FullName === 'Robert King'; })[0].EmployeeID,
+                    ShipVia: Payer.Northwind.ShipperRow.getLookup().items
+                        .filter(function (x) { return x.CompanyName === 'Speedy Express'; })[0].ShipperID
+                });
+            };
+            DefaultValuesInNewGrid.prototype.getButtons = function () {
+                var _this = this;
+                // preserving default New Item button
+                var buttons = _super.prototype.getButtons.call(this);
+                buttons.push({
+                    title: 'Add Order from the Queen',
+                    cssClass: 'add-button',
+                    onClick: function () {
+                        // using EditItem method as a shortcut to create a new Order dialog,
+                        // bind to its events, load our order row, and open dialog
+                        _this.editItem({
+                            CustomerID: 'QUEEN',
+                            EmployeeID: Payer.Northwind.EmployeeRow.getLookup().items
+                                .filter(function (x) { return x.FullName === 'Nancy Davolio'; })[0].EmployeeID,
+                            ShipVia: Payer.Northwind.ShipperRow.getLookup().items
+                                .filter(function (x) { return x.CompanyName === 'United Package'; })[0].ShipperID
+                        });
+                    }
+                });
+                buttons.push({
+                    title: 'Add Order with 5 Chai by Laura', cssClass: 'add-note-button',
+                    onClick: function () {
+                        // we could use EditItem here too, but for demonstration
+                        // purposes we are manually creating dialog this time
+                        var dlg = new Payer.Northwind.OrderDialog();
+                        // let grid watch for changes to manually created dialog, 
+                        // so when a new item is saved, grid can refresh itself
+                        _this.initDialog(dlg);
+                        // get a reference to product Chai
+                        var chai = Payer.Northwind.ProductRow.getLookup().items
+                            .filter(function (x) { return x.ProductName === 'Chai'; })[0];
+                        // LoadEntityAndOpenDialog, loads an OrderRow 
+                        // to dialog and opens it
+                        var lauraCallahanID = Payer.Northwind.EmployeeRow.getLookup().items
+                            .filter(function (x) { return x.FullName === 'Laura Callahan'; })[0].EmployeeID;
+                        dlg.loadEntityAndOpenDialog({
+                            CustomerID: 'GOURL',
+                            EmployeeID: lauraCallahanID,
+                            DetailList: [{
+                                    ProductID: chai.ProductID,
+                                    ProductName: chai.ProductName,
+                                    UnitPrice: chai.UnitPrice,
+                                    Quantity: 5,
+                                    LineTotal: chai.UnitPrice * 5
+                                }]
+                        });
+                    }
+                });
+                return buttons;
+            };
+            DefaultValuesInNewGrid = __decorate([
+                Serenity.Decorators.registerClass()
+            ], DefaultValuesInNewGrid);
+            return DefaultValuesInNewGrid;
+        }(Payer.Northwind.OrderGrid));
+        BasicSamples.DefaultValuesInNewGrid = DefaultValuesInNewGrid;
+    })(BasicSamples = Payer.BasicSamples || (Payer.BasicSamples = {}));
+})(Payer || (Payer = {}));
+var Payer;
+(function (Payer) {
+    var BasicSamples;
+    (function (BasicSamples) {
+        var DialogBoxes;
+        (function (DialogBoxes) {
+            function initializePage() {
+                confirmDialogButtons();
+                confirmWithCustomTitle();
+                information();
+                warning();
+                alert();
+                alertWithHtmlContent();
+            }
+            DialogBoxes.initializePage = initializePage;
+            function confirmDialogButtons() {
+                // here we demonstrate how you can detect which button user has clicked
+                // second parameter is Yes handler and it is called only when user clicks Yes.
+                // third parameter has some additional options, that you should only use when needed
+                $('#ConfirmDialogButtons').click(function () {
+                    Q.confirm("Click one of buttons, or close dialog with [x] on top right, i'll tell you what you did!", function () {
+                        Q.notifySuccess("You clicked YES. Great!");
+                    }, {
+                        onNo: function () {
+                            Q.notifyInfo("You clicked NO. Why?");
+                        },
+                        onCancel: function () {
+                            Q.notifyError("You clicked X. Operation is cancelled. Will try again?");
+                        }
+                    });
+                });
+            }
+            function confirmWithCustomTitle() {
+                $('#ConfirmWithCustomTitle').click(function () {
+                    Q.confirm("This confirmation has a custom title", function () {
+                        Q.notifySuccess("Allright!");
+                    }, {
+                        title: 'Some Custom Confirmation Title'
+                    });
+                });
+            }
+            function information() {
+                $('#Information').click(function () {
+                    Q.information("What a nice day", function () {
+                        Q.notifySuccess("No problem!");
+                    });
+                });
+            }
+            function warning() {
+                $('#Warning').click(function () {
+                    Q.warning("Hey, be careful!");
+                });
+            }
+            function alert() {
+                $('#Alert').click(function () {
+                    Q.alert("Houston, we got a problem!");
+                });
+            }
+            function alertWithHtmlContent() {
+                $('#AlertWithHtmlContent').click(function () {
+                    Q.alert("<h4>Here is some HTML content!</h4>" +
+                        "<ul><li>Item 1</li><li>Item 2</li >" +
+                        "<li>Visit <a href='http://serenity.is/' target='_blank' style='color: #ddf'>http://serenity.is/</a>!</li></ul>", {
+                        htmlEncode: false
+                    });
+                });
+            }
+        })(DialogBoxes = BasicSamples.DialogBoxes || (BasicSamples.DialogBoxes = {}));
+    })(BasicSamples = Payer.BasicSamples || (Payer.BasicSamples = {}));
+})(Payer || (Payer = {}));
+var Payer;
+(function (Payer) {
+    var Northwind;
+    (function (Northwind) {
+        var OrderDialog = /** @class */ (function (_super) {
+            __extends(OrderDialog, _super);
+            function OrderDialog() {
+                var _this = _super.call(this) || this;
+                _this.form = new Northwind.OrderForm(_this.idPrefix);
+                return _this;
+            }
+            OrderDialog.prototype.getFormKey = function () { return Northwind.OrderForm.formKey; };
+            OrderDialog.prototype.getIdProperty = function () { return Northwind.OrderRow.idProperty; };
+            OrderDialog.prototype.getLocalTextPrefix = function () { return Northwind.OrderRow.localTextPrefix; };
+            OrderDialog.prototype.getNameProperty = function () { return Northwind.OrderRow.nameProperty; };
+            OrderDialog.prototype.getService = function () { return Northwind.OrderService.baseUrl; };
+            OrderDialog.prototype.getToolbarButtons = function () {
+                var _this = this;
+                var buttons = _super.prototype.getToolbarButtons.call(this);
+                buttons.push(Payer.Common.ReportHelper.createToolButton({
+                    title: 'Invoice',
+                    cssClass: 'export-pdf-button',
+                    reportKey: 'Northwind.OrderDetail',
+                    getParams: function () { return ({
+                        OrderID: _this.get_entityId()
+                    }); }
+                }));
+                return buttons;
+            };
+            OrderDialog.prototype.updateInterface = function () {
+                _super.prototype.updateInterface.call(this);
+                this.toolbar.findButton('export-pdf-button').toggle(this.isEditMode());
+            };
+            OrderDialog = __decorate([
+                Serenity.Decorators.registerClass(),
+                Serenity.Decorators.panel()
+            ], OrderDialog);
+            return OrderDialog;
+        }(Serenity.EntityDialog));
+        Northwind.OrderDialog = OrderDialog;
+    })(Northwind = Payer.Northwind || (Payer.Northwind = {}));
+})(Payer || (Payer = {}));
+/// <reference path="../../../Northwind/Order/OrderDialog.ts" />
+var Payer;
+(function (Payer) {
+    var BasicSamples;
+    (function (BasicSamples) {
+        /**
+         * A version of order dialog converted to a panel by adding Serenity.Decorators.panel decorator.
+         */
+        var EntityDialogAsPanel = /** @class */ (function (_super) {
+            __extends(EntityDialogAsPanel, _super);
+            function EntityDialogAsPanel() {
+                return _super.call(this) || this;
+            }
+            EntityDialogAsPanel.prototype.updateInterface = function () {
+                _super.prototype.updateInterface.call(this);
+                this.deleteButton.hide();
+                this.applyChangesButton.hide();
+            };
+            EntityDialogAsPanel.prototype.onSaveSuccess = function (response) {
+                this.showSaveSuccessMessage(response);
+            };
+            EntityDialogAsPanel = __decorate([
+                Serenity.Decorators.panel()
+            ], EntityDialogAsPanel);
+            return EntityDialogAsPanel;
+        }(Payer.Northwind.OrderDialog));
+        BasicSamples.EntityDialogAsPanel = EntityDialogAsPanel;
+    })(BasicSamples = Payer.BasicSamples || (Payer.BasicSamples = {}));
+})(Payer || (Payer = {}));
+var Payer;
+(function (Payer) {
+    var Northwind;
+    (function (Northwind) {
+        var CategoryDialog = /** @class */ (function (_super) {
+            __extends(CategoryDialog, _super);
+            function CategoryDialog() {
+                var _this = _super !== null && _super.apply(this, arguments) || this;
+                _this.form = new Northwind.CategoryForm(_this.idPrefix);
+                return _this;
+            }
+            CategoryDialog.prototype.getFormKey = function () { return Northwind.CategoryForm.formKey; };
+            CategoryDialog.prototype.getIdProperty = function () { return Northwind.CategoryRow.idProperty; };
+            CategoryDialog.prototype.getLocalTextPrefix = function () { return Northwind.CategoryRow.localTextPrefix; };
+            CategoryDialog.prototype.getNameProperty = function () { return Northwind.CategoryRow.nameProperty; };
+            CategoryDialog.prototype.getService = function () { return Northwind.CategoryService.baseUrl; };
+            CategoryDialog = __decorate([
+                Serenity.Decorators.registerClass()
+            ], CategoryDialog);
+            return CategoryDialog;
+        }(Serenity.EntityDialog));
+        Northwind.CategoryDialog = CategoryDialog;
+    })(Northwind = Payer.Northwind || (Payer.Northwind = {}));
+})(Payer || (Payer = {}));
+/// <reference path="../../../Northwind/Category/CategoryDialog.ts" />
+var Payer;
+(function (Payer) {
+    var BasicSamples;
+    (function (BasicSamples) {
+        var GetInsertedRecordIdDialog = /** @class */ (function (_super) {
+            __extends(GetInsertedRecordIdDialog, _super);
+            function GetInsertedRecordIdDialog() {
+                return _super !== null && _super.apply(this, arguments) || this;
+            }
+            /**
+             * This method is called after the save request to service
+             * is completed succesfully. This can be an insert or update.
+             *
+             * @param response Response that is returned from server
+             */
+            GetInsertedRecordIdDialog.prototype.onSaveSuccess = function (response) {
+                // check that this is an insert
+                if (this.isNew()) {
+                    Q.notifySuccess("Just inserted a category with ID: " + response.EntityId);
+                    // you could also open a new dialog
+                    // new Northwind.CategoryDialog().loadByIdAndOpenDialog(response.EntityId);
+                    // but let's better load inserted record using Retrieve service
+                    Payer.Northwind.CategoryService.Retrieve({
+                        EntityId: response.EntityId
+                    }, function (resp) {
+                        Q.notifyInfo("Looks like the category you added has name: " + resp.Entity.CategoryName);
+                    });
+                }
+            };
+            GetInsertedRecordIdDialog = __decorate([
+                Serenity.Decorators.registerClass()
+            ], GetInsertedRecordIdDialog);
+            return GetInsertedRecordIdDialog;
+        }(Payer.Northwind.CategoryDialog));
+        BasicSamples.GetInsertedRecordIdDialog = GetInsertedRecordIdDialog;
+    })(BasicSamples = Payer.BasicSamples || (Payer.BasicSamples = {}));
+})(Payer || (Payer = {}));
+var Payer;
+(function (Payer) {
+    var Northwind;
+    (function (Northwind) {
+        var CategoryGrid = /** @class */ (function (_super) {
+            __extends(CategoryGrid, _super);
+            function CategoryGrid(container) {
+                return _super.call(this, container) || this;
+            }
+            CategoryGrid.prototype.getColumnsKey = function () { return "Northwind.Category"; };
+            CategoryGrid.prototype.getDialogType = function () { return Northwind.CategoryDialog; };
+            CategoryGrid.prototype.getIdProperty = function () { return Northwind.CategoryRow.idProperty; };
+            CategoryGrid.prototype.getLocalTextPrefix = function () { return Northwind.CategoryRow.localTextPrefix; };
+            CategoryGrid.prototype.getService = function () { return Northwind.CategoryService.baseUrl; };
+            CategoryGrid = __decorate([
+                Serenity.Decorators.registerClass()
+            ], CategoryGrid);
+            return CategoryGrid;
+        }(Serenity.EntityGrid));
+        Northwind.CategoryGrid = CategoryGrid;
+    })(Northwind = Payer.Northwind || (Payer.Northwind = {}));
+})(Payer || (Payer = {}));
+/// <reference path="../../../Northwind/Category/CategoryGrid.ts" />
+var Payer;
+(function (Payer) {
+    var BasicSamples;
+    (function (BasicSamples) {
+        /**
+         * Subclass of CategoryGrid to override dialog type to GetInsertedRecordIdDialog
+         */
+        var GetInsertedRecordIdGrid = /** @class */ (function (_super) {
+            __extends(GetInsertedRecordIdGrid, _super);
+            function GetInsertedRecordIdGrid(container) {
+                return _super.call(this, container) || this;
+            }
+            GetInsertedRecordIdGrid.prototype.getDialogType = function () { return BasicSamples.GetInsertedRecordIdDialog; };
+            GetInsertedRecordIdGrid = __decorate([
+                Serenity.Decorators.registerClass()
+            ], GetInsertedRecordIdGrid);
+            return GetInsertedRecordIdGrid;
+        }(Payer.Northwind.CategoryGrid));
+        BasicSamples.GetInsertedRecordIdGrid = GetInsertedRecordIdGrid;
+    })(BasicSamples = Payer.BasicSamples || (Payer.BasicSamples = {}));
+})(Payer || (Payer = {}));
+/// <reference path="../../../Northwind/Order/OrderDialog.ts" />
+var Payer;
+(function (Payer) {
+    var BasicSamples;
+    (function (BasicSamples) {
+        /**
+         * Our custom order dialog subclass that will have a tab to display and edit selected customer details.
+         */
+        var OtherFormInTabDialog = /** @class */ (function (_super) {
+            __extends(OtherFormInTabDialog, _super);
+            function OtherFormInTabDialog() {
+                var _this = _super.call(this) || this;
+                // entity dialogs by default creates a property grid on element with ID "PropertyGrid".
+                // here we explicitly create another, the customer property grid (vertical form) on element with ID "CustomerPropertyGrid".
+                _this.customerPropertyGrid = new Serenity.PropertyGrid(_this.byId("CustomerPropertyGrid"), {
+                    idPrefix: _this.idPrefix + "_Customer_",
+                    items: Q.getForm(Payer.Northwind.CustomerForm.formKey).filter(function (x) { return x.name != 'CustomerID'; }),
+                    useCategories: true
+                });
+                // this is just a helper to access editors if needed
+                _this.customerForm = new Payer.Northwind.CustomerForm(_this.customerPropertyGrid.idPrefix);
+                // initialize validator for customer form
+                _this.customerValidator = _this.byId("CustomerForm").validate(Q.validateOptions({}));
+                var selfChange = 0;
+                // creating another toolbar for customer tab that will only save Customer
+                new Serenity.Toolbar(_this.byId("CustomerToolbar"), {
+                    buttons: [{
+                            cssClass: "apply-changes-button",
+                            title: Q.text("Controls.EntityDialog.SaveButton"),
+                            onClick: function () {
+                                var id = _this.getCustomerID();
+                                if (!id)
+                                    return;
+                                if (!_this.customerValidator.form())
+                                    return;
+                                // prepare an empty entity to serialize customer details into
+                                var c = {};
+                                _this.customerPropertyGrid.save(c);
+                                Payer.Northwind.CustomerService.Update({
+                                    EntityId: id,
+                                    Entity: c
+                                }, function (response) {
+                                    // reload customer list just in case
+                                    Q.reloadLookup(Payer.Northwind.CustomerRow.lookupKey);
+                                    // set flag that we are triggering customer select change event
+                                    // otherwise active tab will change to first one
+                                    selfChange++;
+                                    try {
+                                        // trigger change so that customer select updates its text
+                                        // in case if Company Name is changed
+                                        _this.form.CustomerID.element.change();
+                                    }
+                                    finally {
+                                        selfChange--;
+                                    }
+                                    Q.notifySuccess("Saved customer details");
+                                });
+                            }
+                        }]
+                });
+                _this.form.CustomerID.change(function (e) {
+                    if (selfChange)
+                        return;
+                    var customerID = _this.getCustomerID();
+                    Serenity.TabsExtensions.setDisabled(_this.tabs, 'Customer', !customerID);
+                    if (!customerID) {
+                        // no customer is selected, just load an empty entity
+                        _this.customerPropertyGrid.load({});
+                        return;
+                    }
+                    // load selected customer into customer form by calling CustomerService
+                    Payer.Northwind.CustomerService.Retrieve({
+                        EntityId: customerID
+                    }, function (response) {
+                        _this.customerPropertyGrid.load(response.Entity);
+                    });
+                });
+                return _this;
+            }
+            OtherFormInTabDialog.prototype.getCustomerID = function () {
+                var customerID = this.form.CustomerID.value;
+                if (Q.isEmptyOrNull(customerID))
+                    return null;
+                // unfortunately, CustomerID (a string) used in this form and 
+                // the ID (auto increment ID) are different, so we need to 
+                // find numeric ID from customer lookups. 
+                // you'll probably won't need this step.
+                return Q.first(Payer.Northwind.CustomerRow.getLookup().items, function (x) { return x.CustomerID == customerID; }).ID;
+            };
+            OtherFormInTabDialog.prototype.loadEntity = function (entity) {
+                _super.prototype.loadEntity.call(this, entity);
+                Serenity.TabsExtensions.setDisabled(this.tabs, 'Customer', !this.getCustomerID());
+            };
+            OtherFormInTabDialog = __decorate([
+                Serenity.Decorators.registerClass()
+            ], OtherFormInTabDialog);
+            return OtherFormInTabDialog;
+        }(Payer.Northwind.OrderDialog));
+        BasicSamples.OtherFormInTabDialog = OtherFormInTabDialog;
+    })(BasicSamples = Payer.BasicSamples || (Payer.BasicSamples = {}));
+})(Payer || (Payer = {}));
+/// <reference path="../../../Northwind/Order/OrderGrid.ts" />
+var Payer;
+(function (Payer) {
+    var BasicSamples;
+    (function (BasicSamples) {
+        /**
+         * Subclass of OrderGrid to override dialog type to OtherFormInTabDialog
+         */
+        var OtherFormInTabGrid = /** @class */ (function (_super) {
+            __extends(OtherFormInTabGrid, _super);
+            function OtherFormInTabGrid(container) {
+                return _super.call(this, container) || this;
+            }
+            OtherFormInTabGrid.prototype.getDialogType = function () { return BasicSamples.OtherFormInTabDialog; };
+            OtherFormInTabGrid = __decorate([
+                Serenity.Decorators.registerClass()
+            ], OtherFormInTabGrid);
+            return OtherFormInTabGrid;
+        }(Payer.Northwind.OrderGrid));
+        BasicSamples.OtherFormInTabGrid = OtherFormInTabGrid;
+    })(BasicSamples = Payer.BasicSamples || (Payer.BasicSamples = {}));
+})(Payer || (Payer = {}));
+/// <reference path="../../../Northwind/Order/OrderDialog.ts" />
+var Payer;
+(function (Payer) {
+    var BasicSamples;
+    (function (BasicSamples) {
+        /**
+         * Our custom order dialog subclass that will have a tab to display and edit selected customer details.
+         * With single toolbar for all forms
+         */
+        var OtherFormOneBarDialog = /** @class */ (function (_super) {
+            __extends(OtherFormOneBarDialog, _super);
+            function OtherFormOneBarDialog() {
+                var _this = _super.call(this) || this;
+                _this.selfChange = 0;
+                // entity dialogs by default creates a property grid on element with ID "PropertyGrid".
+                // here we explicitly create another, the customer property grid (vertical form) on element with ID "CustomerPropertyGrid".
+                _this.customerPropertyGrid = new Serenity.PropertyGrid(_this.byId("CustomerPropertyGrid"), {
+                    items: Q.getForm(Payer.Northwind.CustomerForm.formKey).filter(function (x) { return x.name != 'CustomerID'; }),
+                    idPrefix: _this.idPrefix + "_Customer_",
+                    useCategories: true
+                });
+                // this is just a helper to access editors if needed
+                _this.customerForm = new Payer.Northwind.CustomerForm(_this.customerPropertyGrid.idPrefix);
+                // initialize validator for customer form
+                _this.customerValidator = _this.byId("CustomerForm").validate(Q.validateOptions({}));
+                _this.form.CustomerID.change(function (e) {
+                    if (_this.selfChange)
+                        return;
+                    var customerID = _this.getCustomerID();
+                    Serenity.TabsExtensions.setDisabled(_this.tabs, 'Customer', !customerID);
+                    if (!customerID) {
+                        // no customer is selected, just load an empty entity
+                        _this.customerPropertyGrid.load({});
+                        return;
+                    }
+                    // load selected customer into customer form by calling CustomerService
+                    Payer.Northwind.CustomerService.Retrieve({
+                        EntityId: customerID
+                    }, function (response) {
+                        _this.customerPropertyGrid.load(response.Entity);
+                    });
+                });
+                return _this;
+            }
+            OtherFormOneBarDialog.prototype.getCustomerID = function () {
+                var customerID = this.form.CustomerID.value;
+                if (Q.isEmptyOrNull(customerID))
+                    return null;
+                // unfortunately, CustomerID (a string) used in this form and 
+                // the ID (auto increment ID) are different, so we need to 
+                // find numeric ID from customer lookups. 
+                // you'll probably won't need this step.
+                return Q.first(Payer.Northwind.CustomerRow.getLookup().items, function (x) { return x.CustomerID == customerID; }).ID;
+            };
+            OtherFormOneBarDialog.prototype.loadEntity = function (entity) {
+                _super.prototype.loadEntity.call(this, entity);
+                Serenity.TabsExtensions.setDisabled(this.tabs, 'Customer', !this.getCustomerID());
+            };
+            // Save the customer and the order 
+            OtherFormOneBarDialog.prototype.saveCustomer = function (callback, onSuccess) {
+                var _this = this;
+                var id = this.getCustomerID();
+                if (!id) {
+                    // If id of Customer isn't present, we save only Order entity
+                    onSuccess(null);
+                }
+                else {
+                    // Get current tab
+                    var currTab = Serenity.TabsExtensions.activeTabKey(this.tabs);
+                    // Select the correct tab and validate to see the error message in tab
+                    Serenity.TabsExtensions.selectTab(this.tabs, "Customer");
+                    if (!this.customerValidator.form()) {
+                        return false;
+                    }
+                    // Re-select initial tab
+                    Serenity.TabsExtensions.selectTab(this.tabs, currTab);
+                    // prepare an empty entity to serialize customer details into
+                    var c = {};
+                    this.customerPropertyGrid.save(c);
+                    Payer.Northwind.CustomerService.Update({
+                        EntityId: id,
+                        Entity: c
+                    }, function (response) {
+                        // reload customer list just in case
+                        Q.reloadLookup(Payer.Northwind.CustomerRow.lookupKey);
+                        // set flag that we are triggering customer select change event
+                        // otherwise active tab will change to first one
+                        _this.selfChange++;
+                        try {
+                            // trigger change so that customer select updates its text
+                            // in case if Company Name is changed
+                            _this.form.CustomerID.element.change();
+                        }
+                        finally {
+                            _this.selfChange--;
+                        }
+                        onSuccess(response);
+                    });
+                }
+                return true;
+            };
+            // Call super.save to save Order entity
+            OtherFormOneBarDialog.prototype.saveOrder = function (callback) {
+                _super.prototype.save.call(this, callback);
+            };
+            OtherFormOneBarDialog.prototype.saveAll = function (callback) {
+                var _this = this;
+                this.saveCustomer(callback, 
+                // If customer successa, save Order entity
+                function (resp) { return _this.saveOrder(callback); });
+            };
+            // This is called when save/update button is pressed
+            OtherFormOneBarDialog.prototype.save = function (callback) {
+                this.saveAll(callback);
+            };
+            OtherFormOneBarDialog = __decorate([
+                Serenity.Decorators.registerClass()
+            ], OtherFormOneBarDialog);
+            return OtherFormOneBarDialog;
+        }(Payer.Northwind.OrderDialog));
+        BasicSamples.OtherFormOneBarDialog = OtherFormOneBarDialog;
+    })(BasicSamples = Payer.BasicSamples || (Payer.BasicSamples = {}));
+})(Payer || (Payer = {}));
+/// <reference path="../../../Northwind/Order/OrderGrid.ts" />
+var Payer;
+(function (Payer) {
+    var BasicSamples;
+    (function (BasicSamples) {
+        /**
+         * Subclass of OrderGrid to override dialog type to OtherFormInTabOneBarDialog
+         */
+        var OtherFormInTabOneBarGrid = /** @class */ (function (_super) {
+            __extends(OtherFormInTabOneBarGrid, _super);
+            function OtherFormInTabOneBarGrid(container) {
+                return _super.call(this, container) || this;
+            }
+            OtherFormInTabOneBarGrid.prototype.getDialogType = function () { return BasicSamples.OtherFormOneBarDialog; };
+            OtherFormInTabOneBarGrid = __decorate([
+                Serenity.Decorators.registerClass()
+            ], OtherFormInTabOneBarGrid);
+            return OtherFormInTabOneBarGrid;
+        }(Payer.Northwind.OrderGrid));
+        BasicSamples.OtherFormInTabOneBarGrid = OtherFormInTabOneBarGrid;
+    })(BasicSamples = Payer.BasicSamples || (Payer.BasicSamples = {}));
+})(Payer || (Payer = {}));
+var Payer;
+(function (Payer) {
+    var BasicSamples;
+    (function (BasicSamples) {
+        var PopulateLinkedDataDialog = /** @class */ (function (_super) {
+            __extends(PopulateLinkedDataDialog, _super);
+            function PopulateLinkedDataDialog() {
+                var _this = _super.call(this) || this;
+                _this.form = new BasicSamples.PopulateLinkedDataForm(_this.idPrefix);
+                // "changeSelect2" is only fired when user changes the selection
+                // but "change" is fired when dialog sets customer on load too
+                // so we prefer "changeSelect2", as initial customer details 
+                // will get populated by initial load, we don't want extra call
+                _this.form.CustomerID.changeSelect2(function (e) {
+                    var customerID = _this.form.CustomerID.value;
+                    if (Q.isEmptyOrNull(customerID)) {
+                        _this.setCustomerDetails({});
+                        return;
+                    }
+                    // in northwind CustomerID is a string like "ALFKI", 
+                    // while its actual integer ID value is 1.
+                    // so we need to convert customer ID to ID.
+                    // you won't have to do this conversion with your tables
+                    var id = Q.first(Payer.Northwind.CustomerRow.getLookup().items, function (x) { return x.CustomerID == customerID; }).ID;
+                    Payer.Northwind.CustomerService.Retrieve({
+                        EntityId: id
+                    }, function (response) {
+                        _this.setCustomerDetails(response.Entity);
+                    });
+                });
+                return _this;
+            }
+            PopulateLinkedDataDialog.prototype.getFormKey = function () { return BasicSamples.PopulateLinkedDataForm.formKey; };
+            PopulateLinkedDataDialog.prototype.getIdProperty = function () { return Payer.Northwind.OrderRow.idProperty; };
+            PopulateLinkedDataDialog.prototype.getLocalTextPrefix = function () { return Payer.Northwind.OrderRow.localTextPrefix; };
+            PopulateLinkedDataDialog.prototype.getNameProperty = function () { return Payer.Northwind.OrderRow.nameProperty; };
+            PopulateLinkedDataDialog.prototype.getService = function () { return Payer.Northwind.OrderService.baseUrl; };
+            PopulateLinkedDataDialog.prototype.setCustomerDetails = function (details) {
+                this.form.CustomerCity.value = details.City;
+                this.form.CustomerContactName.value = details.ContactName;
+                this.form.CustomerContactTitle.value = details.ContactTitle;
+                this.form.CustomerCountry.value = details.Country;
+                this.form.CustomerFax.value = details.Fax;
+                this.form.CustomerPhone.value = details.Phone;
+                this.form.CustomerRegion.value = details.Region;
+            };
+            /**
+             * This dialog will have CSS class "s-PopulateLinkedDataDialog"
+             * We are changing it here to "s-OrderDialog", to make it use default OrderDialog styles
+             * This has no effect other than looks on populate linked data demonstration
+             */
+            PopulateLinkedDataDialog.prototype.getCssClass = function () {
+                return _super.prototype.getCssClass.call(this) + " s-OrderDialog s-Northwind-OrderDialog";
+            };
+            PopulateLinkedDataDialog = __decorate([
+                Serenity.Decorators.registerClass()
+            ], PopulateLinkedDataDialog);
+            return PopulateLinkedDataDialog;
+        }(Serenity.EntityDialog));
+        BasicSamples.PopulateLinkedDataDialog = PopulateLinkedDataDialog;
+    })(BasicSamples = Payer.BasicSamples || (Payer.BasicSamples = {}));
+})(Payer || (Payer = {}));
+/// <reference path="../../../Northwind/Order/OrderGrid.ts" />
+var Payer;
+(function (Payer) {
+    var BasicSamples;
+    (function (BasicSamples) {
+        /**
+         * A subclass of OrderGrid that launches PopulateLinkedDataDialog
+         */
+        var PopulateLinkedDataGrid = /** @class */ (function (_super) {
+            __extends(PopulateLinkedDataGrid, _super);
+            function PopulateLinkedDataGrid(container) {
+                return _super.call(this, container) || this;
+            }
+            PopulateLinkedDataGrid.prototype.getDialogType = function () { return BasicSamples.PopulateLinkedDataDialog; };
+            PopulateLinkedDataGrid = __decorate([
+                Serenity.Decorators.registerClass()
+            ], PopulateLinkedDataGrid);
+            return PopulateLinkedDataGrid;
+        }(Payer.Northwind.OrderGrid));
+        BasicSamples.PopulateLinkedDataGrid = PopulateLinkedDataGrid;
+    })(BasicSamples = Payer.BasicSamples || (Payer.BasicSamples = {}));
+})(Payer || (Payer = {}));
+var Payer;
+(function (Payer) {
+    var Northwind;
+    (function (Northwind) {
+        var SupplierDialog = /** @class */ (function (_super) {
+            __extends(SupplierDialog, _super);
+            function SupplierDialog() {
+                var _this = _super !== null && _super.apply(this, arguments) || this;
+                _this.form = new Northwind.SupplierForm(_this.idPrefix);
+                return _this;
+            }
+            SupplierDialog.prototype.getFormKey = function () { return Northwind.SupplierForm.formKey; };
+            SupplierDialog.prototype.getIdProperty = function () { return Northwind.SupplierRow.idProperty; };
+            SupplierDialog.prototype.getLocalTextPrefix = function () { return Northwind.SupplierRow.localTextPrefix; };
+            SupplierDialog.prototype.getNameProperty = function () { return Northwind.SupplierRow.nameProperty; };
+            SupplierDialog.prototype.getService = function () { return Northwind.SupplierService.baseUrl; };
+            SupplierDialog.prototype.getLanguages = function () {
+                return Payer.LanguageList.getValue();
+            };
+            SupplierDialog = __decorate([
+                Serenity.Decorators.registerClass()
+            ], SupplierDialog);
+            return SupplierDialog;
+        }(Serenity.EntityDialog));
+        Northwind.SupplierDialog = SupplierDialog;
+    })(Northwind = Payer.Northwind || (Payer.Northwind = {}));
+})(Payer || (Payer = {}));
+/// <reference path="../../../Northwind/Supplier/SupplierDialog.ts" />
+var Payer;
+(function (Payer) {
+    var BasicSamples;
+    (function (BasicSamples) {
+        var ReadOnlyDialog = /** @class */ (function (_super) {
+            __extends(ReadOnlyDialog, _super);
+            function ReadOnlyDialog() {
+                return _super !== null && _super.apply(this, arguments) || this;
+            }
+            /**
+             * This is the method that gets list of tool
+             * buttons to be created in a dialog.
+             *
+             * Here we'll remove save and close button, and
+             * apply changes buttons.
+             */
+            ReadOnlyDialog.prototype.getToolbarButtons = function () {
+                var buttons = _super.prototype.getToolbarButtons.call(this);
+                buttons.splice(Q.indexOf(buttons, function (x) { return x.cssClass == "save-and-close-button"; }), 1);
+                buttons.splice(Q.indexOf(buttons, function (x) { return x.cssClass == "apply-changes-button"; }), 1);
+                // We could also remove delete button here, but for demonstration 
+                // purposes we'll hide it in another method (updateInterface)
+                // buttons.splice(Q.indexOf(buttons, x => x.cssClass == "delete-button"), 1);
+                return buttons;
+            };
+            /**
+             * This method is a good place to update states of
+             * interface elements. It is called after dialog
+             * is initialized and an entity is loaded into dialog.
+             * This is also called in new item mode.
+             */
+            ReadOnlyDialog.prototype.updateInterface = function () {
+                _super.prototype.updateInterface.call(this);
+                // finding all editor elements and setting their readonly attribute
+                // note that this helper method only works with basic inputs, 
+                // some editors require widget based set readonly overload (setReadOnly)
+                Serenity.EditorUtils.setReadonly(this.element.find('.editor'), true);
+                // remove required asterisk (*)
+                this.element.find('sup').hide();
+                // here is a way to locate a button by its css class
+                // note that this method is not available in 
+                // getToolbarButtons() because buttons are not 
+                // created there yet!
+                // 
+                // this.toolbar.findButton('delete-button').hide();
+                // entity dialog also has reference variables to
+                // its default buttons, lets use them to hide delete button
+                this.deleteButton.hide();
+                // we could also hide save buttons just like delete button,
+                // but they are null now as we removed them in getToolbarButtons()
+                // if we didn't we could write like this:
+                // 
+                // this.applyChangesButton.hide();
+                // this.saveAndCloseButton.hide();
+                // instead of hiding, we could disable a button
+                // 
+                // this.deleteButton.toggleClass('disabled', true);
+            };
+            /**
+             * This method is called when dialog title needs to be updated.
+             * Base class returns something like 'Edit xyz' for edit mode,
+             * and 'New xyz' for new record mode.
+             *
+             * But our dialog is readonly, so we should change it to 'View xyz'
+             */
+            ReadOnlyDialog.prototype.getEntityTitle = function () {
+                if (!this.isEditMode()) {
+                    // we shouldn't hit here, but anyway for demo...
+                    return "How did you manage to open this dialog in new record mode?";
+                }
+                else {
+                    // entitySingular is type of record this dialog edits. something like 'Supplier'.
+                    // you could hardcode it, but this is for demonstration
+                    var entityType = _super.prototype.getEntitySingular.call(this);
+                    // get name field value of record this dialog edits
+                    var name_1 = this.getEntityNameFieldValue() || "";
+                    // you could use Q.format with a local text, but again demo...
+                    return 'View ' + entityType + " (" + name_1 + ")";
+                }
+            };
+            /**
+             * This method is actually the one that calls getEntityTitle()
+             * and updates the dialog title. We could do it here too...
+             */
+            ReadOnlyDialog.prototype.updateTitle = function () {
+                _super.prototype.updateTitle.call(this);
+                // remove super.updateTitle() call above and uncomment 
+                // below line if you'd like to use this version
+                // 
+                // this.dialogTitle = 'View Supplier (' + this.getEntityNameFieldValue() + ')';
+            };
+            ReadOnlyDialog = __decorate([
+                Serenity.Decorators.registerClass()
+            ], ReadOnlyDialog);
+            return ReadOnlyDialog;
+        }(Payer.Northwind.SupplierDialog));
+        BasicSamples.ReadOnlyDialog = ReadOnlyDialog;
+    })(BasicSamples = Payer.BasicSamples || (Payer.BasicSamples = {}));
+})(Payer || (Payer = {}));
+var Payer;
+(function (Payer) {
+    var Northwind;
+    (function (Northwind) {
+        var SupplierGrid = /** @class */ (function (_super) {
+            __extends(SupplierGrid, _super);
+            function SupplierGrid(container) {
+                return _super.call(this, container) || this;
+            }
+            SupplierGrid.prototype.getColumnsKey = function () { return "Northwind.Supplier"; };
+            SupplierGrid.prototype.getDialogType = function () { return Northwind.SupplierDialog; };
+            SupplierGrid.prototype.getIdProperty = function () { return Northwind.SupplierRow.idProperty; };
+            SupplierGrid.prototype.getLocalTextPrefix = function () { return Northwind.SupplierRow.localTextPrefix; };
+            SupplierGrid.prototype.getService = function () { return Northwind.SupplierService.baseUrl; };
+            SupplierGrid = __decorate([
+                Serenity.Decorators.registerClass()
+            ], SupplierGrid);
+            return SupplierGrid;
+        }(Serenity.EntityGrid));
+        Northwind.SupplierGrid = SupplierGrid;
+    })(Northwind = Payer.Northwind || (Payer.Northwind = {}));
+})(Payer || (Payer = {}));
+/// <reference path="../../../Northwind/Supplier/SupplierGrid.ts" />
+var Payer;
+(function (Payer) {
+    var BasicSamples;
+    (function (BasicSamples) {
+        /**
+         * A readonly grid that launches ReadOnlyDialog
+         */
+        var ReadOnlyGrid = /** @class */ (function (_super) {
+            __extends(ReadOnlyGrid, _super);
+            function ReadOnlyGrid(container) {
+                return _super.call(this, container) || this;
+            }
+            ReadOnlyGrid.prototype.getDialogType = function () { return BasicSamples.ReadOnlyDialog; };
+            /**
+             * Removing add button from grid using its css class
+             */
+            ReadOnlyGrid.prototype.getButtons = function () {
+                var buttons = _super.prototype.getButtons.call(this);
+                buttons.splice(Q.indexOf(buttons, function (x) { return x.cssClass == "add-button"; }), 1);
+                return buttons;
+            };
+            ReadOnlyGrid = __decorate([
+                Serenity.Decorators.registerClass()
+            ], ReadOnlyGrid);
+            return ReadOnlyGrid;
+        }(Payer.Northwind.SupplierGrid));
+        BasicSamples.ReadOnlyGrid = ReadOnlyGrid;
+    })(BasicSamples = Payer.BasicSamples || (Payer.BasicSamples = {}));
+})(Payer || (Payer = {}));
+var Payer;
+(function (Payer) {
+    var Northwind;
+    (function (Northwind) {
+        var CustomerDialog = /** @class */ (function (_super) {
+            __extends(CustomerDialog, _super);
+            function CustomerDialog() {
+                var _this = _super.call(this) || this;
+                _this.form = new Northwind.CustomerForm(_this.idPrefix);
+                _this.ordersGrid = new Northwind.CustomerOrdersGrid(_this.byId('OrdersGrid'));
+                // force order dialog to open in Dialog mode instead of Panel mode
+                // which is set as default on OrderDialog with @panelAttribute
+                _this.ordersGrid.openDialogsAsPanel = false;
+                _this.byId('NoteList').closest('.field').hide().end().appendTo(_this.byId('TabNotes'));
+                Payer.DialogUtils.pendingChangesConfirmation(_this.element, function () { return _this.getSaveState() != _this.loadedState; });
+                return _this;
+            }
+            CustomerDialog.prototype.getFormKey = function () { return Northwind.CustomerForm.formKey; };
+            CustomerDialog.prototype.getIdProperty = function () { return Northwind.CustomerRow.idProperty; };
+            CustomerDialog.prototype.getLocalTextPrefix = function () { return Northwind.CustomerRow.localTextPrefix; };
+            CustomerDialog.prototype.getNameProperty = function () { return Northwind.CustomerRow.nameProperty; };
+            CustomerDialog.prototype.getService = function () { return Northwind.CustomerService.baseUrl; };
+            CustomerDialog.prototype.getSaveState = function () {
+                try {
+                    return $.toJSON(this.getSaveEntity());
+                }
+                catch (e) {
+                    return null;
+                }
+            };
+            CustomerDialog.prototype.loadResponse = function (data) {
+                _super.prototype.loadResponse.call(this, data);
+                this.loadedState = this.getSaveState();
+            };
+            CustomerDialog.prototype.loadEntity = function (entity) {
+                _super.prototype.loadEntity.call(this, entity);
+                Serenity.TabsExtensions.setDisabled(this.tabs, 'Orders', this.isNewOrDeleted());
+                this.ordersGrid.customerID = entity.CustomerID;
+            };
+            CustomerDialog.prototype.onSaveSuccess = function (response) {
+                _super.prototype.onSaveSuccess.call(this, response);
+                Q.reloadLookup('Northwind.Customer');
+            };
+            CustomerDialog = __decorate([
+                Serenity.Decorators.registerClass(),
+                Serenity.Decorators.panel()
+            ], CustomerDialog);
+            return CustomerDialog;
+        }(Serenity.EntityDialog));
+        Northwind.CustomerDialog = CustomerDialog;
+    })(Northwind = Payer.Northwind || (Payer.Northwind = {}));
+})(Payer || (Payer = {}));
+/// <reference path="../../../Northwind/Customer/CustomerDialog.ts" />
+var Payer;
+(function (Payer) {
+    var BasicSamples;
+    (function (BasicSamples) {
+        var SerialAutoNumberDialog = /** @class */ (function (_super) {
+            __extends(SerialAutoNumberDialog, _super);
+            function SerialAutoNumberDialog() {
+                var _this = _super.call(this) || this;
+                _this.form.CustomerID.element.on('keyup', function (e) {
+                    // only auto number when a key between 'A' and 'Z' is pressed
+                    if (e.which >= 65 && e.which <= 90)
+                        _this.getNextNumber();
+                });
+                return _this;
+            }
+            SerialAutoNumberDialog.prototype.afterLoadEntity = function () {
+                _super.prototype.afterLoadEntity.call(this);
+                // fill next number in new record mode
+                if (this.isNew())
+                    this.getNextNumber();
+            };
+            SerialAutoNumberDialog.prototype.getNextNumber = function () {
+                var _this = this;
+                var val = Q.trimToNull(this.form.CustomerID.value);
+                // we will only get next number when customer ID is empty or 1 character in length
+                if (!val || val.length <= 1) {
+                    // if no customer ID yet (new record mode probably) use 'C' as a prefix
+                    var prefix = (val || 'C').toUpperCase();
+                    // call our service, see CustomerEndpoint.cs and CustomerRepository.cs
+                    Payer.Northwind.CustomerService.GetNextNumber({
+                        Prefix: prefix,
+                        Length: 5 // we want service to search for and return serials of 5 in length
+                    }, function (response) {
+                        _this.form.CustomerID.value = response.Serial;
+                        // this is to mark numerical part after prefix
+                        _this.form.CustomerID.element[0].setSelectionRange(prefix.length, response.Serial.length);
+                    });
+                }
+            };
+            SerialAutoNumberDialog = __decorate([
+                Serenity.Decorators.registerClass()
+            ], SerialAutoNumberDialog);
+            return SerialAutoNumberDialog;
+        }(Payer.Northwind.CustomerDialog));
+        BasicSamples.SerialAutoNumberDialog = SerialAutoNumberDialog;
+    })(BasicSamples = Payer.BasicSamples || (Payer.BasicSamples = {}));
+})(Payer || (Payer = {}));
+var Payer;
+(function (Payer) {
+    var Northwind;
+    (function (Northwind) {
+        var CustomerGrid = /** @class */ (function (_super) {
+            __extends(CustomerGrid, _super);
+            function CustomerGrid(container) {
+                return _super.call(this, container) || this;
+            }
+            CustomerGrid.prototype.getColumnsKey = function () { return "Northwind.Customer"; };
+            CustomerGrid.prototype.getDialogType = function () { return Northwind.CustomerDialog; };
+            CustomerGrid.prototype.getIdProperty = function () { return Northwind.CustomerRow.idProperty; };
+            CustomerGrid.prototype.getLocalTextPrefix = function () { return Northwind.CustomerRow.localTextPrefix; };
+            CustomerGrid.prototype.getService = function () { return Northwind.CustomerService.baseUrl; };
+            CustomerGrid.prototype.getButtons = function () {
+                var _this = this;
+                var buttons = _super.prototype.getButtons.call(this);
+                buttons.push(Payer.Common.ExcelExportHelper.createToolButton({
+                    grid: this,
+                    onViewSubmit: function () { return _this.onViewSubmit(); },
+                    service: 'Northwind/Customer/ListExcel',
+                    separator: true
+                }));
+                buttons.push(Payer.Common.PdfExportHelper.createToolButton({
+                    grid: this,
+                    onViewSubmit: function () { return _this.onViewSubmit(); }
+                }));
+                return buttons;
+            };
+            CustomerGrid = __decorate([
+                Serenity.Decorators.registerClass(),
+                Serenity.Decorators.filterable()
+            ], CustomerGrid);
+            return CustomerGrid;
+        }(Serenity.EntityGrid));
+        Northwind.CustomerGrid = CustomerGrid;
+    })(Northwind = Payer.Northwind || (Payer.Northwind = {}));
+})(Payer || (Payer = {}));
+/// <reference path="../../../Northwind/Customer/CustomerGrid.ts" />
+var Payer;
+(function (Payer) {
+    var BasicSamples;
+    (function (BasicSamples) {
+        /**
+         * Subclass of CustomerGrid to override dialog type to SerialAutoNumberDialog
+         */
+        var SerialAutoNumberGrid = /** @class */ (function (_super) {
+            __extends(SerialAutoNumberGrid, _super);
+            function SerialAutoNumberGrid(container) {
+                return _super.call(this, container) || this;
+            }
+            SerialAutoNumberGrid.prototype.getDialogType = function () { return BasicSamples.SerialAutoNumberDialog; };
+            SerialAutoNumberGrid = __decorate([
+                Serenity.Decorators.registerClass()
+            ], SerialAutoNumberGrid);
+            return SerialAutoNumberGrid;
+        }(Payer.Northwind.CustomerGrid));
+        BasicSamples.SerialAutoNumberGrid = SerialAutoNumberGrid;
+    })(BasicSamples = Payer.BasicSamples || (Payer.BasicSamples = {}));
+})(Payer || (Payer = {}));
+var Payer;
+(function (Payer) {
+    var Common;
+    (function (Common) {
+        var GridEditorDialog = /** @class */ (function (_super) {
+            __extends(GridEditorDialog, _super);
+            function GridEditorDialog() {
+                return _super !== null && _super.apply(this, arguments) || this;
+            }
+            GridEditorDialog.prototype.getIdProperty = function () { return "__id"; };
+            GridEditorDialog.prototype.destroy = function () {
+                this.onSave = null;
+                this.onDelete = null;
+                _super.prototype.destroy.call(this);
+            };
+            GridEditorDialog.prototype.updateInterface = function () {
+                _super.prototype.updateInterface.call(this);
+                // apply changes button doesn't work properly with in-memory grids yet
+                if (this.applyChangesButton) {
+                    this.applyChangesButton.hide();
+                }
+            };
+            GridEditorDialog.prototype.saveHandler = function (options, callback) {
+                this.onSave && this.onSave(options, callback);
+            };
+            GridEditorDialog.prototype.deleteHandler = function (options, callback) {
+                this.onDelete && this.onDelete(options, callback);
+            };
+            GridEditorDialog = __decorate([
+                Serenity.Decorators.registerClass()
+            ], GridEditorDialog);
+            return GridEditorDialog;
+        }(Serenity.EntityDialog));
+        Common.GridEditorDialog = GridEditorDialog;
+    })(Common = Payer.Common || (Payer.Common = {}));
+})(Payer || (Payer = {}));
+/// <reference path="../../../Common/Helpers/GridEditorDialog.ts" />
+var Payer;
+(function (Payer) {
+    var BasicSamples;
+    (function (BasicSamples) {
+        var ChangingLookupTextDialog = /** @class */ (function (_super) {
+            __extends(ChangingLookupTextDialog, _super);
+            function ChangingLookupTextDialog() {
+                var _this = _super.call(this) || this;
+                _this.form = new BasicSamples.ChangingLookupTextForm(_this.idPrefix);
+                _this.form.ProductID.changeSelect2(function (e) {
+                    var productID = Q.toId(_this.form.ProductID.value);
+                    if (productID != null) {
+                        _this.form.UnitPrice.value = Payer.Northwind.ProductRow.getLookup().itemById[productID].UnitPrice;
+                    }
+                });
+                _this.form.Discount.addValidationRule(_this.uniqueName, function (e) {
+                    var price = _this.form.UnitPrice.value;
+                    var quantity = _this.form.Quantity.value;
+                    var discount = _this.form.Discount.value;
+                    if (price != null && quantity != null && discount != null &&
+                        discount > 0 && discount >= price * quantity) {
+                        return "Discount can't be higher than total price!";
+                    }
+                });
+                return _this;
+            }
+            ChangingLookupTextDialog.prototype.getFormKey = function () { return BasicSamples.ChangingLookupTextForm.formKey; };
+            ChangingLookupTextDialog.prototype.getLocalTextPrefix = function () { return Payer.Northwind.OrderDetailRow.localTextPrefix; };
+            ChangingLookupTextDialog.prototype.updateInterface = function () {
+                _super.prototype.updateInterface.call(this);
+                this.toolbar.findButton('apply-changes-button').hide();
+                this.toolbar.findButton('save-and-close-button').hide();
+            };
+            ChangingLookupTextDialog = __decorate([
+                Serenity.Decorators.registerClass()
+            ], ChangingLookupTextDialog);
+            return ChangingLookupTextDialog;
+        }(Payer.Common.GridEditorDialog));
+        BasicSamples.ChangingLookupTextDialog = ChangingLookupTextDialog;
+    })(BasicSamples = Payer.BasicSamples || (Payer.BasicSamples = {}));
+})(Payer || (Payer = {}));
+var Payer;
+(function (Payer) {
+    var BasicSamples;
+    (function (BasicSamples) {
+        /**
+         * Our custom product editor type
+         */
+        var ChangingLookupTextEditor = /** @class */ (function (_super) {
+            __extends(ChangingLookupTextEditor, _super);
+            function ChangingLookupTextEditor(container, options) {
+                return _super.call(this, container, options) || this;
+            }
+            ChangingLookupTextEditor.prototype.getLookupKey = function () {
+                return Payer.Northwind.ProductRow.lookupKey;
+            };
+            ChangingLookupTextEditor.prototype.getItemText = function (item, lookup) {
+                return _super.prototype.getItemText.call(this, item, lookup) +
+                    ' (' +
+                    '$' + Q.formatNumber(item.UnitPrice, '#,##0.00') +
+                    ', ' + (item.UnitsInStock > 0 ? (item.UnitsInStock + ' in stock') : 'out of stock') +
+                    ', ' + (item.SupplierCompanyName || 'Unknown') +
+                    ')';
+            };
+            ChangingLookupTextEditor = __decorate([
+                Serenity.Decorators.registerEditor()
+            ], ChangingLookupTextEditor);
+            return ChangingLookupTextEditor;
+        }(Serenity.LookupEditorBase));
+        BasicSamples.ChangingLookupTextEditor = ChangingLookupTextEditor;
+    })(BasicSamples = Payer.BasicSamples || (Payer.BasicSamples = {}));
+})(Payer || (Payer = {}));
+/// <reference path="../../Common/Helpers/GridEditorDialog.ts" />
+var Payer;
+(function (Payer) {
+    var Northwind;
+    (function (Northwind) {
+        var OrderDetailDialog = /** @class */ (function (_super) {
+            __extends(OrderDetailDialog, _super);
+            function OrderDetailDialog() {
+                var _this = _super.call(this) || this;
+                _this.form = new Northwind.OrderDetailForm(_this.idPrefix);
+                _this.form.ProductID.changeSelect2(function (e) {
+                    var productID = Q.toId(_this.form.ProductID.value);
+                    if (productID != null) {
+                        _this.form.UnitPrice.value = Northwind.ProductRow.getLookup().itemById[productID].UnitPrice;
+                    }
+                });
+                _this.form.Discount.addValidationRule(_this.uniqueName, function (e) {
+                    var price = _this.form.UnitPrice.value;
+                    var quantity = _this.form.Quantity.value;
+                    var discount = _this.form.Discount.value;
+                    if (price != null && quantity != null && discount != null &&
+                        discount > 0 && discount >= price * quantity) {
+                        return "Discount can't be higher than total price!";
+                    }
+                });
+                return _this;
+            }
+            OrderDetailDialog.prototype.getFormKey = function () { return Northwind.OrderDetailForm.formKey; };
+            OrderDetailDialog.prototype.getLocalTextPrefix = function () { return Northwind.OrderDetailRow.localTextPrefix; };
+            OrderDetailDialog = __decorate([
+                Serenity.Decorators.registerClass()
+            ], OrderDetailDialog);
+            return OrderDetailDialog;
+        }(Payer.Common.GridEditorDialog));
+        Northwind.OrderDetailDialog = OrderDetailDialog;
+    })(Northwind = Payer.Northwind || (Payer.Northwind = {}));
+})(Payer || (Payer = {}));
+/// <reference path="../../../Northwind/OrderDetail/OrderDetailDialog.ts" />
+var Payer;
+(function (Payer) {
+    var BasicSamples;
+    (function (BasicSamples) {
+        /**
+         * Our subclass of order detail dialog with a CategoryID property
+         * that will be used to set CascadeValue of product editor
+         */
+        var FilteredLookupOrderDetailDialog = /** @class */ (function (_super) {
+            __extends(FilteredLookupOrderDetailDialog, _super);
+            function FilteredLookupOrderDetailDialog() {
+                var _this = _super.call(this) || this;
+                _this.form = new Payer.Northwind.OrderDetailForm(_this.idPrefix);
+                // we can set cascade field in constructor
+                // we could also use FilterField but in this case, when CategoryID is null
+                // lookup editor would show all products in any category
+                _this.form.ProductID.cascadeField = "CategoryID" /* CategoryID */;
+                return _this;
+                // but CategoryID value is not yet available here as detail editor will set it 
+                // after calling constructor (creating a detail dialog) so we'll use BeforeLoadEntity
+            }
+            /**
+             * This method is called just before an entity is loaded to dialog
+             * This is also called for new record mode with an empty entity
+             */
+            FilteredLookupOrderDetailDialog.prototype.beforeLoadEntity = function (entity) {
+                _super.prototype.beforeLoadEntity.call(this, entity);
+                // setting cascade value here
+                // make sure you have [LookupInclude] on CategoryID property of ProductRow
+                // otherwise this field won't be available in lookup script (will always be null),
+                // so can't be filtered and you'll end up with an empty product list.
+                this.form.ProductID.cascadeValue = this.categoryID;
+            };
+            FilteredLookupOrderDetailDialog = __decorate([
+                Serenity.Decorators.registerClass()
+            ], FilteredLookupOrderDetailDialog);
+            return FilteredLookupOrderDetailDialog;
+        }(Payer.Northwind.OrderDetailDialog));
+        BasicSamples.FilteredLookupOrderDetailDialog = FilteredLookupOrderDetailDialog;
+    })(BasicSamples = Payer.BasicSamples || (Payer.BasicSamples = {}));
+})(Payer || (Payer = {}));
+var Payer;
+(function (Payer) {
+    var Common;
+    (function (Common) {
+        var GridEditorBase = /** @class */ (function (_super) {
+            __extends(GridEditorBase, _super);
+            function GridEditorBase(container) {
+                var _this = _super.call(this, container) || this;
+                _this.nextId = 1;
+                return _this;
+            }
+            GridEditorBase.prototype.getIdProperty = function () { return "__id"; };
+            GridEditorBase.prototype.id = function (entity) {
+                return entity[this.getIdProperty()];
+            };
+            GridEditorBase.prototype.getNextId = function () {
+                return "`" + this.nextId++;
+            };
+            GridEditorBase.prototype.setNewId = function (entity) {
+                entity[this.getIdProperty()] = this.getNextId();
+            };
+            GridEditorBase.prototype.save = function (opt, callback) {
+                var _this = this;
+                var request = opt.request;
+                var row = Q.deepClone(request.Entity);
+                var id = this.id(row);
+                if (id == null) {
+                    row[this.getIdProperty()] = this.getNextId();
+                }
+                if (!this.validateEntity(row, id)) {
+                    return;
+                }
+                var items = this.view.getItems().slice();
+                if (id == null) {
+                    items.push(row);
+                }
+                else {
+                    var index = Q.indexOf(items, function (x) { return _this.id(x) === id; });
+                    items[index] = Q.deepClone({}, items[index], row);
+                }
+                this.setEntities(items);
+                callback({});
+            };
+            GridEditorBase.prototype.deleteEntity = function (id) {
+                this.view.deleteItem(id);
+                return true;
+            };
+            GridEditorBase.prototype.validateEntity = function (row, id) {
+                return true;
+            };
+            GridEditorBase.prototype.setEntities = function (items) {
+                this.view.setItems(items, true);
+            };
+            GridEditorBase.prototype.getNewEntity = function () {
+                return {};
+            };
+            GridEditorBase.prototype.getButtons = function () {
+                var _this = this;
+                return [{
+                        title: this.getAddButtonCaption(),
+                        cssClass: 'add-button',
+                        onClick: function () {
+                            _this.createEntityDialog(_this.getItemType(), function (dlg) {
+                                var dialog = dlg;
+                                dialog.onSave = function (opt, callback) { return _this.save(opt, callback); };
+                                dialog.loadEntityAndOpenDialog(_this.getNewEntity());
+                            });
+                        }
+                    }];
+            };
+            GridEditorBase.prototype.editItem = function (entityOrId) {
+                var _this = this;
+                var id = entityOrId;
+                var item = this.view.getItemById(id);
+                this.createEntityDialog(this.getItemType(), function (dlg) {
+                    var dialog = dlg;
+                    dialog.onDelete = function (opt, callback) {
+                        if (!_this.deleteEntity(id)) {
+                            return;
+                        }
+                        callback({});
+                    };
+                    dialog.onSave = function (opt, callback) { return _this.save(opt, callback); };
+                    dialog.loadEntityAndOpenDialog(item);
+                });
+                ;
+            };
+            GridEditorBase.prototype.getEditValue = function (property, target) {
+                target[property.name] = this.value;
+            };
+            GridEditorBase.prototype.setEditValue = function (source, property) {
+                this.value = source[property.name];
+            };
+            Object.defineProperty(GridEditorBase.prototype, "value", {
+                get: function () {
+                    var p = this.getIdProperty();
+                    return this.view.getItems().map(function (x) {
+                        var y = Q.deepClone(x);
+                        var id = y[p];
+                        if (id && id.toString().charAt(0) == '`')
+                            delete y[p];
+                        return y;
+                    });
+                },
+                set: function (value) {
+                    var _this = this;
+                    var p = this.getIdProperty();
+                    this.view.setItems((value || []).map(function (x) {
+                        var y = Q.deepClone(x);
+                        if (y[p] == null)
+                            y[p] = "`" + _this.getNextId();
+                        return y;
+                    }), true);
+                },
+                enumerable: true,
+                configurable: true
+            });
+            GridEditorBase.prototype.getGridCanLoad = function () {
+                return false;
+            };
+            GridEditorBase.prototype.usePager = function () {
+                return false;
+            };
+            GridEditorBase.prototype.getInitialTitle = function () {
+                return null;
+            };
+            GridEditorBase.prototype.createQuickSearchInput = function () {
+            };
+            GridEditorBase.prototype.enableDeleteColumn = function () {
+                return false;
+            };
+            GridEditorBase.prototype.getColumns = function () {
+                var columns = _super.prototype.getColumns.call(this);
+                if (this.enableDeleteColumn()) {
+                    columns.unshift({
+                        field: 'Delete Row',
+                        name: '',
+                        format: function (ctx) { return '<a class="inline-action delete-row" title="delete">' +
+                            '<i class="fa fa-trash-o text-red"></i></a>'; },
+                        width: 24,
+                        minWidth: 24,
+                        maxWidth: 24
+                    });
+                }
+                return columns;
+            };
+            GridEditorBase.prototype.onClick = function (e, row, cell) {
+                var _this = this;
+                _super.prototype.onClick.call(this, e, row, cell);
+                if (e.isDefaultPrevented())
+                    return;
+                var item = this.itemAt(row);
+                var target = $(e.target);
+                // if user clicks "i" element, e.g. icon
+                if (target.parent().hasClass('inline-action'))
+                    target = target.parent();
+                if (target.hasClass('inline-action')) {
+                    e.preventDefault();
+                    if (this.enableDeleteColumn()) {
+                        if (target.hasClass('delete-row')) {
+                            Q.confirm(Q.text('Controls.EntityDialog.DeleteConfirmation'), function () {
+                                _this.deleteEntity(item[_this.getIdProperty()]);
+                            });
+                        }
+                    }
+                }
+            };
+            GridEditorBase = __decorate([
+                Serenity.Decorators.registerClass([Serenity.IGetEditValue, Serenity.ISetEditValue]),
+                Serenity.Decorators.editor(),
+                Serenity.Decorators.element("<div/>")
+            ], GridEditorBase);
+            return GridEditorBase;
+        }(Serenity.EntityGrid));
+        Common.GridEditorBase = GridEditorBase;
+    })(Common = Payer.Common || (Payer.Common = {}));
+})(Payer || (Payer = {}));
+/// <reference path="../../Common/Helpers/GridEditorBase.ts" />
+var Payer;
+(function (Payer) {
+    var Northwind;
+    (function (Northwind) {
+        var OrderDetailsEditor = /** @class */ (function (_super) {
+            __extends(OrderDetailsEditor, _super);
+            function OrderDetailsEditor(container) {
+                return _super.call(this, container) || this;
+            }
+            OrderDetailsEditor.prototype.getColumnsKey = function () { return "Northwind.OrderDetail"; };
+            OrderDetailsEditor.prototype.getDialogType = function () { return Northwind.OrderDetailDialog; };
+            OrderDetailsEditor.prototype.getLocalTextPrefix = function () { return Northwind.OrderDetailRow.localTextPrefix; };
+            OrderDetailsEditor.prototype.validateEntity = function (row, id) {
+                row.ProductID = Q.toId(row.ProductID);
+                var sameProduct = Q.tryFirst(this.view.getItems(), function (x) { return x.ProductID === row.ProductID; });
+                if (sameProduct && this.id(sameProduct) !== id) {
+                    Q.alert('This product is already in order details!');
+                    return false;
+                }
+                row.ProductName = Northwind.ProductRow.getLookup().itemById[row.ProductID].ProductName;
+                row.LineTotal = (row.Quantity || 0) * (row.UnitPrice || 0) - (row.Discount || 0);
+                return true;
+            };
+            OrderDetailsEditor = __decorate([
+                Serenity.Decorators.registerClass()
+            ], OrderDetailsEditor);
+            return OrderDetailsEditor;
+        }(Payer.Common.GridEditorBase));
+        Northwind.OrderDetailsEditor = OrderDetailsEditor;
+    })(Northwind = Payer.Northwind || (Payer.Northwind = {}));
+})(Payer || (Payer = {}));
+/// <reference path="../../../Northwind/OrderDetail/OrderDetailsEditor.ts" />
+var Payer;
+(function (Payer) {
+    var BasicSamples;
+    (function (BasicSamples) {
+        /**
+         * Our subclass of Order Details editor with a CategoryID property
+         */
+        var FilteredLookupDetailEditor = /** @class */ (function (_super) {
+            __extends(FilteredLookupDetailEditor, _super);
+            function FilteredLookupDetailEditor(container) {
+                return _super.call(this, container) || this;
+            }
+            FilteredLookupDetailEditor.prototype.getDialogType = function () { return BasicSamples.FilteredLookupOrderDetailDialog; };
+            /**
+             * This method is called to initialize an edit dialog created by
+             * grid editor when Add button or an edit link is clicked
+             * We have an opportunity here to pass CategoryID to edit dialog
+             */
+            FilteredLookupDetailEditor.prototype.initEntityDialog = function (itemType, dialog) {
+                _super.prototype.initEntityDialog.call(this, itemType, dialog);
+                // passing category ID from grid editor to detail dialog
+                dialog.categoryID = this.categoryID;
+            };
+            FilteredLookupDetailEditor = __decorate([
+                Serenity.Decorators.registerEditor()
+            ], FilteredLookupDetailEditor);
+            return FilteredLookupDetailEditor;
+        }(Payer.Northwind.OrderDetailsEditor));
+        BasicSamples.FilteredLookupDetailEditor = FilteredLookupDetailEditor;
+    })(BasicSamples = Payer.BasicSamples || (Payer.BasicSamples = {}));
+})(Payer || (Payer = {}));
+var Payer;
+(function (Payer) {
+    var BasicSamples;
+    (function (BasicSamples) {
+        /**
+         * Basic order dialog with a category selection
+         */
+        var FilteredLookupInDetailDialog = /** @class */ (function (_super) {
+            __extends(FilteredLookupInDetailDialog, _super);
+            function FilteredLookupInDetailDialog() {
+                var _this = _super.call(this) || this;
+                _this.form = new BasicSamples.FilteredLookupInDetailForm(_this.idPrefix);
+                _this.form.CategoryID.change(function (e) {
+                    _this.form.DetailList.categoryID = Q.toId(_this.form.CategoryID.value);
+                });
+                return _this;
+            }
+            FilteredLookupInDetailDialog.prototype.getFormKey = function () { return BasicSamples.FilteredLookupInDetailForm.formKey; };
+            FilteredLookupInDetailDialog.prototype.getIdProperty = function () { return Payer.Northwind.OrderRow.idProperty; };
+            FilteredLookupInDetailDialog.prototype.getLocalTextPrefix = function () { return Payer.Northwind.OrderRow.localTextPrefix; };
+            FilteredLookupInDetailDialog.prototype.getNameProperty = function () { return Payer.Northwind.OrderRow.nameProperty; };
+            FilteredLookupInDetailDialog.prototype.getService = function () { return Payer.Northwind.OrderService.baseUrl; };
+            FilteredLookupInDetailDialog = __decorate([
+                Serenity.Decorators.registerClass()
+            ], FilteredLookupInDetailDialog);
+            return FilteredLookupInDetailDialog;
+        }(Serenity.EntityDialog));
+        BasicSamples.FilteredLookupInDetailDialog = FilteredLookupInDetailDialog;
+    })(BasicSamples = Payer.BasicSamples || (Payer.BasicSamples = {}));
+})(Payer || (Payer = {}));
+/// <reference path="../../../Northwind/Order/OrderGrid.ts" />
+var Payer;
+(function (Payer) {
+    var BasicSamples;
+    (function (BasicSamples) {
+        /**
+         * Subclass of OrderGrid to override dialog type to FilteredLookupInDetailDialog
+         */
+        var FilteredLookupInDetailGrid = /** @class */ (function (_super) {
+            __extends(FilteredLookupInDetailGrid, _super);
+            function FilteredLookupInDetailGrid(container) {
+                return _super.call(this, container) || this;
+            }
+            FilteredLookupInDetailGrid.prototype.getDialogType = function () { return BasicSamples.FilteredLookupInDetailDialog; };
+            FilteredLookupInDetailGrid = __decorate([
+                Serenity.Decorators.registerClass()
+            ], FilteredLookupInDetailGrid);
+            return FilteredLookupInDetailGrid;
+        }(Payer.Northwind.OrderGrid));
+        BasicSamples.FilteredLookupInDetailGrid = FilteredLookupInDetailGrid;
+    })(BasicSamples = Payer.BasicSamples || (Payer.BasicSamples = {}));
+})(Payer || (Payer = {}));
+/// <reference path="../../../Northwind/Product/ProductDialog.ts" />
+var Payer;
+(function (Payer) {
+    var BasicSamples;
+    (function (BasicSamples) {
+        /**
+         * This is our custom product dialog that uses a different product form
+         * (LookupFilterByMultipleForm) with our special category editor.
+         */
+        var LookupFilterByMultipleDialog = /** @class */ (function (_super) {
+            __extends(LookupFilterByMultipleDialog, _super);
+            function LookupFilterByMultipleDialog() {
+                return _super !== null && _super.apply(this, arguments) || this;
+            }
+            LookupFilterByMultipleDialog.prototype.getFormKey = function () { return BasicSamples.LookupFilterByMultipleForm.formKey; };
+            LookupFilterByMultipleDialog = __decorate([
+                Serenity.Decorators.registerClass()
+            ], LookupFilterByMultipleDialog);
+            return LookupFilterByMultipleDialog;
+        }(Payer.Northwind.ProductDialog));
+        BasicSamples.LookupFilterByMultipleDialog = LookupFilterByMultipleDialog;
+    })(BasicSamples = Payer.BasicSamples || (Payer.BasicSamples = {}));
+})(Payer || (Payer = {}));
+/// <reference path="../../../Northwind/Product/ProductGrid.ts" />
+var Payer;
+(function (Payer) {
+    var BasicSamples;
+    (function (BasicSamples) {
+        /**
+         * Subclass of ProductGrid to override dialog type to CloneableEntityDialog
+         */
+        var LookupFilterByMultipleGrid = /** @class */ (function (_super) {
+            __extends(LookupFilterByMultipleGrid, _super);
+            function LookupFilterByMultipleGrid(container) {
+                return _super.call(this, container) || this;
+            }
+            LookupFilterByMultipleGrid.prototype.getDialogType = function () { return BasicSamples.LookupFilterByMultipleDialog; };
+            /**
+             * This method is called just before List request is sent to service.
+             * You have an opportunity here to cancel request or modify it.
+             * Here we'll add a custom criteria to list request.
+             */
+            LookupFilterByMultipleGrid.prototype.onViewSubmit = function () {
+                if (!_super.prototype.onViewSubmit.call(this)) {
+                    return false;
+                }
+                // this has no relation to our lookup editor but as we'll allow picking only 
+                // categories of Produce and Seafood in product dialog, it's better to show
+                // only products from these categories in grid too
+                var request = this.view.params;
+                request.Criteria = Serenity.Criteria.and(request.Criteria, [['CategoryName'], 'in', [['Produce', 'Seafood']]]);
+                // brackets used are important above, NOT ['CategoryName', 'in', ['Produce', 'Seafood']]
+                return true;
+            };
+            LookupFilterByMultipleGrid = __decorate([
+                Serenity.Decorators.registerClass()
+            ], LookupFilterByMultipleGrid);
+            return LookupFilterByMultipleGrid;
+        }(Payer.Northwind.ProductGrid));
+        BasicSamples.LookupFilterByMultipleGrid = LookupFilterByMultipleGrid;
+    })(BasicSamples = Payer.BasicSamples || (Payer.BasicSamples = {}));
+})(Payer || (Payer = {}));
+var Payer;
+(function (Payer) {
+    var BasicSamples;
+    (function (BasicSamples) {
+        /**
+         * This is our category editor that will show only categories of Produce and
+         * Seafood. We are subclassing LookupEditorBase which also LookupEditor
+         * derives from.
+         *
+         * After compiling and transforming templates, this editor type will be
+         * available in server side to use in our LookupFilterByMultipleForm,
+         * which is a version of ProductForm that uses our custom editor.
+         */
+        var ProduceSeafoodCategoryEditor = /** @class */ (function (_super) {
+            __extends(ProduceSeafoodCategoryEditor, _super);
+            function ProduceSeafoodCategoryEditor(container, opt) {
+                return _super.call(this, container, opt) || this;
+            }
+            /**
+             * Normally LookupEditor requires a lookup key to determine which set of
+             * lookup data to show in editor. As our editor will only show category
+             * data, we lock it to category lookup key.
+             */
+            ProduceSeafoodCategoryEditor.prototype.getLookupKey = function () {
+                return Payer.Northwind.CategoryRow.lookupKey;
+            };
+            /**
+             * Here we are filtering by category name but you could filter by any field.
+             * Just make sure the fields you filter on has [LookupInclude] attribute on them,
+             * otherwise their value will be null in client side as they are not sent back
+             * from server in lookup script.
+             */
+            ProduceSeafoodCategoryEditor.prototype.getItems = function (lookup) {
+                return _super.prototype.getItems.call(this, lookup).filter(function (x) {
+                    return x.CategoryName === 'Produce' || x.CategoryName === 'Seafood';
+                });
+            };
+            ProduceSeafoodCategoryEditor = __decorate([
+                Serenity.Decorators.registerEditor()
+            ], ProduceSeafoodCategoryEditor);
+            return ProduceSeafoodCategoryEditor;
+        }(Serenity.LookupEditorBase));
+        BasicSamples.ProduceSeafoodCategoryEditor = ProduceSeafoodCategoryEditor;
+    })(BasicSamples = Payer.BasicSamples || (Payer.BasicSamples = {}));
+})(Payer || (Payer = {}));
+var Payer;
+(function (Payer) {
+    var BasicSamples;
+    (function (BasicSamples) {
+        var HardcodedValuesDialog = /** @class */ (function (_super) {
+            __extends(HardcodedValuesDialog, _super);
+            function HardcodedValuesDialog() {
+                var _this = _super.call(this) || this;
+                _this.form = new BasicSamples.HardcodedValuesForm(_this.idPrefix);
+                _this.dialogTitle = "Please select some value";
+                _this.form.SomeValue.changeSelect2(function (e) {
+                    Q.notifySuccess("You selected item with key: " + _this.form.SomeValue.value);
+                });
+                return _this;
+            }
+            HardcodedValuesDialog.prototype.getFormKey = function () { return BasicSamples.HardcodedValuesForm.formKey; };
+            HardcodedValuesDialog = __decorate([
+                Serenity.Decorators.registerClass()
+            ], HardcodedValuesDialog);
+            return HardcodedValuesDialog;
+        }(Serenity.PropertyDialog));
+        BasicSamples.HardcodedValuesDialog = HardcodedValuesDialog;
+    })(BasicSamples = Payer.BasicSamples || (Payer.BasicSamples = {}));
+})(Payer || (Payer = {}));
+var Payer;
+(function (Payer) {
+    var BasicSamples;
+    (function (BasicSamples) {
+        /**
+         * Our select editor with hardcoded values.
+         *
+         * When you define a new editor type, make sure you build
+         * and transform templates for it to be available
+         * in server side forms, e.g. [HardCodedValuesEditor]
+         */
+        var HardcodedValuesEditor = /** @class */ (function (_super) {
+            __extends(HardcodedValuesEditor, _super);
+            function HardcodedValuesEditor(container) {
+                var _this = _super.call(this, container, null) || this;
+                // add option accepts a key (id) value and display text value
+                _this.addOption("key1", "Text 1");
+                _this.addOption("key2", "Text 2");
+                // you may also use addItem which accepts a Select2Item parameter
+                _this.addItem({
+                    id: "key3",
+                    text: "Text 3"
+                });
+                // don't let selecting this one (disabled)
+                _this.addItem({
+                    id: "key4",
+                    text: "Text 4",
+                    disabled: true
+                });
+                return _this;
+            }
+            HardcodedValuesEditor = __decorate([
+                Serenity.Decorators.registerEditor()
+            ], HardcodedValuesEditor);
+            return HardcodedValuesEditor;
+        }(Serenity.Select2Editor));
+        BasicSamples.HardcodedValuesEditor = HardcodedValuesEditor;
+    })(BasicSamples = Payer.BasicSamples || (Payer.BasicSamples = {}));
+})(Payer || (Payer = {}));
+var Payer;
+(function (Payer) {
+    var BasicSamples;
+    (function (BasicSamples) {
+        var StaticTextBlockDialog = /** @class */ (function (_super) {
+            __extends(StaticTextBlockDialog, _super);
+            function StaticTextBlockDialog() {
+                var _this = _super.call(this) || this;
+                _this.form = new BasicSamples.StaticTextBlockForm(_this.idPrefix);
+                _this.dialogTitle = "A form with static text blocks";
+                return _this;
+            }
+            StaticTextBlockDialog.prototype.getFormKey = function () { return BasicSamples.StaticTextBlockForm.formKey; };
+            /**
+             * Here we override loadInitialEntity method to set value for "DisplayFieldValue" field.
+             * If this was an EntityDialog, your field value would be originating from server side entity.
+             */
+            StaticTextBlockDialog.prototype.loadInitialEntity = function () {
+                this.propertyGrid.load({
+                    DisplayFieldValue: 'This content comes from <b>the value</b> of <em>DisplayFieldValue</em> field.'
+                });
+            };
+            StaticTextBlockDialog.prototype.getDialogOptions = function () {
+                var opt = _super.prototype.getDialogOptions.call(this);
+                opt.width = 650;
+                return opt;
+            };
+            StaticTextBlockDialog = __decorate([
+                Serenity.Decorators.registerClass()
+            ], StaticTextBlockDialog);
+            return StaticTextBlockDialog;
+        }(Serenity.PropertyDialog));
+        BasicSamples.StaticTextBlockDialog = StaticTextBlockDialog;
+    })(BasicSamples = Payer.BasicSamples || (Payer.BasicSamples = {}));
+})(Payer || (Payer = {}));
+var Payer;
+(function (Payer) {
     var Common;
     (function (Common) {
         var BulkServiceAction = /** @class */ (function () {
