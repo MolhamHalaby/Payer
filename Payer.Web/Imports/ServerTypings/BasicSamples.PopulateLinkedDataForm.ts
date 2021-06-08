@@ -1,6 +1,6 @@
 ﻿namespace Payer.BasicSamples {
     export interface PopulateLinkedDataForm {
-        CustomerID: Northwind.CustomerEditor;
+ //       CustomerID: Northwind.CustomerEditor;
         CustomerContactName: Serenity.StringEditor;
         CustomerContactTitle: Serenity.StringEditor;
         CustomerCity: Serenity.StringEditor;
@@ -11,7 +11,7 @@
         OrderDate: Serenity.DateEditor;
         RequiredDate: Serenity.DateEditor;
         EmployeeID: Serenity.LookupEditor;
-        DetailList: Northwind.OrderDetailsEditor;
+ //       DetailList: Northwind.OrderDetailsEditor;
     }
 
     export class PopulateLinkedDataForm extends Serenity.PrefixedContext {
@@ -25,14 +25,14 @@
                 PopulateLinkedDataForm.init = true;
 
                 var s = Serenity;
-                var w0 = Northwind.CustomerEditor;
+          //      var w0 = Northwind.CustomerEditor;
                 var w1 = s.StringEditor;
                 var w2 = s.DateEditor;
                 var w3 = s.LookupEditor;
-                var w4 = Northwind.OrderDetailsEditor;
+           //     var w4 = Northwind.OrderDetailsEditor;
 
                 Q.initFormType(PopulateLinkedDataForm, [
-                    'CustomerID', w0,
+             //       'CustomerID', w0,
                     'CustomerContactName', w1,
                     'CustomerContactTitle', w1,
                     'CustomerCity', w1,
@@ -43,7 +43,7 @@
                     'OrderDate', w2,
                     'RequiredDate', w2,
                     'EmployeeID', w3,
-                    'DetailList', w4
+              //      'DetailList', w4
                 ]);
             }
         }

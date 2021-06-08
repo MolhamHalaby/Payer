@@ -1671,39 +1671,10 @@
     <Content Include="Content\site\site.theme.less" />
     <Content Include="Scripts\input-mask\phone-codes\phone-be.json" />
     <Content Include="Scripts\input-mask\phone-codes\phone-codes.json" />
-    <Content Include="Modules\AdminLTE\Widgets.cshtml" />
-    <Content Include="Modules\AdminLTE\Charts\Morris.cshtml" />
-    <Content Include="Modules\AdminLTE\Charts\ChartJS.cshtml" />
-    <Content Include="Modules\AdminLTE\Charts\Flot.cshtml" />
-    <Content Include="Modules\AdminLTE\Charts\InlineCharts.cshtml" />
     <Content Include="Imports\MVC\MVC.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>MVC.cs</LastGenOutput>
     </Content>
-    <Content Include="Modules\AdminLTE\UIElements\Buttons.cshtml" />
-    <Content Include="Modules\AdminLTE\UIElements\General.cshtml" />
-    <Content Include="Modules\AdminLTE\UIElements\Icons.cshtml" />
-    <Content Include="Modules\AdminLTE\UIElements\Modals.cshtml" />
-    <Content Include="Modules\AdminLTE\UIElements\Sliders.cshtml" />
-    <Content Include="Modules\AdminLTE\UIElements\Timeline.cshtml" />
-    <Content Include="Modules\AdminLTE\Forms\AdvancedElements.cshtml" />
-    <Content Include="Modules\AdminLTE\Forms\GeneralElements.cshtml" />
-    <Content Include="Modules\AdminLTE\Forms\TextEditors.cshtml" />
-    <Content Include="Modules\AdminLTE\Tables\SimpleTables.cshtml" />
-    <Content Include="Modules\AdminLTE\Calendar.cshtml" />
-    <Content Include="Modules\AdminLTE\Mailbox\Inbox.cshtml" />
-    <Content Include="Modules\AdminLTE\Mailbox\Compose.cshtml" />
-    <Content Include="Modules\AdminLTE\Mailbox\Read.cshtml" />
-    <Content Include="Modules\AdminLTE\Examples\Invoice.cshtml" />
-    <Content Include="Modules\AdminLTE\Examples\Profile.cshtml" />
-    <Content Include="Modules\AdminLTE\Examples\Login.cshtml" />
-    <Content Include="Modules\AdminLTE\Examples\Register.cshtml" />
-    <Content Include="Modules\AdminLTE\Examples\Lockscreen.cshtml" />
-    <Content Include="Modules\AdminLTE\Examples\Error404.cshtml" />
-    <Content Include="Modules\AdminLTE\Examples\Error500.cshtml" />
-    <Content Include="Modules\AdminLTE\Examples\BlankPage.cshtml" />
-    <Content Include="Modules\AdminLTE\Examples\PacePage.cshtml" />
-    <Content Include="Modules\AdminLTE\Examples\InvoicePrint.cshtml" />
     <Content Include="Content\bootstrap-less\mixins\reset-text.less" />
     <Content Include="Modules\Membership\Account\SignUp\AccountSignUp.cshtml" />
     <Content Include="Modules\Membership\Account\SignUp\AccountActivateEmail.cshtml" />
@@ -1939,21 +1910,12 @@
     <Compile Include="QCCode.aspx.designer.cs">
       <DependentUpon>QCCode.aspx</DependentUpon>
     </Compile>
-    <Content Include="Modules\AdminLTE\DashboardV2.cshtml" />
     <Compile Include="Modules\Administration\User\Authentication\DirectoryEntry.cs" />
     <Compile Include="Modules\Administration\User\Authentication\ActiveDirectoryService.cs" />
     <Compile Include="Modules\Administration\User\Authentication\LdapDirectoryService.cs" />
     <Compile Include="Modules\Administration\User\Authentication\IDirectoryService.cs" />
     <Compile Include="Modules\Administration\User\Authentication\ScriptUserDefinition.cs" />
     <Compile Include="Modules\Administration\User\UserColumns.cs" />
-    <Compile Include="Modules\AdminLTE\AdminLTEController.cs" />
-    <Compile Include="Modules\AdminLTE\Charts\ChartsController.cs" />
-    <Compile Include="Modules\AdminLTE\Examples\ExamplesController.cs" />
-    <Compile Include="Modules\AdminLTE\Mailbox\MailboxController.cs" />
-    <Compile Include="Modules\AdminLTE\AdminLTENavigation.cs" />
-    <Compile Include="Modules\AdminLTE\Tables\TablesController.cs" />
-    <Compile Include="Modules\AdminLTE\Forms\FormsController.cs" />
-    <Compile Include="Modules\AdminLTE\UIElements\UIElementsController.cs" />
     <Compile Include="Modules\Common\Helpers\EmailHelper.cs" />
     <Compile Include="Modules\Common\Helpers\ExcelImportRequest.cs" />
     <Compile Include="Modules\Common\Dashboard\DashboardPageModel.cs" />

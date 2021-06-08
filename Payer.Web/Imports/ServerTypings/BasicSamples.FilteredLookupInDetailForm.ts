@@ -1,9 +1,9 @@
 ﻿namespace Payer.BasicSamples {
     export interface FilteredLookupInDetailForm {
-        CustomerID: Northwind.CustomerEditor;
+      //  CustomerID: Northwind.CustomerEditor;
         OrderDate: Serenity.DateEditor;
         CategoryID: Serenity.LookupEditor;
-        DetailList: FilteredLookupDetailEditor;
+    //    DetailList: FilteredLookupDetailEditor;
     }
 
     export class FilteredLookupInDetailForm extends Serenity.PrefixedContext {
@@ -17,16 +17,16 @@
                 FilteredLookupInDetailForm.init = true;
 
                 var s = Serenity;
-                var w0 = Northwind.CustomerEditor;
+             //   var w0 = Northwind.CustomerEditor;
                 var w1 = s.DateEditor;
                 var w2 = s.LookupEditor;
-                var w3 = FilteredLookupDetailEditor;
+              //  var w3 = FilteredLookupDetailEditor;
 
                 Q.initFormType(FilteredLookupInDetailForm, [
-                    'CustomerID', w0,
+               //     'CustomerID', w0,
                     'OrderDate', w1,
                     'CategoryID', w2,
-                    'DetailList', w3
+               //     'DetailList', w3
                 ]);
             }
         }

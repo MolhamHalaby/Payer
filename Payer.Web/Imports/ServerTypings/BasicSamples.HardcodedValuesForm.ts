@@ -1,6 +1,6 @@
 ﻿namespace Payer.BasicSamples {
     export interface HardcodedValuesForm {
-        SomeValue: HardcodedValuesEditor;
+    //    SomeValue: HardcodedValuesEditor;
     }
 
     export class HardcodedValuesForm extends Serenity.PrefixedContext {
@@ -14,10 +14,10 @@
                 HardcodedValuesForm.init = true;
 
                 var s = Serenity;
-                var w0 = HardcodedValuesEditor;
+             //   var w0 = HardcodedValuesEditor;
 
                 Q.initFormType(HardcodedValuesForm, [
-                    'SomeValue', w0
+               //     'SomeValue', w0
                 ]);
             }
         }

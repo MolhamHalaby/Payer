@@ -364,11 +364,11 @@ var Payer;
                 if (!ChangingLookupTextForm.init) {
                     ChangingLookupTextForm.init = true;
                     var s = Serenity;
-                    var w0 = ChangingLookupTextEditor;
+                    // var w0 = ChangingLookupTextEditor;
                     var w1 = s.DecimalEditor;
                     var w2 = s.IntegerEditor;
                     Q.initFormType(ChangingLookupTextForm, [
-                        'ProductID', w0,
+                        //        'ProductID', w0,
                         'UnitPrice', w1,
                         'Quantity', w2,
                         'Discount', w1
@@ -471,15 +471,14 @@ var Payer;
                 if (!FilteredLookupInDetailForm.init) {
                     FilteredLookupInDetailForm.init = true;
                     var s = Serenity;
-                    var w0 = Northwind.CustomerEditor;
+                    //   var w0 = Northwind.CustomerEditor;
                     var w1 = s.DateEditor;
                     var w2 = s.LookupEditor;
-                    var w3 = FilteredLookupDetailEditor;
+                    //  var w3 = FilteredLookupDetailEditor;
                     Q.initFormType(FilteredLookupInDetailForm, [
-                        'CustomerID', w0,
+                        //     'CustomerID', w0,
                         'OrderDate', w1,
                         'CategoryID', w2,
-                        'DetailList', w3
                     ]);
                 }
                 return _this;
@@ -501,9 +500,9 @@ var Payer;
                 if (!HardcodedValuesForm.init) {
                     HardcodedValuesForm.init = true;
                     var s = Serenity;
-                    var w0 = HardcodedValuesEditor;
+                    //   var w0 = HardcodedValuesEditor;
                     Q.initFormType(HardcodedValuesForm, [
-                        'SomeValue', w0
+                    //     'SomeValue', w0
                     ]);
                 }
                 return _this;
@@ -529,7 +528,7 @@ var Payer;
                     var w1 = s.ImageUploadEditor;
                     var w2 = s.BooleanEditor;
                     var w3 = s.LookupEditor;
-                    var w4 = ProduceSeafoodCategoryEditor;
+                    //      var w4 = ProduceSeafoodCategoryEditor;
                     var w5 = s.DecimalEditor;
                     var w6 = s.IntegerEditor;
                     Q.initFormType(LookupFilterByMultipleForm, [
@@ -537,7 +536,7 @@ var Payer;
                         'ProductImage', w1,
                         'Discontinued', w2,
                         'SupplierID', w3,
-                        'CategoryID', w4,
+                        //       'CategoryID', w4,
                         'QuantityPerUnit', w0,
                         'UnitPrice', w5,
                         'UnitsInStock', w6,
@@ -564,13 +563,13 @@ var Payer;
                 if (!PopulateLinkedDataForm.init) {
                     PopulateLinkedDataForm.init = true;
                     var s = Serenity;
-                    var w0 = Northwind.CustomerEditor;
+                    //      var w0 = Northwind.CustomerEditor;
                     var w1 = s.StringEditor;
                     var w2 = s.DateEditor;
                     var w3 = s.LookupEditor;
-                    var w4 = Northwind.OrderDetailsEditor;
+                    //     var w4 = Northwind.OrderDetailsEditor;
                     Q.initFormType(PopulateLinkedDataForm, [
-                        'CustomerID', w0,
+                        //       'CustomerID', w0,
                         'CustomerContactName', w1,
                         'CustomerContactTitle', w1,
                         'CustomerCity', w1,
@@ -581,7 +580,6 @@ var Payer;
                         'OrderDate', w2,
                         'RequiredDate', w2,
                         'EmployeeID', w3,
-                        'DetailList', w4
                     ]);
                 }
                 return _this;
@@ -3653,56 +3651,6 @@ var Payer;
 (function (Payer) {
     var Default;
     (function (Default) {
-        var CustomersDialog = /** @class */ (function (_super) {
-            __extends(CustomersDialog, _super);
-            function CustomersDialog() {
-                var _this = _super !== null && _super.apply(this, arguments) || this;
-                _this.form = new Default.CustomersForm(_this.idPrefix);
-                return _this;
-            }
-            CustomersDialog.prototype.getFormKey = function () { return Default.CustomersForm.formKey; };
-            CustomersDialog.prototype.getIdProperty = function () { return Default.CustomersRow.idProperty; };
-            CustomersDialog.prototype.getLocalTextPrefix = function () { return Default.CustomersRow.localTextPrefix; };
-            CustomersDialog.prototype.getNameProperty = function () { return Default.CustomersRow.nameProperty; };
-            CustomersDialog.prototype.getService = function () { return Default.CustomersService.baseUrl; };
-            CustomersDialog.prototype.getDeletePermission = function () { return Default.CustomersRow.deletePermission; };
-            CustomersDialog.prototype.getInsertPermission = function () { return Default.CustomersRow.insertPermission; };
-            CustomersDialog.prototype.getUpdatePermission = function () { return Default.CustomersRow.updatePermission; };
-            CustomersDialog = __decorate([
-                Serenity.Decorators.registerClass()
-            ], CustomersDialog);
-            return CustomersDialog;
-        }(Serenity.EntityDialog));
-        Default.CustomersDialog = CustomersDialog;
-    })(Default = Payer.Default || (Payer.Default = {}));
-})(Payer || (Payer = {}));
-var Payer;
-(function (Payer) {
-    var Default;
-    (function (Default) {
-        var CustomersGrid = /** @class */ (function (_super) {
-            __extends(CustomersGrid, _super);
-            function CustomersGrid(container) {
-                return _super.call(this, container) || this;
-            }
-            CustomersGrid.prototype.getColumnsKey = function () { return 'Default.Customers'; };
-            CustomersGrid.prototype.getDialogType = function () { return Default.CustomersDialog; };
-            CustomersGrid.prototype.getIdProperty = function () { return Default.CustomersRow.idProperty; };
-            CustomersGrid.prototype.getInsertPermission = function () { return Default.CustomersRow.insertPermission; };
-            CustomersGrid.prototype.getLocalTextPrefix = function () { return Default.CustomersRow.localTextPrefix; };
-            CustomersGrid.prototype.getService = function () { return Default.CustomersService.baseUrl; };
-            CustomersGrid = __decorate([
-                Serenity.Decorators.registerClass()
-            ], CustomersGrid);
-            return CustomersGrid;
-        }(Serenity.EntityGrid));
-        Default.CustomersGrid = CustomersGrid;
-    })(Default = Payer.Default || (Payer.Default = {}));
-})(Payer || (Payer = {}));
-var Payer;
-(function (Payer) {
-    var Default;
-    (function (Default) {
         var ItemsDialog = /** @class */ (function (_super) {
             __extends(ItemsDialog, _super);
             function ItemsDialog() {
@@ -3747,56 +3695,6 @@ var Payer;
             return ItemsGrid;
         }(Serenity.EntityGrid));
         Default.ItemsGrid = ItemsGrid;
-    })(Default = Payer.Default || (Payer.Default = {}));
-})(Payer || (Payer = {}));
-var Payer;
-(function (Payer) {
-    var Default;
-    (function (Default) {
-        var MailsMessagesDialog = /** @class */ (function (_super) {
-            __extends(MailsMessagesDialog, _super);
-            function MailsMessagesDialog() {
-                var _this = _super !== null && _super.apply(this, arguments) || this;
-                _this.form = new Default.MailsMessagesForm(_this.idPrefix);
-                return _this;
-            }
-            MailsMessagesDialog.prototype.getFormKey = function () { return Default.MailsMessagesForm.formKey; };
-            MailsMessagesDialog.prototype.getIdProperty = function () { return Default.MailsMessagesRow.idProperty; };
-            MailsMessagesDialog.prototype.getLocalTextPrefix = function () { return Default.MailsMessagesRow.localTextPrefix; };
-            MailsMessagesDialog.prototype.getNameProperty = function () { return Default.MailsMessagesRow.nameProperty; };
-            MailsMessagesDialog.prototype.getService = function () { return Default.MailsMessagesService.baseUrl; };
-            MailsMessagesDialog.prototype.getDeletePermission = function () { return Default.MailsMessagesRow.deletePermission; };
-            MailsMessagesDialog.prototype.getInsertPermission = function () { return Default.MailsMessagesRow.insertPermission; };
-            MailsMessagesDialog.prototype.getUpdatePermission = function () { return Default.MailsMessagesRow.updatePermission; };
-            MailsMessagesDialog = __decorate([
-                Serenity.Decorators.registerClass()
-            ], MailsMessagesDialog);
-            return MailsMessagesDialog;
-        }(Serenity.EntityDialog));
-        Default.MailsMessagesDialog = MailsMessagesDialog;
-    })(Default = Payer.Default || (Payer.Default = {}));
-})(Payer || (Payer = {}));
-var Payer;
-(function (Payer) {
-    var Default;
-    (function (Default) {
-        var MailsMessagesGrid = /** @class */ (function (_super) {
-            __extends(MailsMessagesGrid, _super);
-            function MailsMessagesGrid(container) {
-                return _super.call(this, container) || this;
-            }
-            MailsMessagesGrid.prototype.getColumnsKey = function () { return 'Default.MailsMessages'; };
-            MailsMessagesGrid.prototype.getDialogType = function () { return Default.MailsMessagesDialog; };
-            MailsMessagesGrid.prototype.getIdProperty = function () { return Default.MailsMessagesRow.idProperty; };
-            MailsMessagesGrid.prototype.getInsertPermission = function () { return Default.MailsMessagesRow.insertPermission; };
-            MailsMessagesGrid.prototype.getLocalTextPrefix = function () { return Default.MailsMessagesRow.localTextPrefix; };
-            MailsMessagesGrid.prototype.getService = function () { return Default.MailsMessagesService.baseUrl; };
-            MailsMessagesGrid = __decorate([
-                Serenity.Decorators.registerClass()
-            ], MailsMessagesGrid);
-            return MailsMessagesGrid;
-        }(Serenity.EntityGrid));
-        Default.MailsMessagesGrid = MailsMessagesGrid;
     })(Default = Payer.Default || (Payer.Default = {}));
 })(Payer || (Payer = {}));
 var Payer;

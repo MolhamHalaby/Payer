@@ -4,7 +4,7 @@
         ProductImage: Serenity.ImageUploadEditor;
         Discontinued: Serenity.BooleanEditor;
         SupplierID: Serenity.LookupEditor;
-        CategoryID: ProduceSeafoodCategoryEditor;
+ //       CategoryID: ProduceSeafoodCategoryEditor;
         QuantityPerUnit: Serenity.StringEditor;
         UnitPrice: Serenity.DecimalEditor;
         UnitsInStock: Serenity.IntegerEditor;
@@ -27,7 +27,7 @@
                 var w1 = s.ImageUploadEditor;
                 var w2 = s.BooleanEditor;
                 var w3 = s.LookupEditor;
-                var w4 = ProduceSeafoodCategoryEditor;
+          //      var w4 = ProduceSeafoodCategoryEditor;
                 var w5 = s.DecimalEditor;
                 var w6 = s.IntegerEditor;
 
@@ -36,7 +36,7 @@
                     'ProductImage', w1,
                     'Discontinued', w2,
                     'SupplierID', w3,
-                    'CategoryID', w4,
+             //       'CategoryID', w4,
                     'QuantityPerUnit', w0,
                     'UnitPrice', w5,
                     'UnitsInStock', w6,
