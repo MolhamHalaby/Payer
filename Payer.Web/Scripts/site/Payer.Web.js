@@ -3808,7 +3808,6 @@ var Payer;
             __extends(TipsGrid, _super);
             function TipsGrid(container) {
                 return _super.call(this, container) || this;
-                //this.rowSelection = new Serenity.GridRowSelectionMixin(this);
             }
             TipsGrid.prototype.getColumnsKey = function () { return 'Default.Tips'; };
             TipsGrid.prototype.getDialogType = function () { return Default.TipsDialog; };
@@ -3823,7 +3822,6 @@ var Payer;
             };
             TipsGrid.prototype.getColumns = function () {
                 var columns = _super.prototype.getColumns.call(this);
-                //  columns.unshift(Serenity.GridRowSelectionMixin.createSelectColumn(() => this.rowSelection));
                 Q.first(columns, function (x) { return x.field == "PullTip" /* PullTip */; }).format =
                     function (ctx) { return "<a href=\"javascript:;\" class=\"inline-action pull-tip\"><i class=\"btn btn-primary btn-sm\" style=\"line-height: 3px\">PULL</i></a>"; };
                 return columns;
@@ -3831,8 +3829,9 @@ var Payer;
             TipsGrid.prototype.PullTip = function (id) {
                 id = window.prompt("Please Enter Id", "ID:");
                 if (id != null)
-                    window.location.href = Q.resolveUrl('~/Default/Tips/Pull?id=' + id);
+                    window.location.href = Q.resolveUrl('~/Default/Tips/Pull?Id=' + id);
             };
+            //Activating pull tip button for getting the tip amount that related to the specefic waiter
             TipsGrid.prototype.onClick = function (e, row, cell) {
                 _super.prototype.onClick.call(this, e, row, cell);
                 if (e.isDefaultPrevented())
@@ -3939,10 +3938,8 @@ var Payer;
     (function (Default) {
         var TransactionsGrid = /** @class */ (function (_super) {
             __extends(TransactionsGrid, _super);
-            //private rowSelection: Serenity.GridRowSelectionMixin;
             function TransactionsGrid(container) {
                 return _super.call(this, container) || this;
-                //this.rowSelection = new Serenity.GridRowSelectionMixin(this);
             }
             TransactionsGrid.prototype.getColumnsKey = function () { return 'Default.Transactions'; };
             TransactionsGrid.prototype.getDialogType = function () { return Default.TransactionsDialog; };
@@ -3952,15 +3949,14 @@ var Payer;
             TransactionsGrid.prototype.getService = function () { return Default.TransactionsService.baseUrl; };
             TransactionsGrid.prototype.getColumns = function () {
                 var columns = _super.prototype.getColumns.call(this);
-                // columns.unshift(Serenity.GridRowSelectionMixin.createSelectColumn(() => this.rowSelection));
                 Q.first(columns, function (x) { return x.field == "GenerateQrCode" /* GenerateQrCode */; }).format =
                     function (ctx) { return "<a href=\"javascript:;\" class=\"inline-action generate-qr-code\"><i class=\"fa fa-qrcode\"></i></a>"; };
                 return columns;
             };
             TransactionsGrid.prototype.generateQrCode = function (id) {
                 window.location.href = Q.resolveUrl('~/Default/Transactions/DisplayQrCode?id=' + id);
-                //later, try to put this href in a new tab and not the current window
             };
+            //Generating QR Code with the transaction link info
             TransactionsGrid.prototype.onClick = function (e, row, cell) {
                 _super.prototype.onClick.call(this, e, row, cell);
                 if (e.isDefaultPrevented())

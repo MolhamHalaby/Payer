@@ -20,7 +20,7 @@ namespace Payer.Default {
         private buttonAdd: Serenity.ToolButton[];
         constructor(container: JQuery) {
             super(container);
-            //this.rowSelection = new Serenity.GridRowSelectionMixin(this);
+
            
         }
 
@@ -28,7 +28,6 @@ namespace Payer.Default {
 
         protected getColumns(): Slick.Column[] {
             var columns = super.getColumns();
-          //  columns.unshift(Serenity.GridRowSelectionMixin.createSelectColumn(() => this.rowSelection));
             Q.first(columns, x => x.field == TipsRow.Fields.PullTip).format =
                 ctx => `<a href="javascript:;" class="inline-action pull-tip"><i class="btn btn-primary btn-sm" style="line-height: 3px">PULL</i></a>`;
             return columns;
@@ -38,12 +37,12 @@ namespace Payer.Default {
            
             id = window.prompt("Please Enter Id", "ID:");
             if(id!=null)
-                window.location.href = Q.resolveUrl('~/Default/Tips/Pull?id=' + id);
+                window.location.href = Q.resolveUrl('~/Default/Tips/Pull?Id=' + id);
             
                 
 
         }
-
+        //Activating pull tip button for getting the tip amount that related to the specefic waiter
         protected onClick(e: JQueryEventObject, row: number, cell: number) {
             super.onClick(e, row, cell);
             if (e.isDefaultPrevented())

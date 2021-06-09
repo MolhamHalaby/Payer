@@ -18,7 +18,6 @@ namespace Payer.Default.Pages
     using System.Linq;
     using System.Threading.Tasks;
     using System.Data.Entity;
-    using Payer.Models;
     using System.Net.Mail;
     using System.Windows.Forms;
     using System.Configuration;
@@ -53,7 +52,7 @@ namespace Payer.Default.Pages
             return View(MVC.Views.Default.Transactions.Pay, transaction);//here we pass the model to the view
         }
        //Updating html table for all the customers that are opening the same page every few seconds.
-        public async Task<ActionResult> UpdateTable(int tranId)
+        public async Task<ActionResult> UpdateTable(int TranId)
         {
             var transaction = new Transaction();
 
@@ -63,7 +62,7 @@ namespace Payer.Default.Pages
                 transaction = await db.Transactions
                     .Include(t => t.TransactionItems)
                     .Include(t => t.TransactionItems.Select(ti => ti.Item))
-                    .FirstOrDefaultAsync(t => t.Id == tranId);
+                    .FirstOrDefaultAsync(t => t.Id == TranId);
                 return Content(JsonConvert.SerializeObject(transaction, new JsonSerializerSettings
                 {
                     ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
@@ -76,15 +75,15 @@ namespace Payer.Default.Pages
 
         // Saving tip amount for specific waiter in Tips table via data base after clicking on pay button
         [HttpPost]
-        public ActionResult PayButton(float tip,int waiterForTip)
+        public ActionResult PayButton(float Tip,int WaiterForTip)
         {
             var x = new Tip();
             using (var db = new DBModel())
             {
-                var m = db.Tips.Where(t => t.WaiterId == waiterForTip).FirstOrDefault();
+                var m = db.Tips.Where(t => t.WaiterId == WaiterForTip).FirstOrDefault();
                 if(m!=null)
                 {
-                    m.Value = m.Value + tip;
+                    m.Value = m.Value + Tip;
                     m.Date = DateTime.Now;
                     db.Entry(m).State = EntityState.Modified;
                     db.SaveChanges();
@@ -92,8 +91,8 @@ namespace Payer.Default.Pages
                 else
                 {
                     
-                    x.Value = tip;
-                    x.WaiterId = waiterForTip;
+                    x.Value = Tip;
+                    x.WaiterId = WaiterForTip;
                     x.Date = DateTime.Now;
                     db.Tips.Add(x);                   
                     db.Entry(x).State = EntityState.Added;
@@ -101,32 +100,29 @@ namespace Payer.Default.Pages
                 }
 
             }
-           
-            
-            ViewBag.Amount = 5;
-            ViewBag.Phone = 6;
+         
              return View(MVC.Views.Default.Transactions.PayButton);
 
         }
         // Display payment page to let custmer entering his card details.
-        public ActionResult PayButton(int phone,int customerAmount)
+        public ActionResult PayButton(int Phone,int CustomerAmount)
         {
-            ViewBag.Phone = phone;
-            ViewBag.Amount = customerAmount;
+            ViewBag.Phone = Phone;
+            ViewBag.Amount = CustomerAmount;
             return View(MVC.Views.Default.Transactions.PayButton);
         }
         // Updating TransactionItems table after check/unCheck a new Item
         [HttpPost]
-        public JsonResult checkNewItem(int phone , String itemName, int tranId,int flag,int tranItemId)
+        public JsonResult CheckNewItem(int Phone , String ItemName, int TranId,int Flag,int TranItemId)
         {
             
              using(var db= new DBModel())
              {
 
-                if (flag == 0)
+                if (Flag == 0)
                 {
-                    var m = db.TransactionItems.Where(t => t.Item.Name == itemName)
-                       .Where(ti => ti.TransactionId == tranId).Where(tt => tt.CustomerId == phone).Where(ttt => ttt.Id==tranItemId).FirstOrDefault();
+                    var m = db.TransactionItems.Where(t => t.Item.Name == ItemName)
+                       .Where(ti => ti.TransactionId == TranId).Where(tt => tt.CustomerId == Phone).Where(ttt => ttt.Id==TranItemId).FirstOrDefault();
 
                     if (m != null)
                     {
@@ -143,13 +139,13 @@ namespace Payer.Default.Pages
                 }
                 else
                 {
-                    var m = db.TransactionItems.Where(t => t.Item.Name == itemName)
-                      .Where(ti => ti.TransactionId == tranId).Where(tt => tt.CustomerId == null).Where(ttt => ttt.Id == tranItemId).FirstOrDefault();
+                    var m = db.TransactionItems.Where(t => t.Item.Name == ItemName)
+                      .Where(ti => ti.TransactionId == TranId).Where(tt => tt.CustomerId == null).Where(ttt => ttt.Id == TranItemId).FirstOrDefault();
 
                     if (m != null)
                     {
 
-                        m.CustomerId = phone;
+                        m.CustomerId = Phone;
                         db.Entry(m).State = EntityState.Modified;
                         db.SaveChanges();
 
@@ -188,10 +184,6 @@ namespace Payer.Default.Pages
         //Display Generating QR Code
         public ActionResult DisplayQrCode(int id)   
         {
-            //this is the generic link
-            //var payerUrl = $"~/Default/Transactions/Pay?id={id}";
-
-            //this is the specific link for the localhost
             var payerUrl = $"http://localhost:54989/Default/Transactions/Pay?id={id}";
             ViewBag.Base64QRCode = GetQCCodeBase64(payerUrl);
             return View(MVC.Views.Default.Transactions.QRViewer);

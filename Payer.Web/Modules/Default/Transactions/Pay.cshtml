@@ -13,8 +13,9 @@
 </aside>
 
 <div style="float:left">
+    <label style="margin-right:20px">Enter Phone Number:</label>
     <input type="tel" pattern="[0]{1}[5]{1}[0-9]{1}[0-9]{7}" placeholder="05xxxxxxxx" id="customerPhone" rows="1" maxlength="10" name="phone" style="width:150px;" onchange="IsNumberValid()" required />
-    <label style="margin-right:20px">:Enter Phone Number</label>
+
 
 </div>
 
@@ -62,7 +63,7 @@
         var count = 0;
         var wait = 0;
 
-
+         // Refreshing items table for synchronization between customers.
         $(document).ready(function () {
 
 
@@ -95,11 +96,11 @@
                     telNum();
 
 
-        }, 100); //300000 is 5minutes in ms
+        }, 100); 
 
         })
 
-
+        //Checking validation of entered phone number to become the customer's Id to unlock items table and other fields.
         var statPhone;
         var flagg;
         var firstIsValid;
@@ -141,7 +142,7 @@
             }
 
         }
-
+         // Updating items table by retrieving data from the data base.
         function toUpdateModel() {
 
             var data;
@@ -149,7 +150,7 @@
             $(document).ready(function () {
                 data = JSON.parse(
                     $.ajax({
-                        url: Q.resolveUrl('~/Default/Transactions/UpdateTable?tranId=' + trId),
+                        url: Q.resolveUrl('~/Default/Transactions/UpdateTable?TranId=' + trId),
                     async: false,
                         success: function (res) {
                             transactionItems = (JSON.parse(res)).TransactionItems;
@@ -160,7 +161,7 @@
 
 
         }
-
+            //By entering valid phone number,we update table checkBoxes according to the items that related to the specefic customer
             function telNum() {
 
                 var vall = document.getElementById("table").getElementsByTagName('input').length;
@@ -197,8 +198,10 @@
                 }
 
                 statPhone = PhoneNum;
-        }
-        var totAmount = 0
+            }
+        
+    var totAmount = 0;
+        //Updating database when one of the items checked or un checked
         function checkedIteeemm(x) {
             var r = x.rowIndex;
             var vall = document.getElementById("table").getElementsByTagName('input')[r-1].checked == true;
@@ -225,14 +228,11 @@
             var tranItemId = transactionItems[r - 1].Id;
 
             $.ajax({
-                url: "/Default/Transactions/checkNewItem",
+                url: "/Default/Transactions/CheckNewItem",
                 type: 'post',
-                data: { 'phone': statPhone, 'itemName': nameOfItem, 'tranId': @Model.Id , 'flag': flagg, 'tranItemId': tranItemId},
+                data: { 'Phone': statPhone, 'ItemName': nameOfItem, 'TranId': @Model.Id , 'Flag': flagg, 'TranItemId': tranItemId},
                 cache: false,
                 success: function (response) {
-                   /* if (response == true)
-                        //location.href = location.href;
-                        alert("done!");*/
                 },
                 error: function (response) {
                     alert("Error");
@@ -240,29 +240,22 @@
 
             });
 
-            //wait = 0;
+        
         }
-
+        //Transfering customer to the payment page in order to complete the payment process
         function toPayButton() {
-
-            //window.location.href = Q.resolveUrl('~/Default/Transactions/DisplayQrCode?id=' + id);
-
             $.ajax({
                 url: "/Default/Transactions/PayButton",
                 type: 'post',
-               // dataType: 'Json',
-             //   contentType: "application/json; charset=utf-8",
                 data: {
-                    tip: document.getElementById("tipArea").value,
-                    //customerAmount: document.getElementById("amountArea").value,
-                    waiterForTip: @Model.WaiterId,
-          //          CustomerPhoneNum: statPhone,
-                   // trannId: Model.Id,
+                    Tip: document.getElementById("tipArea").value,
+                    WaiterForTip: @Model.WaiterId,
+      
                 },
                 success: function (response) {
-                    alert("done");
+                    
 
-                        window.location.href = "/Default/Transactions/PayButton?phone=" + statPhone + "&customerAmount=" + parseInt(document.getElementById("amountArea").value);
+                        window.location.href = "/Default/Transactions/PayButton?Phone=" + statPhone + "&CustomerAmount=" + parseInt(document.getElementById("amountArea").value);
                     },
                     error: function (response) {
                         alert("Error");
@@ -288,12 +281,12 @@
         }
 </script>
 
-
+<label style="margin-right:20px; margin-left:63px">Tip:</label>
 <input type="number" min="0" id="tipArea" rows="1" name="tipAre" style="width:80px;margin-right:65px;margin-bottom:10px" value="0" onchange="addTip()" disabled />
-<label style="margin-right:20px">:Tip</label>
-<form method="post">
-    <input type="button" class="btn btn-primary btn-sm" id="payy" value="Pay" style="margin-left:20px" onclick="toPayButton()" disabled />
-    <input type="text" id="amountArea" rows="1" name="amountAre" style="width:80px" disabled value="0" />
-    <label style="margin-right:20px">:Total Amount</label>
 
+<form method="post">
+    <label style="margin-right:20px">Total Amount:</label>
+    <input type="text" id="amountArea" rows="1" name="amountAre" style="width:80px" disabled value="0" />
+
+    <input type="button" class="btn btn-primary btn-sm" id="payy" value="Pay" style="margin-left:20px" onclick="toPayButton()" disabled />
 </form>

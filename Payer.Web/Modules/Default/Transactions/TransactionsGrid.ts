@@ -10,15 +10,15 @@ namespace Payer.Default {
         protected getLocalTextPrefix() { return TransactionsRow.localTextPrefix; }
         protected getService() { return TransactionsService.baseUrl; }
 
-        //private rowSelection: Serenity.GridRowSelectionMixin;
+   
         constructor(container: JQuery) {
             super(container);
-            //this.rowSelection = new Serenity.GridRowSelectionMixin(this);
+ 
         }
 
         protected getColumns(): Slick.Column[] {
             var columns = super.getColumns();
-           // columns.unshift(Serenity.GridRowSelectionMixin.createSelectColumn(() => this.rowSelection));
+        
             Q.first(columns, x => x.field == TransactionsRow.Fields.GenerateQrCode).format =
                 ctx => `<a href="javascript:;" class="inline-action generate-qr-code"><i class="fa fa-qrcode"></i></a>`;
             return columns;
@@ -26,12 +26,12 @@ namespace Payer.Default {
         private generateQrCode(id) {
             window.location.href = Q.resolveUrl('~/Default/Transactions/DisplayQrCode?id=' + id);
 
-            //later, try to put this href in a new tab and not the current window
+           
         }
 
 
         
-
+         //Generating QR Code with the transaction link info
         protected onClick(e: JQueryEventObject, row: number, cell: number) {
             super.onClick(e, row, cell);
             if (e.isDefaultPrevented())

@@ -1,0 +1,1231 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Payer.FilterConfig" Collapsed="true">
+    <Position X="11.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>App_Start\FilterConfig.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.RouteConfig" Collapsed="true">
+    <Position X="10" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>App_Start\RouteConfig.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.SiteInitialization" Collapsed="true">
+    <Position X="17" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEgAAAAhAQAAAAAAAAAQAAAAAgAAAACAAAAAAAAAAA=</HashCode>
+      <FileName>App_Start\SiteInitialization.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.SqlErrorStore" Collapsed="true">
+    <Position X="18.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CBAABAAAAAgAAAhBCAAAAARAIAAAAACAAAAAAJIQAFA=</HashCode>
+      <FileName>App_Start\SqlErrorStore.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Global" Collapsed="true">
+    <Position X="24" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAACAAAAEAAAAAAAAAAEAIAQAAAAAAAAA=</HashCode>
+      <FileName>Global.asax.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.StaticTextBlockAttribute" Collapsed="true">
+    <Position X="22.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQACQAAAAAAAAAAAAAAAAAACAIAAAA=</HashCode>
+      <FileName>Imports\ClientTypes\StaticTextBlockAttribute.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.ScriptUserDefinition" Collapsed="true">
+    <Position X="11.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAAAAAQAAAAAACAAAAAAAEAAAAAAAAAA=</HashCode>
+      <FileName>Modules\Administration\User\Authentication\ScriptUserDefinition.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.UserDefinition" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="11.75" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EACCEAAAAyAAAAAAEQAAAAgAAACAAAAAAAAACAAAAAA=</HashCode>
+      <FileName>Modules\Administration\User\Authentication\UserDefinition.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Payer.ImplicitPermissionAttribute" Collapsed="true">
+    <Position X="4.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Modules\Administration\UserPermission\ImplicitPermissionAttribute.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.ExcelImportRequest" Collapsed="true">
+    <Position X="3" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAA=</HashCode>
+      <FileName>Modules\Common\Helpers\ExcelImportRequest.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.ExcelImportResponse" Collapsed="true">
+    <Position X="4.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAIAAAAAAAAAAAAAAAAABAAQAAAAAAAAAA=</HashCode>
+      <FileName>Modules\Common\Helpers\ExcelImportRequest.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.GetNextNumberHelper" Collapsed="true">
+    <Position X="18.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Modules\Common\Helpers\GetNextNumberHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.GetNextNumberRequest" Collapsed="true">
+    <Position X="20.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAABCAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Modules\Common\Helpers\GetNextNumberRequest.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.GetNextNumberResponse" Collapsed="true">
+    <Position X="22.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAEAAAAAAABAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Modules\Common\Helpers\GetNextNumberRequest.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.ForeignKeyExceptionInfo" Collapsed="true">
+    <Position X="15.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAA=</HashCode>
+      <FileName>Modules\Common\Helpers\SqlExceptionHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.PrimaryKeyExceptionInfo" Collapsed="true">
+    <Position X="13.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAA=</HashCode>
+      <FileName>Modules\Common\Helpers\SqlExceptionHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.SqlExceptionHelper" Collapsed="true">
+    <Position X="20.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAAAAIAAAgAAAAAAAQAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Modules\Common\Helpers\SqlExceptionHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.ReportController" Collapsed="true">
+    <Position X="18.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AKAAAAAAAAAAAAQAAAAAAAIAAAAAAAAAQBEAAAAAAAA=</HashCode>
+      <FileName>Modules\Common\Reporting\ReportController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.ReportRepository" Collapsed="true">
+    <Position X="20.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAACAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAA=</HashCode>
+      <FileName>Modules\Common\Reporting\ReportRepository.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.ReportTree" Collapsed="true">
+    <Position X="22.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAQAAAAA=</HashCode>
+      <FileName>Modules\Common\Reporting\ReportTree.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.EnvironmentSettings" Collapsed="true">
+    <Position X="24" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Modules\Membership\Account\EnvironmentSettings.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Texts" Collapsed="true">
+    <Position X="24" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Modules\Texts.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.QCCode" Collapsed="true">
+    <Position X="17" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAABQAACkAAIAAAAAAAAAAAAAAAAgEAAIQAAA=</HashCode>
+      <FileName>QCCode.aspx.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Administration.PermissionCheckEditorAttribute" Collapsed="true">
+    <Position X="18.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAEAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Imports\ClientTypes\Administration.PermissionCheckEditorAttribute.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Administration.RoleCheckEditorAttribute" Collapsed="true">
+    <Position X="8.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Imports\ClientTypes\Administration.RoleCheckEditorAttribute.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Administration.PermissionKeys" Collapsed="true">
+    <Position X="20.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAEAAAAAAA=</HashCode>
+      <FileName>Modules\Administration\AdministrationPermissionKeys.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Administration.RolePermissionListRequest" Collapsed="true">
+    <Position X="20.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIgAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAA=</HashCode>
+      <FileName>Modules\Administration\RolePermission\RolePermissionListRequest.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Administration.RolePermissionListResponse" Collapsed="true">
+    <Position X="22.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Modules\Administration\RolePermission\RolePermissionListResponse.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Administration.RolePermissionUpdateRequest" Collapsed="true">
+    <Position X="4.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIgAAAAAAAAAAAAAAAAAAAAAAAAEAAACAAAAAA=</HashCode>
+      <FileName>Modules\Administration\RolePermission\RolePermissionUpdateRequest.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Administration.TranslationItem" Collapsed="true">
+    <Position X="20.5" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAAAAAAAQAAAAAAAEAAAAAAAAAAAAAAAAAQAA=</HashCode>
+      <FileName>Modules\Administration\Translation\TranslationItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Administration.TranslationListRequest" Collapsed="true">
+    <Position X="22.25" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAA=</HashCode>
+      <FileName>Modules\Administration\Translation\TranslationListRequest.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Administration.TranslationUpdateRequest" Collapsed="true">
+    <Position X="3" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Modules\Administration\Translation\TranslationUpdateRequest.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Administration.ActiveDirectoryService" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="6.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Modules\Administration\User\Authentication\ActiveDirectoryService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Payer.Administration.AuthenticationService" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="8.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAAAAABAAAAAAAAAAAAAAAAAAQAA=</HashCode>
+      <FileName>Modules\Administration\User\Authentication\AuthenticationService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Payer.Administration.AuthorizationService" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="10" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAACAAAAAAA=</HashCode>
+      <FileName>Modules\Administration\User\Authentication\AuthorizationService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Payer.Administration.DirectoryEntry" Collapsed="true">
+    <Position X="17" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAACAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAg=</HashCode>
+      <FileName>Modules\Administration\User\Authentication\DirectoryEntry.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Administration.LdapDirectoryService" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="11.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Modules\Administration\User\Authentication\LdapDirectoryService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Payer.Administration.PermissionService" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="22.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAABAAAAAAAAAAACAAAAAAEAAA=</HashCode>
+      <FileName>Modules\Administration\User\Authentication\PermissionService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Payer.Administration.UserRetrieveService" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="17" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAAAAAAAAAIAAAgAAAAAAAAAAAQAAAQA=</HashCode>
+      <FileName>Modules\Administration\User\Authentication\UserRetrieveService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Payer.Administration.UserPermissionListRequest" Collapsed="true">
+    <Position X="18.75" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAAAAAAAAAAAAAgAAAAAAAAAAAAACAAAAAA=</HashCode>
+      <FileName>Modules\Administration\UserPermission\UserPermissionListRequest.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Administration.UserPermissionUpdateRequest" Collapsed="true">
+    <Position X="24" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAAAAAAAAAAAAAgAAAAAAAAAEAAACAAAAAA=</HashCode>
+      <FileName>Modules\Administration\UserPermission\UserPermissionUpdateRequest.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Administration.UserRoleListRequest" Collapsed="true">
+    <Position X="22.25" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Modules\Administration\UserRole\UserRoleListRequest.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Administration.UserRoleListResponse" Collapsed="true">
+    <Position X="24" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Modules\Administration\UserRole\UserRoleListResponse.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Administration.UserRoleUpdateRequest" Collapsed="true">
+    <Position X="6.5" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAgAAgAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Modules\Administration\UserRole\UserRoleUpdateRequest.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.BasicSamples.ChangingLookupTextEditorAttribute" Collapsed="true">
+    <Position X="13.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Imports\ClientTypes\BasicSamples.ChangingLookupTextEditorAttribute.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.BasicSamples.FilteredLookupDetailEditorAttribute" Collapsed="true">
+    <Position X="13.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Imports\ClientTypes\BasicSamples.FilteredLookupDetailEditorAttribute.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.BasicSamples.HardcodedValuesEditorAttribute" Collapsed="true">
+    <Position X="3" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Imports\ClientTypes\BasicSamples.HardcodedValuesEditorAttribute.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.BasicSamples.InlineImageFormatterAttribute" Collapsed="true">
+    <Position X="6.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAgAAAAAAAAAAAIAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Imports\ClientTypes\BasicSamples.InlineImageFormatterAttribute.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.BasicSamples.ProduceSeafoodCategoryEditorAttribute" Collapsed="true">
+    <Position X="15.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Imports\ClientTypes\BasicSamples.ProduceSeafoodCategoryEditorAttribute.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Common.EnumSelectFormatterAttribute" Collapsed="true">
+    <Position X="22.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAAAACAQAAAAAAAAAAAAAAAAAABAAAAAAAAA=</HashCode>
+      <FileName>Imports\ClientTypes\Common.EnumSelectFormatterAttribute.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Common.DetailListSaveHandler&lt;TRow&gt;" Collapsed="true">
+    <Position X="15.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAIUAAACAAAAAAgAAgQAAAAEAAAIAAAAAAAAABBA=</HashCode>
+      <FileName>Modules\Common\Helpers\DetailListSaveHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Common.EmailHelper" Collapsed="true">
+    <Position X="20.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Modules\Common\Helpers\EmailHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Common.UserPreferenceUpdateRequest" Collapsed="true">
+    <Position X="13.5" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAEAAAAAQAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Modules\Common\UserPreference\UserPreferenceModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Common.UserPreferenceRetrieveRequest" Collapsed="true">
+    <Position X="8.25" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAEAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Modules\Common\UserPreference\UserPreferenceModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Common.UserPreferenceRetrieveResponse" Collapsed="true">
+    <Position X="10" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Modules\Common\UserPreference\UserPreferenceModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MVC.Views" Collapsed="true">
+    <Position X="11.75" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Imports\MVC\MVC.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Migrations.DefaultDB.DefaultDB_20141103_140000_Initial" Collapsed="true">
+    <Position X="8.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>Migrations\DefaultDB\DefaultDB_20141103_140000_Initial.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Migrations.DefaultDB.DefaultDB_20141111_113000_Permissions" Collapsed="true">
+    <Position X="10" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>Migrations\DefaultDB\DefaultDB_20141111_113000_Permissions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Migrations.DefaultDB.DefaultDB_20160515_072600_UserPreferences" Collapsed="true">
+    <Position X="11.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>Migrations\DefaultDB\DefaultDB_20160515_072600_UserPreferences.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Migrations.DefaultDB.DefaultDB_20161029_130000_ExceptionLog" Collapsed="true">
+    <Position X="13.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>Migrations\DefaultDB\DefaultDB_20161029_130000_ExceptionLog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Migrations.Utils" Collapsed="true">
+    <Position X="8.25" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAACAAAAAAAAAAAEAAAAAAAFAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Migrations\MigrationUtils.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Migrations.MigrationAttribute" Collapsed="true">
+    <Position X="15.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Migrations\MigrationUtils.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Models.CustomerTable" Collapsed="true">
+    <Position X="15.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACCAAAAAAAAAAAAAEAAAAAAAAABAAAAAEAAAAAAAAA=</HashCode>
+      <FileName>Models\CustomerTable.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Models.DBModel" Collapsed="true">
+    <Position X="6.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAACAASAACCAAAAAAAAEAAFgQAAIgAQAAAQAEAAAA=</HashCode>
+      <FileName>Models\DBModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Models.Exception" Collapsed="true">
+    <Position X="8.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QABSAAAAAgQEAAIAEAAAAACAAQAACAAQaQAAIAACCAA=</HashCode>
+      <FileName>Models\Exception.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Models.Item" Collapsed="true">
+    <Position X="8.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACACAAAQAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Item.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Models.Language" Collapsed="true">
+    <Position X="20.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAgAgAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Language.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Models.Person" Collapsed="true">
+    <Position X="24" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAACAAAAAAAAAAAEQAAAAIAAACAAAAIAAAAAA=</HashCode>
+      <FileName>Models\Person.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Models.Role" Collapsed="true">
+    <Position X="6.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAAAAAAAAAABAAAAAgAAAAAEAAAAAA=</HashCode>
+      <FileName>Models\Role.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Models.RolePermission" Collapsed="true">
+    <Position X="17" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAIAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAgAAA=</HashCode>
+      <FileName>Models\RolePermission.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Models.Tip" Collapsed="true">
+    <Position X="3" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAQAAAAAAAAAAAAAAAAAAAAAAACABAAAgAAAAAAA=</HashCode>
+      <FileName>Models\Tip.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Models.Transaction" Collapsed="true">
+    <Position X="15.25" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACASAAAAEAAAAAAAAAAACAAAAAACQAAAAAQACAAAA=</HashCode>
+      <FileName>Models\Transaction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Models.TransactionItem" Collapsed="true">
+    <Position X="17" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACCAAAAAAAAAAAAgCAAAAAEAAAAABAAEAAAAAAAAAA=</HashCode>
+      <FileName>Models\TransactionItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Models.User" Collapsed="true">
+    <Position X="4.75" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EACAEAAAAyAAAAAAEQAAIAgAAACAAAggQAAACAEAAAA=</HashCode>
+      <FileName>Models\User.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Models.UserPermission" Collapsed="true">
+    <Position X="15.25" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAAAAQAAAgAgAAAAAAAAAAAAAAgAAA=</HashCode>
+      <FileName>Models\UserPermission.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Models.UserPreference" Collapsed="true">
+    <Position X="3" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAAAAEAAAAAwAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Models\UserPreference.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Models.UserRole" Collapsed="true">
+    <Position X="18.75" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAIAAAAAAAAAEAAAAAgAAAAAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>Models\UserRole.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Models.VersionInfo" Collapsed="true">
+    <Position X="10" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAAAgACAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\VersionInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Models.Waiter" Collapsed="true">
+    <Position X="13.5" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AICCAAAAAAAAAAAEAAAAAAgAAAAAAAAAAAAAQAAAAAA=</HashCode>
+      <FileName>Models\Waiter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Administration.Forms.LanguageColumns" Collapsed="true">
+    <Position X="22.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAgAgAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Modules\Administration\Language\LanguageColumns.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Administration.Forms.LanguageForm" Collapsed="true">
+    <Position X="4.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAgAgAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Modules\Administration\Language\LanguageForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Administration.Forms.RoleColumns" Collapsed="true">
+    <Position X="10" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAA=</HashCode>
+      <FileName>Modules\Administration\Role\RoleColumns.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Administration.Forms.RoleForm" Collapsed="true">
+    <Position X="15.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAA=</HashCode>
+      <FileName>Modules\Administration\Role\RoleForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Administration.Forms.UserForm" Collapsed="true">
+    <Position X="13.5" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAiAAAAAAAQAAAAAAgAAAAAACAAAACAAAAAA=</HashCode>
+      <FileName>Modules\Administration\User\UserForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Administration.Endpoints.LanguageController" Collapsed="true">
+    <Position X="3" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIQAAAAAAAAAAAAAAAAAAAAAAAEAAEAAAAAAAAAAAAI=</HashCode>
+      <FileName>Modules\Administration\Language\LanguageEndpoint.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Administration.Endpoints.RoleController" Collapsed="true">
+    <Position X="13.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIQAAAAAAAAAAAAAAAAAAAAAAAEAAEAAAAAAAAAAAAI=</HashCode>
+      <FileName>Modules\Administration\Role\RoleEndpoint.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Administration.Endpoints.RolePermissionController" Collapsed="true">
+    <Position X="18.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>Modules\Administration\RolePermission\RolePermissionEndpoint.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Administration.Endpoints.TranslationController" Collapsed="true">
+    <Position X="17" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>Modules\Administration\Translation\TranslationEndpoint.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Administration.Endpoints.UserController" Collapsed="true">
+    <Position X="10" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIQAAAAAAAAACAAAAgAAAAAAAAEAAEAAAAACAAAAAAI=</HashCode>
+      <FileName>Modules\Administration\User\UserEndpoint.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Administration.Endpoints.UserPermissionController" Collapsed="true">
+    <Position X="17" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAIAAAAEAAAAAAAAAAAAAAAAAAAAAABAAAAI=</HashCode>
+      <FileName>Modules\Administration\UserPermission\UserPermissionEndpoint.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Administration.Endpoints.UserRoleController" Collapsed="true">
+    <Position X="20.5" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>Modules\Administration\UserRole\UserRoleEndpoint.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Administration.Lookups.LanguageLookup" Collapsed="true">
+    <Position X="6.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Modules\Administration\Language\LanguageLookup.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Administration.Pages.LanguageController" Collapsed="true">
+    <Position X="24" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>Modules\Administration\Language\LanguagePage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Administration.Pages.RoleController" Collapsed="true">
+    <Position X="11.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>Modules\Administration\Role\RolePage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Administration.Pages.TranslationController" Collapsed="true">
+    <Position X="18.75" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>Modules\Administration\Translation\TranslationPage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Administration.Pages.UserController" Collapsed="true">
+    <Position X="8.25" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>Modules\Administration\User\UserPage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Administration.Repositories.LanguageRepository" Collapsed="true">
+    <Position X="8.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIQAAAAAAAAAAAAAAAAAAAAAAAEAAEAAAAAAAAAAAQI=</HashCode>
+      <FileName>Modules\Administration\Language\LanguageRepository.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Administration.Repositories.RoleRepository" Collapsed="true">
+    <Position X="6.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIQAAAAAAAAAAAAAAAAAAAAAAAEAAEAAAAAAAAAAAQI=</HashCode>
+      <FileName>Modules\Administration\Role\RoleRepository.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Administration.Repositories.RolePermissionRepository" Collapsed="true">
+    <Position X="24" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAQI=</HashCode>
+      <FileName>Modules\Administration\RolePermission\RolePermissionRepository.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Administration.Repositories.TranslationRepository" Collapsed="true">
+    <Position X="24" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAQAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>Modules\Administration\Translation\TranslationRepository.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Administration.Repositories.UserRepository" Collapsed="true">
+    <Position X="15.25" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIQAAABBAAAACAAAQAAAAAAAAAEAAEQAAAAAAIACAQI=</HashCode>
+      <FileName>Modules\Administration\User\UserRepository.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Administration.Repositories.UserPermissionRepository" Collapsed="true">
+    <Position X="20.5" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAYAIAAAAIAAAAEAAAAAAgAAEAQAAAAAAAACAAAAAQI=</HashCode>
+      <FileName>Modules\Administration\UserPermission\UserPermissionRepository.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Administration.Repositories.UserRoleRepository" Collapsed="true">
+    <Position X="3" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAACAAAAAQI=</HashCode>
+      <FileName>Modules\Administration\UserRole\UserRoleRepository.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Administration.Entities.LanguageRow" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="10" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAEAAAAAAAAAgAgAAAAAAAAAAAAgCA=</HashCode>
+      <FileName>Modules\Administration\Language\LanguageRow.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Payer.Administration.Entities.RoleRow" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="8.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAEAAAAAAAAAAAAAAAAAAAAEAAAgCA=</HashCode>
+      <FileName>Modules\Administration\Role\RoleRow.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Payer.Administration.Entities.RolePermissionRow" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="3" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAIAAAAAAAAEAAAAAAAAAAAAgAAAAAAAAAAggCA=</HashCode>
+      <FileName>Modules\Administration\RolePermission\RolePermissionRow.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Payer.Administration.Entities.LoggingRow" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAQAAAAAAAAAAIAAAAAAEUAAgAAAAAAEAAgA=</HashCode>
+      <FileName>Modules\Administration\User\LoggingRow.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Payer.Administration.Entities.UserRow" Collapsed="true">
+    <Position X="0.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EACAEAAAAiAAAAAEEQAAAAgAgACAAAACCAAACAAAgCA=</HashCode>
+      <FileName>Modules\Administration\User\UserRow.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Payer.Administration.Entities.UserPermissionRow" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="22.25" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAEAQQAAAgAgAAAAAAAAAAAAAAggCA=</HashCode>
+      <FileName>Modules\Administration\UserPermission\UserPermissionRow.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Payer.Administration.Entities.UserRoleRow" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="4.75" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAIAAAAAAAAAAQAAAAgAAAAAAAAAAAAAAAAAgiA=</HashCode>
+      <FileName>Modules\Administration\UserRole\UserRoleRow.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Payer.Administration.Columns.UserColumns" Collapsed="true">
+    <Position X="6.5" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAiAAAAAAAQAAAAgAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Modules\Administration\User\UserColumns.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Common.Pages.DashboardController" Collapsed="true">
+    <Position X="4.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>Modules\Common\Dashboard\DashboardPage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Common.Pages.FileController" Collapsed="true">
+    <Position X="10" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAEAAAAAAIAAgAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Modules\Common\File\FilePage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Navigation.NavigationModel" Collapsed="true">
+    <Position X="17" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAACAAAAAAAAAAAAAAAAEAAAAAAAgAAAAA=</HashCode>
+      <FileName>Modules\Common\Navigation\NavigationModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Serenity.Reporting.DynamicDataReport" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="18.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAEAAAAAAAAAAAAAAEAAAAgBAAAAAAQAAAAAA=</HashCode>
+      <FileName>Modules\Common\Reporting\DynamicDataReport.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Serenity.Reporting.ExcelReportGenerator" Collapsed="true">
+    <Position X="6.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAgAAAABAAAABAQAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Modules\Common\Reporting\ExcelReportGenerator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Common.Endpoints.UserPreferenceController" Collapsed="true">
+    <Position X="4.75" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Modules\Common\UserPreference\UserPreferenceEndpoint.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Common.Repositories.UserPreferenceRepository" Collapsed="true">
+    <Position X="6.5" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQA=</HashCode>
+      <FileName>Modules\Common\UserPreference\UserPreferenceRepository.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Common.Entities.UserPreferenceRow" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="11.75" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAAAEEAAAAAwAAAAAAAAAAAAgAAAAgCA=</HashCode>
+      <FileName>Modules\Common\UserPreference\UserPreferenceRow.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Payer.Default.Columns.CustomerTablesColumns" Collapsed="true">
+    <Position X="17" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAEAAAAAAAAABAAAAAEAAAAAAAAA=</HashCode>
+      <FileName>Modules\Default\CustomerTables\CustomerTablesColumns.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Default.Columns.ItemsColumns" Collapsed="true">
+    <Position X="10" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAQAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Modules\Default\Items\ItemsColumns.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Default.Columns.PersonsColumns" Collapsed="true">
+    <Position X="3" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAACAAAAAAAAAAAAQAAAAIAAACAAAAIAAAAAA=</HashCode>
+      <FileName>Modules\Default\Persons\PersonsColumns.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Default.Columns.TipsColumns" Collapsed="true">
+    <Position X="4.75" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAQAAAAAAAAAAAAAAIAAAAAAAAAABAAAgAAAAAAA=</HashCode>
+      <FileName>Modules\Default\Tips\TipsColumns.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Default.Columns.TransactionItemsColumns" Collapsed="true">
+    <Position X="18.75" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAGAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAA=</HashCode>
+      <FileName>Modules\Default\TransactionItems\TransactionItemsColumns.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Default.Columns.TransactionsColumns" Collapsed="true">
+    <Position X="6.5" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAACAQAAAAEAAAAAAAAAAACAAAAAAAQAAAAAAACAAAA=</HashCode>
+      <FileName>Modules\Default\Transactions\TransactionsColumns.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Default.Columns.WaitersColumns" Collapsed="true">
+    <Position X="15.25" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAIAAgAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Modules\Default\Waiters\WaitersColumns.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Default.Endpoints.CustomerTablesController" Collapsed="true">
+    <Position X="20.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIQAAAAAAAAAAAAAAAAAAAAAAAEAAEAAAAAAAAAAAAI=</HashCode>
+      <FileName>Modules\Default\CustomerTables\CustomerTablesEndpoint.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Default.Endpoints.ItemsController" Collapsed="true">
+    <Position X="13.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIQAAAAAAAAAAAAAAAAAAAAAAAEAAEAAAAAAAAAAAAI=</HashCode>
+      <FileName>Modules\Default\Items\ItemsEndpoint.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Default.Endpoints.PersonsController" Collapsed="true">
+    <Position X="6.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIQAAAAAAAAAAAAAAAAAAAAAAAEAAEAAAAAAAAAAAAI=</HashCode>
+      <FileName>Modules\Default\Persons\PersonsEndpoint.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Default.Endpoints.TipsController" Collapsed="true">
+    <Position X="6.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIQAAAAAAAAAAAAAAAAAAAAAAAEAAEAAAAAAAAAAAAI=</HashCode>
+      <FileName>Modules\Default\Tips\TipsEndpoint.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Default.Endpoints.TransactionItemsController" Collapsed="true">
+    <Position X="22.25" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIQAAAAAAAAAAAAAAAAAAAAAAAEAAEAAAAAAAAAAAAI=</HashCode>
+      <FileName>Modules\Default\TransactionItems\TransactionItemsEndpoint.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Default.Endpoints.TransactionsController" Collapsed="true">
+    <Position X="10" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIQAAAAAAAAAAAAAAAAAAAAAAAEAAEAAAAAAAAAAAAI=</HashCode>
+      <FileName>Modules\Default\Transactions\TransactionsEndpoint.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Default.Endpoints.WaitersController" Collapsed="true">
+    <Position X="17" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIQAAAAAAAAAAAAAAAAAAAAAAAEAAEAAAAAAAAAAAAI=</HashCode>
+      <FileName>Modules\Default\Waiters\WaitersEndpoint.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Default.Forms.CustomerTablesForm" Collapsed="true">
+    <Position X="22.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAEAAAAAAAAABAAAAAEAAAAAAAAA=</HashCode>
+      <FileName>Modules\Default\CustomerTables\CustomerTablesForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Default.Forms.ItemsForm" Collapsed="true">
+    <Position X="15.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Modules\Default\Items\ItemsForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Default.Forms.PersonsForm" Collapsed="true">
+    <Position X="8.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAQAAAAIAAACAAAAIAAAAAA=</HashCode>
+      <FileName>Modules\Default\Persons\PersonsForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Default.Forms.TipsForm" Collapsed="true">
+    <Position X="10" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAAAAAAAAAAAAAAAAAAAAAAABAAAgAAAAAAA=</HashCode>
+      <FileName>Modules\Default\Tips\TipsForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Default.Forms.TransactionItemsForm" Collapsed="true">
+    <Position X="24" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAgCAAAAAAAAAAABAAEAAAAAAAAAA=</HashCode>
+      <FileName>Modules\Default\TransactionItems\TransactionItemsForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Default.Forms.TransactionsForm" Collapsed="true">
+    <Position X="11.75" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAAEAAAAAAAAAAACAAAAAAAQAAAAAAACAAAA=</HashCode>
+      <FileName>Modules\Default\Transactions\TransactionsForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Default.Forms.WaitersForm" Collapsed="true">
+    <Position X="20.5" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAgAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Modules\Default\Waiters\WaitersForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Default.Pages.CustomerTablesController" Collapsed="true">
+    <Position X="18.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>Modules\Default\CustomerTables\CustomerTablesPage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Default.Pages.ItemsController" Collapsed="true">
+    <Position X="11.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>Modules\Default\Items\ItemsPage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Default.Pages.PersonsController" Collapsed="true">
+    <Position X="4.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>Modules\Default\Persons\PersonsPage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Default.Pages.TipsController" Collapsed="true">
+    <Position X="8.25" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAgAA=</HashCode>
+      <FileName>Modules\Default\Tips\TipsPage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Default.Pages.TransactionItemsController" Collapsed="true">
+    <Position X="20.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>Modules\Default\TransactionItems\TransactionItemsPage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Default.Pages.TransactionsController" Collapsed="true">
+    <Position X="8.25" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAAAIAAgAQAAAAAQQAAAAAAAAAAAEAAAAAIAA=</HashCode>
+      <FileName>Modules\Default\Transactions\TransactionsPage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Default.Pages.WaitersController" Collapsed="true">
+    <Position X="18.75" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>Modules\Default\Waiters\WaitersPage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Default.Repositories.CustomerTablesRepository" Collapsed="true">
+    <Position X="24" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIQAAAAAAAAAAAAAAAAAAAAAAAEAAEAAAAAAAAAAAQI=</HashCode>
+      <FileName>Modules\Default\CustomerTables\CustomerTablesRepository.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Default.Repositories.ItemsRepository" Collapsed="true">
+    <Position X="17" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIQAAAAAAAAAAAAAAAAAAAAAAAEAAEAAAAAAAAAAAQI=</HashCode>
+      <FileName>Modules\Default\Items\ItemsRepository.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Default.Repositories.PersonsRepository" Collapsed="true">
+    <Position X="10" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIQAAAAAAAAAAAAAAAAAAAAAAAEAAEAAAAAAAAAAAQI=</HashCode>
+      <FileName>Modules\Default\Persons\PersonsRepository.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Default.Repositories.TipsRepository" Collapsed="true">
+    <Position X="11.75" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIQAAAAAAAAAAAAAAAAAAAAAAAEAAEAAAAAAAAAAAQI=</HashCode>
+      <FileName>Modules\Default\Tips\TipsRepository.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Default.Repositories.TransactionItemsRepository" Collapsed="true">
+    <Position X="3" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIQAAAAAAAAAAAAAAAAAAAAAAAEAAEAAAAAAAAAAAQI=</HashCode>
+      <FileName>Modules\Default\TransactionItems\TransactionItemsRepository.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Default.Repositories.TransactionsRepository" Collapsed="true">
+    <Position X="13.5" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIQAAAAAAAAAAAAAAAAAAAAAAAEAAEAAAAAAAAAAAQI=</HashCode>
+      <FileName>Modules\Default\Transactions\TransactionsRepository.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Default.Repositories.WaitersRepository" Collapsed="true">
+    <Position X="22.25" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIQAAAAAAAAAAAAAAAAAAAAAAAEAAEAAAAAAAAAAAQI=</HashCode>
+      <FileName>Modules\Default\Waiters\WaitersRepository.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Default.Entities.CustomerTablesRow" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="3" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAEAAAAAAAAABAAAAAEAAAAAAgCA=</HashCode>
+      <FileName>Modules\Default\CustomerTables\CustomerTablesRow.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Payer.Default.Entities.ItemsRow" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="18.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAQAAAAAEAAAAAAQAAAAAAAAAAAAAAAAAgCA=</HashCode>
+      <FileName>Modules\Default\Items\ItemsRow.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Payer.Default.Entities.PersonsRow" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="11.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAACAAAAAEAAAAAAQAAAAIAAACAAAAIAAAgCA=</HashCode>
+      <FileName>Modules\Default\Persons\PersonsRow.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Payer.Default.Entities.TipsRow" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="13.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAQAAAAAAAAAAAAAAIAACAAAAAAABAAAgAAAAgCE=</HashCode>
+      <FileName>Modules\Default\Tips\TipsRow.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Payer.Default.Entities.TransactionItemsRow" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="4.75" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgGAAAAhAAAEAAAgCAgAAAAAAAAABAAEAAAAAAAgCA=</HashCode>
+      <FileName>Modules\Default\TransactionItems\TransactionItemsRow.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Payer.Default.Entities.TransactionsRow" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="15.25" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAACCQAAAAEAAAgAAAAAAACCAAAAAAQAAEAAAACAgCE=</HashCode>
+      <FileName>Modules\Default\Transactions\TransactionsRow.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Payer.Default.Entities.WaitersRow" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="24" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAEAAAIAAgAAAAAABAABAAAABAAgSA=</HashCode>
+      <FileName>Modules\Default\Waiters\WaitersRow.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Payer.Membership.Pages.AccountController" Collapsed="true">
+    <Position X="3" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABIAAAiQDAAAAAACAAAAAAAAAAAAEQAAAAAAA=</HashCode>
+      <FileName>Modules\Membership\Account\AccountPage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Membership.ChangePasswordRequest" Collapsed="true">
+    <Position X="11.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAABAAAAAAAEAAAAAAAAAAAAAAIAA=</HashCode>
+      <FileName>Modules\Membership\Account\ChangePassword\ChangePasswordRequest.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Membership.ForgotPasswordRequest" Collapsed="true">
+    <Position X="17" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Modules\Membership\Account\ForgotPassword\ForgotPasswordRequest.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Membership.LoginRequest" Collapsed="true">
+    <Position X="13.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAAAAAAACAAAAAAAAAAA=</HashCode>
+      <FileName>Modules\Membership\Account\LoginRequest.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Membership.ResetPasswordEmailModel" Collapsed="true">
+    <Position X="24" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAMAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Modules\Membership\Account\ResetPassword\ResetPasswordEmailModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Membership.ResetPasswordModel" Collapsed="true">
+    <Position X="3" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAA=</HashCode>
+      <FileName>Modules\Membership\Account\ResetPassword\ResetPasswordModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Membership.ResetPasswordRequest" Collapsed="true">
+    <Position X="4.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAABIAA=</HashCode>
+      <FileName>Modules\Membership\Account\ResetPassword\ResetPasswordRequest.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Membership.ActivateEmailModel" Collapsed="true">
+    <Position X="4.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAAAAAQAAAAACAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Modules\Membership\Account\SignUp\ActivateEmailModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Membership.SignUpForm" Collapsed="true">
+    <Position X="13.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAACAAAAAAAAAAAAAAAAAAAIACAAAAAAAAIAA=</HashCode>
+      <FileName>Modules\Membership\Account\SignUp\SignUpForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Payer.Membership.SignUpRequest" Collapsed="true">
+    <Position X="15.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAACAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAA=</HashCode>
+      <FileName>Modules\Membership\Account\SignUp\SignUpRequest.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="Payer.Administration.IDirectoryService" Collapsed="true">
+    <Position X="3" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Modules\Administration\User\Authentication\IDirectoryService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

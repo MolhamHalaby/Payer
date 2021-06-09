@@ -28,15 +28,14 @@ namespace Payer.Default.Pages
             return View("~/Modules/Default/Tips/TipsIndex.cshtml");
         }
 
-        //Pulling tip amount from Tips table via data base that relates to the specific waiter.
-     
-        public ActionResult Pull(int id)  
+        //Pulling tip amount from Tips table via data base that relates to the specific waiter.   
+        public ActionResult Pull(int Id)  
         {
             var x = new Tip();
             
             using (var db = new DBModel())
             {
-                var m = db.Tips.Where(t => t.WaiterId == id).FirstOrDefault();
+                var m = db.Tips.Where(t => t.WaiterId == Id).FirstOrDefault();
                 if (m != null)
                 {
                     m.Value = 0;
