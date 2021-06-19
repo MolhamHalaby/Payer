@@ -91,8 +91,8 @@
                     }
                 }
 
-                totAmount = tempAmount;
-                document.getElementById("amountArea").value = tempAmount.toString();
+                totAmount = tempAmount + statTip;
+                document.getElementById("amountArea").value = (tempAmount + statTip).toString();
                     telNum();
 
 
@@ -265,7 +265,7 @@
                 });
             }
 
-
+        //Adding tip amount to the total amount
         var statTip = 0;
         function addTip() {
             var tip = document.getElementById("tipArea").value;
@@ -276,7 +276,9 @@
                 statTip = parseInt(tip);
             }
             else {
+
                 document.getElementById("amountArea").value = (parseInt(amount) - parseInt(statTip)).toString();
+                statTip = 0;
             }
         }
 </script>

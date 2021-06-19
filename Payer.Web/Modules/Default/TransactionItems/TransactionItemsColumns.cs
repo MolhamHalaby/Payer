@@ -18,6 +18,8 @@ namespace Payer.Default.Columns
       //  public String TransactionQrCode { get; set; }
         public String ItemName { get; set; }
         //public String CustomerClubMember { get; set; }
-        public Double TotalPaid { get; set; }
+     //   public Double TotalPaid { get; set; }
+
+        public Int32 TransactionId { get; set; }
     }
 }

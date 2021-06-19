@@ -55,6 +55,8 @@ declare namespace Serenity {
         }, field: string): TWidget;
     }
 }
+
+
 declare namespace Serenity {
     interface QuickSearchField {
         name: string;

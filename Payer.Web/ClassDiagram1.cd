@@ -231,7 +231,7 @@
       <HashCode>AAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Modules\Administration\User\Authentication\ActiveDirectoryService.cs</FileName>
     </TypeIdentifier>
-    <Lollipop Position="0.2" Collapsed="true" />
+    <Lollipop Position="0.234" Collapsed="true" />
   </Class>
   <Class Name="Payer.Administration.AuthenticationService" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="8.25" Y="0.5" Width="1.5" />
@@ -761,7 +761,7 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="Payer.Administration.Entities.UserRow" Collapsed="true">
-    <Position X="0.5" Y="2" Width="1.5" />
+    <Position X="0.5" Y="2.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>EACAEAAAAiAAAAAEEQAAAAgAgACAAAACCAAACAAAgCA=</HashCode>
       <FileName>Modules\Administration\User\UserRow.cs</FileName>
@@ -880,7 +880,7 @@
   <Class Name="Payer.Default.Columns.TransactionItemsColumns" Collapsed="true">
     <Position X="18.75" Y="8.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAGAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAA=</HashCode>
+      <HashCode>AAAGAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Modules\Default\TransactionItems\TransactionItemsColumns.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -1083,7 +1083,7 @@
   <Class Name="Payer.Default.Repositories.TransactionsRepository" Collapsed="true">
     <Position X="13.5" Y="9.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AIQAAAAAAAAAAAAAAAAAAAAAAAEAAEAAAAAAAAAAAQI=</HashCode>
+      <HashCode>AIQAAAAAAAAAAAAAAAAAAAAAAAEAAEAAAAAAAAAAAQA=</HashCode>
       <FileName>Modules\Default\Transactions\TransactionsRepository.cs</FileName>
     </TypeIdentifier>
   </Class>

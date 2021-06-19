@@ -36,7 +36,7 @@ namespace Payer.Default.Entities
             set { Fields.ItemId[this] = value; }
         }
 
-        [DisplayName("Customer")/*, ForeignKey("[dbo].[Customers]", "Id"), LeftJoin("jCustomer")/*, TextualField("CustomerClubMember")*/]
+        [DisplayName("Customer")]
         public Int32? CustomerId
         {
             get { return Fields.CustomerId[this]; }
@@ -63,21 +63,7 @@ namespace Payer.Default.Entities
             get { return Fields.TransactionNoOfCustomers[this]; }
             set { Fields.TransactionNoOfCustomers[this] = value; }
         }
-/*
-        [DisplayName("Transaction Qr Code"), Expression("jTransaction.[QrCode]")]
-        public String TransactionQrCode
-        {
-            get { return Fields.TransactionQrCode[this]; }
-            set { Fields.TransactionQrCode[this] = value; }
-        }
 
-        [DisplayName("Transaction Deal Num"), Expression("jTransaction.[DealNum]")]
-        public String TransactionDealNum
-        {
-            get { return Fields.TransactionDealNum[this]; }
-            set { Fields.TransactionDealNum[this] = value; }
-        }
-*/
         [DisplayName("Transaction Waiter Id"), Expression("jTransaction.[WaiterId]")]
         public Int32? TransactionWaiterId
         {
@@ -85,12 +71,7 @@ namespace Payer.Default.Entities
             set { Fields.TransactionWaiterId[this] = value; }
         }
 
-        [DisplayName("Transaction Item Id"), Expression("jTransaction.[ItemId]")]
-        public Int32? TransactionItemId
-        {
-            get { return Fields.TransactionItemId[this]; }
-            set { Fields.TransactionItemId[this] = value; }
-        }
+ 
 
         [DisplayName("Transaction Created"), Expression("jTransaction.[Created]")]
         public DateTime? TransactionCreated
@@ -119,21 +100,7 @@ namespace Payer.Default.Entities
             get { return Fields.ItemPrice[this]; }
             set { Fields.ItemPrice[this] = value; }
         }
-/*
-        [DisplayName("Customer Club Member"), Expression("jCustomer.[ClubMember]")]
-        public String CustomerClubMember
-        {
-            get { return Fields.CustomerClubMember[this]; }
-            set { Fields.CustomerClubMember[this] = value; }
-        }
 
-        [DisplayName("Customer Person Id"), Expression("jCustomer.[PersonId]")]
-        public Int32? CustomerPersonId
-        {
-            get { return Fields.CustomerPersonId[this]; }
-            set { Fields.CustomerPersonId[this] = value; }
-        }
-*/
         IIdField IIdRow.IdField
         {
             get { return Fields.Id; }
@@ -153,21 +120,14 @@ namespace Payer.Default.Entities
             public Int32Field ItemId;
             public Int32Field CustomerId;
             public DoubleField TotalPaid;
-
             public Int32Field TransactionCustomerTableId;
             public Int32Field TransactionNoOfCustomers;
-        //    public StringField TransactionQrCode;
-        //    public StringField TransactionDealNum;
-            public Int32Field TransactionWaiterId;
-            public Int32Field TransactionItemId;
+            public Int32Field TransactionWaiterId;      
             public DateTimeField TransactionCreated;
             public DateTimeField TransactionClosed;
-
             public StringField ItemName;
             public DoubleField ItemPrice;
 
-         /*   public StringField CustomerClubMember;
-            public Int32Field CustomerPersonId;*/
         }
     }
 }

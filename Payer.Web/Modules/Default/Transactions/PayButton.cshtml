@@ -1,5 +1,4 @@
-﻿
-@{ ViewBag.Title = "Payment Details";
+﻿@{ ViewBag.Title = "Payment Details";
     var CustomerPhone = "0" + @ViewBag.Phone;
     var CustomerAmount = @ViewBag.Amount; }
 
@@ -125,10 +124,8 @@
     <div class="row">
         <div class="col-75">
             <div class="container">
-                <form action="/action_page.php">
-
+           
                     <div class="row">
-
 
                         <div class="col-50">
                             <h3>Payment Details</h3>
@@ -164,7 +161,7 @@
                     </div>
 
                     <input type="submit" value="Submit" class="btn" onclick="CardDetails()">
-                </form>
+               
             </div>
         </div>
 
@@ -173,37 +170,25 @@
 
 
     <script>
-        // passing customer's info to the controller in order to send the bill via email address 
+        // passing customer's info to the controller in order to send the bill via email address
     function CardDetails() {
 
-       // var CustomerName = document.getElementById("cname").value;
-        //var CustomerPhone = document.getElementById("cphone").value;
         var CustomerEmail = document.getElementById("cEmail").value;
-       // var CardNumber = document.getElementById("ccnum").value;
-       // var ExpMonth = document.getElementById("expmonth").value;
-        //var ExpYear = document.getElementById("expyear").value;
-        //var CVV = document.getElementById("cvv").value;
-
+        var CustomerName = document.getElementById("cname").value;
+        var CustPhone = document.getElementById("cphone").value;
         $.ajax({
             url: "/Default/Transactions/SendEmailToCustomer",
-          //  type: 'post',
+            type: 'post',
             cache: false,
             data: {
-            //    Name: CustomerName,
-            //    Phone : CustomerPhone,
                 Email : CustomerEmail,
-            //    CardNum : CardNumber,
-             //   Month : ExpMonth,
-           //     Year : ExpYear,
-           //     Cvv : CVV,
                 Amount: @CustomerAmount,
+                CustomerName: CustomerName,
+                CusPhoneNumber: CustPhone,
             },
             success: function (response) {
-                if (response == true)
-                    alert("Receipt Sent To Your Email");
-                else
-                    alert("One Of The Fields Is Incorrect");
 
+                    alert("Receipt Sent To Your Email");
             },
             error: function (response) {
                 alert("Error");

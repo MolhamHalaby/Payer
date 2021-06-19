@@ -43,10 +43,12 @@ namespace Payer.Membership.Pages
                     throw new ArgumentNullException("username");
 
                 var username = request.Username;
-                
-                if (WebSecurityHelper.Authenticate(ref username, request.Password, false))
-                    return new ServiceResponse();
 
+                    if (WebSecurityHelper.Authenticate(ref username, request.Password, false))
+                        return new ServiceResponse();
+
+                
+                
                 throw new ValidationError("AuthenticationError", Texts.Validation.AuthenticationError);
             });
         }

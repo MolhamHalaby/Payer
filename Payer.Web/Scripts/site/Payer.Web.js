@@ -3639,6 +3639,7 @@ var Payer;
             CustomerTablesGrid.prototype.getInsertPermission = function () { return Default.CustomerTablesRow.insertPermission; };
             CustomerTablesGrid.prototype.getLocalTextPrefix = function () { return Default.CustomerTablesRow.localTextPrefix; };
             CustomerTablesGrid.prototype.getService = function () { return Default.CustomerTablesService.baseUrl; };
+            //Disabling the limit access by entering the below password that used by the manager.
             CustomerTablesGrid.prototype.addButtonClick = function () {
                 var managerId = window.prompt("Please Enter Id", "ID:");
                 if (managerId == "0526989970") {
@@ -3698,6 +3699,7 @@ var Payer;
             ItemsGrid.prototype.getInsertPermission = function () { return Default.ItemsRow.insertPermission; };
             ItemsGrid.prototype.getLocalTextPrefix = function () { return Default.ItemsRow.localTextPrefix; };
             ItemsGrid.prototype.getService = function () { return Default.ItemsService.baseUrl; };
+            //Disabling the limit access by entering the below password that used by the manager.
             ItemsGrid.prototype.addButtonClick = function () {
                 var managerId = window.prompt("Please Enter Id", "ID:");
                 if (managerId == "0526989970") {
@@ -3757,6 +3759,7 @@ var Payer;
             PersonsGrid.prototype.getInsertPermission = function () { return Default.PersonsRow.insertPermission; };
             PersonsGrid.prototype.getLocalTextPrefix = function () { return Default.PersonsRow.localTextPrefix; };
             PersonsGrid.prototype.getService = function () { return Default.PersonsService.baseUrl; };
+            //Disabling the limit access by entering the below password that used by the manager.
             PersonsGrid.prototype.addButtonClick = function () {
                 var managerId = window.prompt("Please Enter Id", "ID:");
                 if (managerId == "0526989970") {
@@ -4022,6 +4025,7 @@ var Payer;
             WaitersGrid.prototype.getInsertPermission = function () { return Default.WaitersRow.insertPermission; };
             WaitersGrid.prototype.getLocalTextPrefix = function () { return Default.WaitersRow.localTextPrefix; };
             WaitersGrid.prototype.getService = function () { return Default.WaitersService.baseUrl; };
+            //Disabling the limit access by entering the below password that used by the manager.
             WaitersGrid.prototype.addButtonClick = function () {
                 var managerId = window.prompt("Please Enter Id", "ID:");
                 if (managerId == "0526989970") {

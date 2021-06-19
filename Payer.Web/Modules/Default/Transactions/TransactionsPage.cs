@@ -24,7 +24,7 @@ namespace Payer.Default.Pages
     using System.Net.Mime;
     using System.Net;
     using System.Web;
-
+   
     [RoutePrefix("Default/Transactions"), Route("{action=Index}")]
     [PageAuthorize(typeof(Entities.TransactionsRow))]
     public class TransactionsController : Controller
@@ -100,15 +100,16 @@ namespace Payer.Default.Pages
                 }
 
             }
-         
-             return View(MVC.Views.Default.Transactions.PayButton);
+           
+            return View(MVC.Views.Default.Transactions.PayButton);
 
         }
         // Display payment page to let custmer entering his card details.
-        public ActionResult PayButton(int Phone,int CustomerAmount)
+        public ActionResult PayButton(int? Phone,int? CustomerAmount)
         {
             ViewBag.Phone = Phone;
-            ViewBag.Amount = CustomerAmount;
+           
+                ViewBag.Amount = CustomerAmount;
             return View(MVC.Views.Default.Transactions.PayButton);
         }
         // Updating TransactionItems table after check/unCheck a new Item
@@ -162,24 +163,68 @@ namespace Payer.Default.Pages
            
         }
         // Sending Email to customer after payment process
-        public JsonResult SendEmailToCustomer(String Email,String Amount)
+       
+        public JsonResult SendEmailToCustomer(string Email,int Amount,string CustomerName,int CusPhoneNumber)
         {
+            try
+            {                
+                if (ModelState.IsValid)
+                {
+                    var senderEmail = new MailAddress("hmwlhm@gmail.com", "noreply@QRpayer.com");
+                    var receiverEmail = new MailAddress(Email);
+                    var password = "311154322";
+                    var sub = "QR PAYER RECIEPT - Payment Successful";
+                    var body = "Hello " + CustomerName + ",\nYou Are Charged In The Amount: " + Amount + "$" + "\n\nThank You"; 
+                    var smtp = new SmtpClient
+                    {
+                        Host = "smtp.gmail.com",
+                        Port = 587,
+                        EnableSsl = true,
+                        DeliveryMethod = SmtpDeliveryMethod.Network,
+                        UseDefaultCredentials = false,
+                        Credentials = new NetworkCredential(senderEmail.Address, password)
+                    };
+                    using (var mess = new MailMessage(senderEmail, receiverEmail)
+                    {
+                        Subject = sub,
+                        Body = body
+                    })
+                    {
+                        smtp.Send(mess);
+                    }
+                    
+                }
+            }
+            catch (System.FormatException)
+            {
+                return Json(false);
+            }
+            //////////////////////////////Deleting items from TransactionItems table 
+            using (var db = new DBModel())
+            {
 
-            MailMessage mail = new MailMessage();
-            mail.From = new MailAddress("hmwlhm@gmail.com");
-            mail.To.Add(Email);
-            mail.Subject = "QR PAYER RECIEPT";
-              mail.Body = "Hello,\n You Are Charged In The Amount: " + Amount;
+                var m = db.TransactionItems.Where(t => t.CustomerId == CusPhoneNumber).FirstOrDefault();
+                var tranId = m.TransactionId;
+                while (m != null)
+                {
+                    db.Entry(m).State = EntityState.Deleted;
+                    db.SaveChanges();
 
-            SmtpClient smtpMail = new SmtpClient("smtp.gmail.com");
-            smtpMail.UseDefaultCredentials = false;
-            smtpMail.Port = 587;
-            smtpMail.Credentials = new NetworkCredential("hmwlhm@gmail.com", "311154322");
-            smtpMail.EnableSsl = true;
-            smtpMail.DeliveryMethod = SmtpDeliveryMethod.Network;
-                        // and then send the mail
-            smtpMail.Send(mail);   
-            return Json(true);    
+                    m = db.TransactionItems.Where(t => t.CustomerId == CusPhoneNumber).FirstOrDefault();
+                }
+
+                var transactionItem = db.TransactionItems.Where(t => t.TransactionId == tranId).FirstOrDefault();
+                if (transactionItem == null)
+                {
+                    var transaction = db.Transactions.Where(t => t.Id == tranId).FirstOrDefault();
+                    db.Entry(transaction).State = EntityState.Deleted;
+                    db.SaveChanges();
+                }
+
+            }
+                return Json(true);
+
+
         }
         //Display Generating QR Code
         public ActionResult DisplayQrCode(int id)   

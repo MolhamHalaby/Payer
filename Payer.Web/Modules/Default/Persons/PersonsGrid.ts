@@ -13,7 +13,7 @@ namespace Payer.Default {
         constructor(container: JQuery) {
             super(container);
         }
-
+        //Disabling the limit access by entering the below password that used by the manager.
         protected addButtonClick() {
 
 

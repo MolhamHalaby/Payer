@@ -14,6 +14,7 @@ namespace Payer.Default {
             super(container);
         }
 
+        //Disabling the limit access by entering the below password that used by the manager.
         protected addButtonClick() {
 
 
